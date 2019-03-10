@@ -2,8 +2,9 @@ package simulator;
 
 public abstract class Event {
 	
-	private double executeTime;
-	protected StoreState state;
+	protected double executeTime;
+	private StoreState state;
+	private EventQueue eventQueue;
 	
 	
 	/**
@@ -11,6 +12,9 @@ public abstract class Event {
 	 * 
 	 * @return time when event is executed.
 	 */
+
+	
+	
 	public double getExTime(){
 		return executeTime;
 	}
@@ -20,8 +24,8 @@ public abstract class Event {
 	 * 
 	 * @param event adds this to the eventqueue
 	 */
-	public void addEventToQue(Event event){
-		state.eventQueue.add(event);
+	public void addEventToQueue(Event event){
+		this.state.eventQueue.addEvent(event);
 	}
 	
 	/**
