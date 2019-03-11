@@ -2,6 +2,8 @@ package simulator;
 
 import java.util.ArrayList;
 
+import store.state.StoreState;
+
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected StoreState state;
@@ -36,8 +38,8 @@ public class EventQueue {
 
 		Event tempEvent = eventQueue.get(0);
 		// Sets time in state to be the time that the event was executed.
-		state.setElapsedTime(tempEvent.getExTime());
-		state.updateView(tempEvent.getCustomerID(), tempEvent.getEventDescription(), tempEvent.getExTime());
+		state.setStoreTime(tempEvent.getExTime());
+		//state.updateView(tempEvent.getCustomerID(), tempEvent.getEventDescription(), tempEvent.getExTime());
 		eventQueue.remove(0);
 		return tempEvent;
 	}
@@ -60,7 +62,7 @@ public class EventQueue {
 			tempRight.add(list.get(midPoint));
 			midPoint++;
 		}
-		/// Blir lite dumt med namnen här men va fan, kommer på nå bättre på ngn
+		/// Blir lite dumt med namnen hï¿½r men va fan, kommer pï¿½ nï¿½ bï¿½ttre pï¿½ ngn
 		/// dag.
 		tempLeft = sortEvent(tempLeft);
 		tempRight = sortEvent(tempRight);

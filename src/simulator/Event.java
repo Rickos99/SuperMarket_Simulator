@@ -1,5 +1,8 @@
 package simulator;
 
+import store.state.CreateCustomer;
+import store.state.StoreState;
+
 public abstract class Event {
 
 	protected double executeTime;
@@ -18,7 +21,7 @@ public abstract class Event {
 		return executeTime;
 	}
 
-	public int getCustomerID(){
+	public CreateCustomer getCustomerID(){
 		return customer;
 	}
 	
@@ -43,5 +46,15 @@ public abstract class Event {
 	 * Abstract method which is designed for each event.
 	 */
 	public abstract void runEvent();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

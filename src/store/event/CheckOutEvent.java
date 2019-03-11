@@ -1,12 +1,14 @@
 package store.event;
 
 import simulator.Event;
+import store.state.CreateCustomer;
+import store.state.StoreState;
 
 public class CheckOutEvent extends Event {
 
 
 	private String eventDescription = "Customer paying for products";
-	private boolean peopleInQueue;
+	private boolean isPeopleInQueue;
 
 	/**
 	 * Constructor if there are avaliable registers and the que is empty.
@@ -20,10 +22,10 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time, CreateCustomer customer) {
 		this.state = state;
-		this.state.registersOpen--;
+		this.state.closeOneRegister();
 		this.executeTime = time;
 		this.customer = customer;
-		this.peopleInQueue = false;
+		this.isPeopleInQueue = false;
 		
 
 	}
@@ -41,33 +43,38 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time) {
 		this.state = state;
-		//:S:S:S:SS::
-		this.state.registersOpen--;
+		this.state.closeOneRegister();
 		this.executeTime = time;
 		// Gets the first custommer in the queue.
 		this.customer = state.checkOutQueue.getFirst();
-		this.peopleInQueue = true;
+		this.isPeopleInQueue = true;
 
 	}
 
 	@Override
 	public void runEvent() {
 		double newExecuteTime = state.getTimeElapsed() + state.storeTime.timeCustomerCheckOut();
-		if (peopleInQueue) {
+		try {
+		if (isPeopleInQueue) {
 			//Removes the first person in the queue
 			state.checkOutQueue.removeFirst();
 			//Open upp a new register.
-			state.registersOpen++;
+			state.openNewRegister();
 			//Checks to see if there are anymore customers in the queue.
 			if (!state.checkOutQueue.isEmpty()) {
-				addEventToQueue(state, newExecuteTime);
+				addEventToQueue(new CheckOutEvent(state, newExecuteTime));
 
 			}
 
 
 		}else{
-			state.registersOpen++;
+			state.openNewRegister();
 			//No new event since there are no people in the queue.
+		}
+		}
+		catch (IOException e){
+			
+			
 		}
 	}
 
