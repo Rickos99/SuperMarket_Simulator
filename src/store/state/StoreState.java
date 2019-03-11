@@ -128,6 +128,57 @@ public class StoreState extends simulator.SimState {
 		checkOutQueue.add(customer);
 	}
 
+	public int getMAX_CUSTOMERS() {
+		return MAX_CUSTOMERS;
+	}
+
+	public int getMAX_REGISTERS() {
+		return MAX_REGISTERS;
+	}
+
+	public double getARRIVAL_SPEED() {
+		return ARRIVAL_SPEED;
+	}
+
+	public double getMIN_PICKING_TIME() {
+		return MIN_PICKING_TIME;
+	}
+
+	public double getMAX_PICKING_TIME() {
+		return MAX_PICKING_TIME;
+	}
+
+	public double getMIN_CHECKOUT_TIME() {
+		return MIN_CHECKOUT_TIME;
+	}
+
+	public double getMAX_CHECKOUT_TIME() {
+		return MAX_CHECKOUT_TIME;
+	}
+
+	public int getCustomersPayed() {
+		return customersPayed;
+	}
+
+	public int getCustomersVisited() {
+		return customersVisited;
+	}
+
+	public int getCustomersInQueue() {
+		return customersInQueue;
+	}
+
+	public int getCustomersDeniedEntry() {
+		return customersDeniedEntry;
+	}
+
+	public double getQueueTime() {
+		return queueTime;
+	}
+
+	public double getCheckoutFreeTime() {
+		return checkoutFreeTime;
+	}
 	
 	@Override
 	public void runSim() {

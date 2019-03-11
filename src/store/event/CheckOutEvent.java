@@ -2,6 +2,7 @@ package store.event;
 
 import simulator.Event;
 import store.state.CreateCustomer;
+import store.state.Customer;
 import store.state.StoreState;
 
 public class CheckOutEvent extends Event {
@@ -20,7 +21,7 @@ public class CheckOutEvent extends Event {
 	 * @param customer
 	 *            event for this customer
 	 */
-	public CheckOutEvent(StoreState state, double time, CreateCustomer customer) {
+	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		this.state = state;
 		this.state.closeOneRegister();
 		this.executeTime = time;
@@ -74,4 +75,4 @@ public class CheckOutEvent extends Event {
 	}
 
 
-}
+
