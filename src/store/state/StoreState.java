@@ -91,7 +91,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	public FIFO<Customer> getCheckoutQueue() {
-		return checkoutQueue;
+		return checkOutQueue;
 	}
 
 	public int getMaxCustomers() {
