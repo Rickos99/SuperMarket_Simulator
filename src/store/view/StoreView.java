@@ -2,6 +2,7 @@ package store.view;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.MessageFormat;
 
 import simulator.SimView;
 import store.state.StoreState;
@@ -55,20 +56,32 @@ public class StoreView extends SimView {
 			}
 		}
 
-		PrintWriter writer = new PrintWriter(filePath, "UTF-8");
-		writer.println(generateParameters());
-		writer.println(generateProgress());
-		writer.println(generateResult());
+		try {
+			PrintWriter writer = new PrintWriter(file);
+			writer.println(generateParameters());
+			writer.println(generateProgress());
+			writer.println(generateResult());
+			writer.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
 	private String generateParameters() {
 		String result = generateHeader("Parametrar") + newLine;
-		result += "Antal kassor, N...........:" + newLine;
-		result += "Max som ryms, M...........:" + newLine;
-		result += "Ankomshastighet, lambda...:" + newLine;
-		result += "Plocktider, [P_min, P_max]:" + newLine;
-		result += "Betaltider, [K_min, K_max]:" + newLine;
-		result += "Frö, F....................:" + newLine;
+		result += MessageFormat.format("Antal kassor, N...........: {0} \n",
+				state.getMAX_REGISTERS());
+		result += MessageFormat.format("Max som ryms, M...........: {0} \n",
+				state.getMAX_CUSTOMERS());
+		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n",
+				state.getTIME_LAMBDA());
+		result += MessageFormat.format("Plocktider, [P_min, P_max]: [{0}..{1}] \n",
+				state.getMIN_PICKING_TIME(), state.getMAX_PICKING_TIME());
+		result += MessageFormat.format("Betaltider, [K_min, K_max]: [{0}..{1}] \n",
+				state.getMIN_CHECKOUT_TIME(), state.getMAX_CHECKOUT_TIME());
+		result += MessageFormat.format("Frö, F....................: {0} \n",
+				state.getTIME_SEED());
 		return result;
 	}
 
@@ -79,14 +92,19 @@ public class StoreView extends SimView {
 
 	private String generateResult() {
 		String result = generateHeader("Resultat") + newLine;
-		result += "1) Av <TOT_KUNDER> kunder handlade <KUNDER_HANDLADE> medan <KUNDER_MISSADE> missades"
-				+ newLine;
-		result += "2) Total tid <MAX_KASSOR> kassor varit lediga: <KASSOR_LEDIG_TID> te."
-				+ newLine;
-		result += "   Genomsnittlig ledig kassatid: <KASSOR_LEDIG_TID_AVG> te (dvs <PROCENT> av tiden från öppning tills sista kunden betalat)."
-				+ newLine;
-		result += "3) Total tid 12 kunder tvingats köa: 3,77 te." + newLine;
-		result += "   Genomsnittlig kötid: <KÖTID_AVG> te." + newLine;
+		result += MessageFormat.format(
+				"1) Av {0} kunder handlade {1} medan {2} missades \n",
+				state.getCustomersInTotal(), state.getCustomersPayed(),
+				state.getCustomersDeniedEntry());
+		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n",
+				state.getMAX_REGISTERS(), state.getCheckoutFreeTime());
+		result += MessageFormat.format(
+				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1} av tiden från öppning tills sista kunden betalat). \n",
+				"<KASSOR_LEDIG_TID_AVG>", "<PROCENT>");
+		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n",
+				state.getCustomersPayed(), "<TOTAL_KÖTID_FÖR_KUNDER");
+		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n",
+				"<KÖTID_AVG>");
 		return result;
 	}
 
