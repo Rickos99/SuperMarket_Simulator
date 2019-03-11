@@ -7,7 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class StoreState extends simulator.SimState {
 
-	private final int TIME_SEED;
+	private final long TIME_SEED;
 	private final int MAX_CUSTOMERS;
 	private final int MAX_REGISTERS;
 	private final int TIME_STORE_CLOSE;
@@ -17,6 +17,7 @@ public class StoreState extends simulator.SimState {
 	private final double MIN_CHECKOUT_TIME;
 	private final double MAX_CHECKOUT_TIME;
 	private final double TIME_LAMBDA;
+
 	
 
 	private int customersPayed;
@@ -37,13 +38,16 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
-	public StoreState(int max_customers, int max_registers, int TIME_STORE_CLOSE) {
+	public StoreState(int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double TIME_LAMBDA, long TIME_SEED ) {
 		// TODO: Initialize all parameters in this state
-		storeTime = new StoreTime();
+		storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
 		checkOutQueue = new FIFO<Customer>();
 		customerSpawn = new CreateCustomer();
-		this.MAX_CUSTOMERS = max_customers;
-		this.MAX_REGISTERS = max_registers;
+		this.TIME_LAMBDA = TIME_LAMBDA;
+		this.TIME_SEED = TIME_SEED;
+		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
+		this.MAX_REGISTERS = MAX_REGISTERS;
+		this.TIME_STORE_CLOSE = TIME_STORE_CLOSE;
 		new StartEvent(this, TIME_STORE_CLOSE);
 	}
 
@@ -80,7 +84,7 @@ public class StoreState extends simulator.SimState {
 		storeIsOpen = false;
 	}
 	
-	public void setTimeElapsed(double time) {
+	public void uppdateTimeElapsed(double time) {
 		elapsedTime = time;
 	}
 	
@@ -143,7 +147,7 @@ public class StoreState extends simulator.SimState {
 		checkOutQueue.add(customer);
 	}
 	
-	public int getTIME_SEED() {
+	public long getTIME_SEED() {
 		return TIME_SEED;
 	}
 	
@@ -204,6 +208,10 @@ public class StoreState extends simulator.SimState {
 	}
 	public void uppdateRegistersDownTime(double deadRegisterTime){
 		checkoutFreeTime+= deadRegisterTime;
+	}
+	
+	public void uppdateCustomersInQueueTime(double peopleInQueueTime){
+		queueTime+= peopleInQueueTime;
 	}
 	
 	

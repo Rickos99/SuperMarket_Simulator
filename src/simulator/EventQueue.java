@@ -35,11 +35,19 @@ public class EventQueue {
 		// Sorts the current array via it's getExTime method.
 
 		eventQueue = sortEvent(eventQueue);
-
 		Event nextRunEvent = eventQueue.get(0);
-		state.uppdateRegistersDownTime(state.getRegistersOpen()*(nextRunEvent.getExTime()-state.getElapsedTime()));
+		
+		//Uppdates registers wasted time.
+		if (state.storeIsOpen()) {
+			state.uppdateRegistersDownTime(
+					state.getRegistersOpen() * (nextRunEvent.getExTime() - state.getElapsedTime()));
+		}
+		//Uppdates time that people have been standing in the queue
+		state.uppdateCustomersInQueueTime(
+				state.getCustomersInQueue() * (nextRunEvent.getExTime() - state.getElapsedTime()));
+		
 		// Sets time in state to be the time that the event was executed.
-		state.setTimeElapsed(nextRunEvent.getExTime());
+		state.uppdateTimeElapsed(nextRunEvent.getExTime());
 		eventQueue.remove(0);
 		return nextRunEvent;
 	}
@@ -62,7 +70,8 @@ public class EventQueue {
 			tempRight.add(list.get(midPoint));
 			midPoint++;
 		}
-		/// Blir lite dumt med namnen h�r men va fan, kommer p� n� b�ttre p� ngn
+		/// Blir lite dumt med namnen h�r men va fan, kommer p� n�
+		/// b�ttre p� ngn
 		/// dag.
 		tempLeft = sortEvent(tempLeft);
 		tempRight = sortEvent(tempRight);

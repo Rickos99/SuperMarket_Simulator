@@ -1,9 +1,10 @@
 package store.time;
 
-//Inte klart än
+
 public class StoreTime {
 	private ExponentialRandomStream randomExcept;
 	private UniformRandomStream randomUni;
+	
 
 	public StoreTime(double lambda, long seed) {
 		this.randomExcept = new ExponentialRandomStream(lambda, seed);

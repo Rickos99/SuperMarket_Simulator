@@ -5,7 +5,6 @@ import store.state.StoreState;
 
 public class CustomerArrivedEvent extends Event {
 
-
 	private String eventDescription = "Customer Arrived";
 
 	public CustomerArrivedEvent(StoreState state, double time) {
@@ -45,6 +44,5 @@ public class CustomerArrivedEvent extends Event {
 			}
 		}
 	}
-
 
 }

@@ -4,9 +4,9 @@ import simulator.Event;
 import store.state.StoreState;
 
 public class StopEvent extends Event {
-	
-	public  String eventDescription = "Store closed";
-	
+
+	public String eventDescription = "Store closed";
+
 	public StopEvent(StoreState state, double stopTime) {
 		this.state = state;
 		this.executeTime = stopTime;
@@ -23,7 +23,5 @@ public class StopEvent extends Event {
 		state.closeStore();
 
 	}
-
-
 
 }
