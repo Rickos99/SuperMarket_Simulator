@@ -1,6 +1,7 @@
 package store.event;
 
 import simulator.Event;
+import store.state.StoreState;
 
 public class StopEvent extends Event {
 	
@@ -9,7 +10,6 @@ public class StopEvent extends Event {
 	public StopEvent(StoreState state, double stopTime) {
 		this.state = state;
 		this.executeTime = stopTime;
-		this.customer = "-";
 
 	}
 
@@ -20,7 +20,7 @@ public class StopEvent extends Event {
 	 */
 	@Override
 	public void runEvent() {
-		state.setStoreClosed();
+		state.closeStore();
 
 	}
 

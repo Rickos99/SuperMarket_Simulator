@@ -1,6 +1,7 @@
 package store.event;
 
 import simulator.Event;
+import store.state.StoreState;
 
 public class StartEvent extends Event {
 
@@ -10,7 +11,6 @@ public class StartEvent extends Event {
 	public StartEvent(StoreState state, double stopTime) {
 		this.state = state;
 		this.executeTime = 0.0;
-		this.customer = "-";
 		this.stopExecuteTime = stopTime;
 
 	}
@@ -22,6 +22,7 @@ public class StartEvent extends Event {
 		addEventToQueue(new StopEvent(state, stopExecuteTime));
 
 	}
+	
 
 
 }

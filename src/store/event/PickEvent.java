@@ -1,6 +1,8 @@
 package store.event;
 
 import simulator.Event;
+import store.state.CreateCustomer;
+import store.state.StoreState;
 
 public class PickEvent extends Event {
 
@@ -25,6 +27,7 @@ public class PickEvent extends Event {
 	public void runEvent() {
 		// Checks if there are avaliable registers to pay in and if the que is
 		// empty.
+		try {
 		double checkOutTime = state.getElapsedTime() + state.storeTime.timeCustomerCheckOut();
 		if (state.registersOpen > 0 && state.checkOutQueue.isEmpty()) {
 			// Adds a checkout event with no people in the queue and there are
@@ -38,7 +41,8 @@ public class PickEvent extends Event {
 			state.checkOutQueue.add(customer);
 			addEventToQueue(new CheckOutEvent(state, checkOutTime));
 		}
-
+		}
+		catch (IOException e) {System.out.println("Ojj, nu vare något galet.");}
 	}
 
 
