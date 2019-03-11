@@ -36,12 +36,12 @@ public class EventQueue {
 
 		eventQueue = sortEvent(eventQueue);
 
-		Event tempEvent = eventQueue.get(0);
+		Event nextRunEvent = eventQueue.get(0);
+		state.uppdateRegistersDownTime(state.getRegistersOpen()*(nextRunEvent.getExTime()-state.getElapsedTime()));
 		// Sets time in state to be the time that the event was executed.
-		state.setTimeElapsed(tempEvent.getExTime());
-		//state.updateView(tempEvent.getCustomerID(), tempEvent.getEventDescription(), tempEvent.getExTime());
+		state.setTimeElapsed(nextRunEvent.getExTime());
 		eventQueue.remove(0);
-		return tempEvent;
+		return nextRunEvent;
 	}
 
 	private static ArrayList<Event> sortEvent(ArrayList<Event> list) {

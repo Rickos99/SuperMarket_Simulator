@@ -198,6 +198,10 @@ public class StoreState extends simulator.SimState {
 	public double getTIME_LAMBDA() {
 		return TIME_LAMBDA;
 	}
+	public void uppdateRegistersDownTime(double deadRegisterTime){
+		checkoutFreeTime+= deadRegisterTime;
+	}
+	
 	
 	@Override
 	public void runSim() {

@@ -7,7 +7,6 @@ import store.state.StoreState;
 
 public class CheckOutEvent extends Event {
 
-
 	private String eventDescription = "Customer paying for products";
 	private boolean isPeopleInQueue;
 
@@ -27,7 +26,6 @@ public class CheckOutEvent extends Event {
 		this.executeTime = time;
 		this.customer = customer;
 		this.isPeopleInQueue = false;
-		
 
 	}
 
@@ -46,7 +44,7 @@ public class CheckOutEvent extends Event {
 		this.state = state;
 		this.state.closeOneRegister();
 		this.executeTime = time;
-		// Gets the first custommer in the queue.
+		// Gets the first custommer in the queue and deletes it from the queue.
 		this.customer = state.getFirst();
 		this.isPeopleInQueue = true;
 
@@ -56,23 +54,18 @@ public class CheckOutEvent extends Event {
 	public void runEvent() {
 		double newExecuteTime = state.getElapsedTime() + state.getTimeNextCustomerCheckout();
 		if (isPeopleInQueue) {
-			//Open upp a new register.
+			// Open upp a new register.
 			state.openNewRegister();
-			//Checks to see if there are anymore customers in the queue.
+			// Checks to see if there are anymore customers in the queue.
 			if (!state.getCheckOutQueueIsEmpty()) {
 				addEventToQueue(new CheckOutEvent(state, newExecuteTime));
 
 			}
 
-
-		}else{
+		} else {
 			state.openNewRegister();
-			//No new event since there are no people in the queue.
+			// No new event since there are no people in the queue.
 		}
-			
-			
-		}
+
 	}
-
-
-
+}
