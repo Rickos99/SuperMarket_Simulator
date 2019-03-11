@@ -6,6 +6,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class StoreState extends simulator.SimState {
 
+	private final int TIME_SEED;
 	private final int MAX_CUSTOMERS;
 	private final int MAX_REGISTERS;
 	private final double ARRIVAL_SPEED;
@@ -13,6 +14,7 @@ public class StoreState extends simulator.SimState {
 	private final double MAX_PICKING_TIME;
 	private final double MIN_CHECKOUT_TIME;
 	private final double MAX_CHECKOUT_TIME;
+	private final double TIME_LAMBDA;
 
 	private int customersPayed;
 	private int customersInTotal;
@@ -136,7 +138,11 @@ public class StoreState extends simulator.SimState {
 	public void addCustomerInPayoutLine(Customer customer) {
 		checkOutQueue.add(customer);
 	}
-
+	
+	public int getTIME_SEED() {
+		return TIME_SEED;
+	}
+	
 	public int getMAX_CUSTOMERS() {
 		return MAX_CUSTOMERS;
 	}
@@ -187,6 +193,10 @@ public class StoreState extends simulator.SimState {
 
 	public double getCheckoutFreeTime() {
 		return checkoutFreeTime;
+	}
+	
+	public double getTIME_LAMBDA() {
+		return TIME_LAMBDA;
 	}
 	
 	@Override
