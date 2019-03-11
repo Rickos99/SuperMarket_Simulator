@@ -8,10 +8,10 @@ public class StartEvent extends Event {
 	private final double stopExecuteTime;
 	public String eventDescription = "Store opens";
 
-	public StartEvent(StoreState state, double stopTime) {
+	public StartEvent(StoreState state, double stopExecuteTime) {
 		this.state = state;
 		this.executeTime = 0.0;
-		this.stopExecuteTime = stopTime;
+		this.stopExecuteTime = stopExecuteTime;
 		addEventToQueue(this);
 
 	}
