@@ -18,8 +18,6 @@ public class StoreState extends simulator.SimState {
 	private final double MAX_CHECKOUT_TIME;
 	private final double TIME_LAMBDA;
 
-	
-
 	private int customersPayed;
 	private int customersInTotal;
 	private int customersVisited;
@@ -38,16 +36,22 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
-	public StoreState(int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double TIME_LAMBDA, long TIME_SEED ) {
-		// TODO: Initialize all parameters in this state
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME, double TIME_LAMBDA) {
 		storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
 		checkOutQueue = new FIFO<Customer>();
 		customerSpawn = new CreateCustomer();
-		this.TIME_LAMBDA = TIME_LAMBDA;
+		
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
 		this.MAX_REGISTERS = MAX_REGISTERS;
 		this.TIME_STORE_CLOSE = TIME_STORE_CLOSE;
+		this.ARRIVAL_SPEED = ARRIVAL_SPEED;
+		this.MIN_PICKING_TIME = MIN_PICKING_TIME;
+		this.MAX_PICKING_TIME = MAX_PICKING_TIME;
+		this.MIN_CHECKOUT_TIME = MIN_CHECKOUT_TIME;
+		this.MAX_CHECKOUT_TIME = MAX_CHECKOUT_TIME;
+		this.TIME_LAMBDA = TIME_LAMBDA;
+		
 		new StartEvent(this, TIME_STORE_CLOSE);
 	}
 
@@ -61,7 +65,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	public void openNewRegister() {
-		if(registersOpen < MAX_REGISTERS) {
+		if (registersOpen < MAX_REGISTERS) {
 			registersOpen++;
 		} else {
 			// TODO: throw new OpenRegisterFailedException()
@@ -69,7 +73,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	public void closeOneRegister() {
-		if(registersOpen > 0) {
+		if (registersOpen > 0) {
 			registersOpen--;
 		} else {
 			// TODO: throw new CloseRegisterFailedException()
@@ -83,16 +87,15 @@ public class StoreState extends simulator.SimState {
 	public void closeStore() {
 		storeIsOpen = false;
 	}
-	
+
 	public void uppdateTimeElapsed(double time) {
 		elapsedTime = time;
 	}
-	
+
 	public double getTimeElapsed() {
 		return elapsedTime;
 	}
-	
-	
+
 	public void openStore() {
 		storeIsOpen = true;
 	}
@@ -102,7 +105,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	public StoreTime getStoreTime() {
-		//TODO
+		return storeTime;
 	}
 
 	public double getElapsedTime() {
@@ -128,7 +131,7 @@ public class StoreState extends simulator.SimState {
 	public boolean getCheckOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
 	}
-	
+
 	public Customer getFirst() {
 		return checkOutQueue.getFirst();
 	}
@@ -136,9 +139,11 @@ public class StoreState extends simulator.SimState {
 	public int getTimeNextCustomer() {
 		return (int) storeTime.timeNextCustomer();
 	}
+
 	public int getTimeNextCustomerCheckout() {
 		return (int) storeTime.timeCustomerCheckOut();
 	}
+
 	public int getTimeCustomerPick() {
 		return (int) storeTime.timeCustomerPick();
 	}
@@ -146,11 +151,11 @@ public class StoreState extends simulator.SimState {
 	public void addCustomerInPayoutLine(Customer customer) {
 		checkOutQueue.add(customer);
 	}
-	
+
 	public long getTIME_SEED() {
 		return TIME_SEED;
 	}
-	
+
 	public int getMAX_CUSTOMERS() {
 		return MAX_CUSTOMERS;
 	}
@@ -202,19 +207,19 @@ public class StoreState extends simulator.SimState {
 	public double getCheckoutFreeTime() {
 		return checkoutFreeTime;
 	}
-	
+
 	public double getTIME_LAMBDA() {
 		return TIME_LAMBDA;
 	}
-	public void uppdateRegistersDownTime(double deadRegisterTime){
-		checkoutFreeTime+= deadRegisterTime;
+
+	public void uppdateRegistersDownTime(double deadRegisterTime) {
+		checkoutFreeTime += deadRegisterTime;
 	}
-	
-	public void uppdateCustomersInQueueTime(double peopleInQueueTime){
-		queueTime+= peopleInQueueTime;
+
+	public void uppdateCustomersInQueueTime(double peopleInQueueTime) {
+		queueTime += peopleInQueueTime;
 	}
-	
-	
+
 	@Override
 	public void runSim() {
 		startSimulator();
