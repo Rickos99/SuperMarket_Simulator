@@ -109,6 +109,10 @@ public class StoreState extends simulator.SimState {
 	public boolean getCheckOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
 	}
+	
+	public Customer getFirst() {
+		return checkOutQueue.getFirst();
+	}
 
 	public int getTimeNextCustomer() {
 		return (int) storeTime.timeNextCustomer();
