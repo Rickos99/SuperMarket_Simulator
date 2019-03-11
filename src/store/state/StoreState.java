@@ -1,6 +1,7 @@
 package store.state;
 
 import simulator.Event;
+import store.event.StartEvent;
 import store.time.StoreTime;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -9,12 +10,14 @@ public class StoreState extends simulator.SimState {
 	private final int TIME_SEED;
 	private final int MAX_CUSTOMERS;
 	private final int MAX_REGISTERS;
+	private final int TIME_STORE_CLOSE;
 	private final double ARRIVAL_SPEED;
 	private final double MIN_PICKING_TIME;
 	private final double MAX_PICKING_TIME;
 	private final double MIN_CHECKOUT_TIME;
 	private final double MAX_CHECKOUT_TIME;
 	private final double TIME_LAMBDA;
+	
 
 	private int customersPayed;
 	private int customersInTotal;
@@ -34,13 +37,14 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
-	public StoreState(int max_customers, int max_registers) {
+	public StoreState(int max_customers, int max_registers, int TIME_STORE_CLOSE) {
 		// TODO: Initialize all parameters in this state
 		storeTime = new StoreTime();
 		checkOutQueue = new FIFO<Customer>();
 		customerSpawn = new CreateCustomer();
 		this.MAX_CUSTOMERS = max_customers;
 		this.MAX_REGISTERS = max_registers;
+		new StartEvent(this, TIME_STORE_CLOSE);
 	}
 
 	public Customer customer(int id) {

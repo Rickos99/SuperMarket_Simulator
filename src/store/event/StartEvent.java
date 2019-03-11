@@ -12,6 +12,7 @@ public class StartEvent extends Event {
 		this.state = state;
 		this.executeTime = 0.0;
 		this.stopExecuteTime = stopTime;
+		addEventToQueue(this);
 
 	}
 
@@ -22,7 +23,5 @@ public class StartEvent extends Event {
 		addEventToQueue(new StopEvent(state, stopExecuteTime));
 
 	}
-	
-
 
 }
