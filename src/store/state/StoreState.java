@@ -93,7 +93,19 @@ public class StoreState extends simulator.SimState {
 	public void openStore() {
 		storeIsOpen = true;
 	}
-	
+
+	/**
+	 * Increase the elapsed time.
+	 * 
+	 * @param time Time to increase with
+	 */
+	public void increaseElapsedTime(double time) {
+		elapsedTime += time;
+	}
+
+	/**
+	 * Increase number of customers denied by one.
+	 */
 	public void increaseCustomerDeniedByOne() {
 		customersDeniedEntry++;
 	}
