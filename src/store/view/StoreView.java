@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import simulator.SimView;
+import store.state.StoreState;
 
 /**
  * 
@@ -14,10 +15,6 @@ public class StoreView extends SimView {
 
 	private String newLine = "\r\n";
 	private StoreState state;
-
-	public static void main(String[] args) {
-		new StoreView(null).printFile("C:/temp", true);
-	}
 
 	/**
 	 * Constructs a new instance of a {@code StoreView} object.
