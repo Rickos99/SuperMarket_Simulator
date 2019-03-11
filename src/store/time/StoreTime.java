@@ -1,6 +1,6 @@
 package store.time;
 
-
+//Inte klart än
 public class StoreTime {
 	private ExponentialRandomStream randomExcept;
 	private UniformRandomStream randomUni;
