@@ -5,7 +5,7 @@ import simulator.Event;
 public class PickEvent extends Event {
 
 
-	public String eventDescription = "Picking products";
+	public String eventDescription = "Costumer picking products";
 
 	public PickEvent(StoreState state, double time, CreateCustomer customer) {
 		this.executeTime = time;

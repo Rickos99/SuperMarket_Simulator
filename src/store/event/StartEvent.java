@@ -5,7 +5,7 @@ import simulator.Event;
 public class StartEvent extends Event {
 
 	private final double stopExecuteTime;
-	public String eventDescription = "Start event";
+	public String eventDescription = "Store opens";
 
 	public StartEvent(StoreState state, double stopTime) {
 		this.state = state;
