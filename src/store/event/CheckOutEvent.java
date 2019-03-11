@@ -46,22 +46,19 @@ public class CheckOutEvent extends Event {
 		this.state.closeOneRegister();
 		this.executeTime = time;
 		// Gets the first custommer in the queue.
-		this.customer = state.checkOutQueue.getFirst();
+		this.customer = state.getFirst();
 		this.isPeopleInQueue = true;
 
 	}
 
 	@Override
 	public void runEvent() {
-		double newExecuteTime = state.getTimeElapsed() + state.storeTime.timeCustomerCheckOut();
-		try {
+		double newExecuteTime = state.getElapsedTime() + state.getTimeNextCustomerCheckout();
 		if (isPeopleInQueue) {
-			//Removes the first person in the queue
-			state.checkOutQueue.removeFirst();
 			//Open upp a new register.
 			state.openNewRegister();
 			//Checks to see if there are anymore customers in the queue.
-			if (!state.checkOutQueue.isEmpty()) {
+			if (!state.getCheckOutQueueIsEmpty()) {
 				addEventToQueue(new CheckOutEvent(state, newExecuteTime));
 
 			}
@@ -71,8 +68,6 @@ public class CheckOutEvent extends Event {
 			state.openNewRegister();
 			//No new event since there are no people in the queue.
 		}
-		}
-		catch (IOException e){
 			
 			
 		}

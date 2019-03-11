@@ -34,12 +34,12 @@ public class CustomerArrivedEvent extends Event {
 		 */
 		if (state.storeIsOpen()) {
 
-			double newTimeCustomer = state.getElapsedTime() + state.storeTime.timeNextCustomer();
+			double newTimeCustomer = state.getElapsedTime() + state.getTimeNextCustomer();
 			if (state.getCustomersInTotal() >= state.getMaxCustomers()) {
 				state.increaseCustomerDeniedByOne();
 				addEventToQueue(new CustomerArrivedEvent(state, newTimeCustomer));
 			} else {
-				double newPickTime = state.getElapsedTime() + state.storeTime.timeCustomerPick();
+				double newPickTime = state.getElapsedTime() + state.getTimeCustomerPick();
 				addEventToQueue(new CustomerArrivedEvent(state, newTimeCustomer));
 				addEventToQueue(new PickEvent(state, newPickTime, customer));
 			}
