@@ -18,7 +18,7 @@ public class EventQueue {
 	 * @param event
 	 */
 	public void addEvent(Event event) {
-		this.eventQueue.add(event);
+		eventQueue.add(event);
 	}
 
 	/**
@@ -27,17 +27,18 @@ public class EventQueue {
 	 */
 
 	public Event getEvent() throws IndexOutOfBoundsException {
-		if (this.eventQueue.size() == 0) {
+		if (eventQueue.size() == 0) {
 			throw new IndexOutOfBoundsException("Event Queue is empty.");
 		}
 		// Sorts the current array via it's getExTime method.
 
-		this.eventQueue = sortEvent(this.eventQueue);
+		eventQueue = sortEvent(eventQueue);
 
-		Event tempEvent = this.eventQueue.get(0);
+		Event tempEvent = eventQueue.get(0);
 		// Sets time in state to be the time that the event was executed.
-		this.state.setElapsedTime(tempEvent.getExTime());
-		this.eventQueue.remove(0);
+		state.setElapsedTime(tempEvent.getExTime());
+		state.updateView(tempEvent.getCustomerID(), tempEvent.getEventDescription(), tempEvent.getExTime());
+		eventQueue.remove(0);
 		return tempEvent;
 	}
 

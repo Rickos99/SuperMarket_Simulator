@@ -4,8 +4,8 @@ import simulator.Event;
 
 public class CheckOutEvent extends Event {
 
-	private StoreState state;
-	private CreateCustomer customer;
+
+	private String eventDescription = "Paying products";
 	private boolean peopleInQueue;
 
 	/**
@@ -40,29 +40,31 @@ public class CheckOutEvent extends Event {
 	public CheckOutEvent(StoreState state, double time) {
 		this.state = state;
 		this.executeTime = time;
-		//Gets the first custommer in the queue.
+		// Gets the first custommer in the queue.
 		this.customer = state.checkOutQueue.getFirst();
 		this.peopleInQueue = true;
-		
+
 	}
 
 	@Override
 	public void runEvent() {
 		double newExecuteTime = state.getTimeElapsed() + state.storeTime.timeCustomerCheckOut();
 		if (peopleInQueue) {
-			
-			state.customersInQueue--;
-			state.registersOpen++;
-			if(!state.checkOutQueue.isEmpty()){
-				addEventToQueue(new CheckOutEvent(state,newExecuteTime));
-			}
-		}else{
-			
-			
-			
-			
-		}
+			state.registersOpen--;
+			//Removes the first person in the queue
+			state.checkOutQueue.removeFirst();
+			//Checks to see if there are anymore customers in the queue.
+			if (!state.checkOutQueue.isEmpty()) {
+				addEventToQueue(state, newExecuteTime);
 
+			}
+			//Adds a new register since the first person in the queue has now paid.
+			state.registersOpen++;
+
+		}else{
+			//TODO: Denna var klurig hur man ska få med extra tid dvs hur länge kunderna stått i kassan.
+		}
 	}
+
 
 }
