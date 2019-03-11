@@ -7,8 +7,10 @@ import simulator.SimView;
 import store.state.StoreState;
 
 /**
- * 
  * @author Rickard Bemm
+ * @author Philip Eriksson
+ * @author Nour Aldein Bahtite
+ * @author Andr� Christofferson
  *
  */
 public class StoreView extends SimView {
@@ -60,7 +62,12 @@ public class StoreView extends SimView {
 		writer.println(generateProgress());
 		writer.println(generateResult());
 	}
-
+	
+	/**
+	 * Method to generate the paramaters for this simulation.
+	 * 
+	 * @return parameter statistics from the simulator
+	 */
 	private String generateParameters() {
 		String result = generateHeader("Parametrar") + newLine;
 		result += "Antal kassor, N...........:" + newLine;
@@ -71,12 +78,22 @@ public class StoreView extends SimView {
 		result += "Frö, F....................:" + newLine;
 		return result;
 	}
-
+	
+	/**
+	 * Method generates the event course of the simulation.
+	 * 
+	 * @return simulation event description
+	 */
+	
 	private String generateProgress() {
 		String result = generateHeader("Förlopp") + newLine;
 		return result;
 	}
-
+	/**
+	 * Method generates statistics regarding how well the store is run.
+	 * 
+	 * @return simulation results
+	 */
 	private String generateResult() {
 		String result = generateHeader("Resultat") + newLine;
 		result += "1) Av <TOT_KUNDER> kunder handlade <KUNDER_HANDLADE> medan <KUNDER_MISSADE> missades"
@@ -89,6 +106,13 @@ public class StoreView extends SimView {
 		result += "   Genomsnittlig kötid: <KÖTID_AVG> te." + newLine;
 		return result;
 	}
+	
+	/**
+	 * Method generates description of the current event.
+	 * 
+	 * @param headerText describes the current event executed.
+	 * @return header description of the event
+	 */
 
 	private String generateHeader(String headerText) {
 		String headerString = headerText + "\r\n";
