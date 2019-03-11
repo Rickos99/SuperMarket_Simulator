@@ -25,13 +25,17 @@ public class StoreState extends simulator.SimState {
 	private double elapsedTime;
 	private double checkoutFreeTime;
 	
-	private boolean storeIsClosed;
+	private boolean storeIsOpen;
 
 	private FIFO<Customer> checkoutQueue;
 	private StoreTime storeTime;
+	private CreateCustomer customerSpawn;
 
-	public SimState() {
-
+	public StoreState() {
+		// TODO: Initialize all parameters in this state
+		storeTime = new StoreTime();
+		checkoutQueue = new FIFO<Customer>();
+		customerSpawn = new CreateCustomer();
 	}
 
 	public Customer customer(int id) {
@@ -44,57 +48,66 @@ public class StoreState extends simulator.SimState {
 	}
 	
 	public void openNewRegister() {
-		throw new NotImplementedException();
+		if(registersOpen < MAX_REGISTERS) {
+			registersOpen++;
+		} else {
+			// TODO: throw new OpenRegisterFailedException()
+		}
 	}
 
 	public void closeOneRegister() {
-		throw new NotImplementedException();
+		if(registersOpen > 0) {
+			registersOpen--;
+		} else {
+			// TODO: throw new CloseRegisterFailedException()
+		}
 	}
 	
 	public boolean storeIsOpen() {
-		throw new NotImplementedException();
+		return storeIsOpen;
 	}
 	
 	public void closeStore() {
-		throw new NotImplementedException();
+		storeIsOpen = false;
 	}
 	
 	public void openStore() {
-		throw new NotImplementedException();
+		storeIsOpen = true;
 	}
 	
 	public void increaseCustomerDeniedByOne() {
-		throw new NotImplementedException();
+		customersDeniedEntry++;
 	}
 	
 	public StoreTime getStoreTime() {
-		throw new NotImplementedException();
+		return storeTime;
 	}
 	
 	public double getElapsedTime() {
-		throw new NotImplementedException();
+		return elapsedTime;
 	}
 	
-	public FIFO getCheckoutQueue() {
-		throw new NotImplementedException();
+	public FIFO<Customer> getCheckoutQueue() {
+		return checkoutQueue;
 	}
 	
 	public int getMaxCustomers() {
-		throw new NotImplementedException();
+		return MAX_CUSTOMERS;
 	}
 	
 	public int getCustomersInTotal() {
-		throw new NotImplementedException();
+		return customersInTotal;
 	}
 
 	@Override
 	public void runSim() {
+		startSimulator();
 		// TODO Implement runSim()
+		throw new NotImplementedException();
 	}
 
 	private void executeEvent(Event e) {
-		// TODO Implement executeEvent(Event e)
-		throw new NotImplementedException();
+		e.runEvent();
 	}
 
 }
