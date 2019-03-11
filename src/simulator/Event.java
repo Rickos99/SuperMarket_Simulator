@@ -22,7 +22,7 @@ public abstract class Event {
 		return executeTime;
 	}
 
-	public CreateCustomer getCustomerID(){
+	public Customer getCustomerID(){
 		return customer;
 	}
 	
@@ -38,7 +38,7 @@ public abstract class Event {
 	 *            adds this to the eventqueue
 	 */
 	public void addEventToQueue(Event event) {
-		this.state.eventQueue.addEvent(event);
+		this.eventQueue.addEvent(event);
 	}
 	
 	

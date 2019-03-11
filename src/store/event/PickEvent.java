@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import simulator.Event;
 import store.state.CreateCustomer;
+import store.state.Customer;
 import store.state.StoreState;
 
 public class PickEvent extends Event {
@@ -44,7 +45,7 @@ public class PickEvent extends Event {
 			addEventToQueue(new CheckOutEvent(state, checkOutTime));
 		}
 		}
-		catch (IOException e) {System.out.println("Ojj, nu vare något galet.");}
+		catch (Exception e) {System.out.println("Ojj, nu vare något galet.");}
 	}
 
 
