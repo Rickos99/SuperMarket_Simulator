@@ -46,7 +46,7 @@ public class CheckOutEvent extends Event {
 		this.state.closeOneRegister();
 		this.executeTime = time;
 		// Gets the first custommer in the queue.
-		this.customer = state.removeFirst();
+		this.customer = state.getFirst();
 		this.isPeopleInQueue = true;
 
 	}
