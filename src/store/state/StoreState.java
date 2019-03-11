@@ -73,7 +73,16 @@ public class StoreState extends simulator.SimState {
 	public void closeStore() {
 		storeIsOpen = false;
 	}
-
+	
+	public void setTimeElapsed(double time) {
+		elapsedTime = time;
+	}
+	
+	public double getTimeElapsed() {
+		return elapsedTime;
+	}
+	
+	
 	public void openStore() {
 		storeIsOpen = true;
 	}

@@ -38,7 +38,7 @@ public class EventQueue {
 
 		Event tempEvent = eventQueue.get(0);
 		// Sets time in state to be the time that the event was executed.
-		state.setStoreTime(tempEvent.getExTime());
+		state.setTimeElapsed(tempEvent.getExTime());
 		//state.updateView(tempEvent.getCustomerID(), tempEvent.getEventDescription(), tempEvent.getExTime());
 		eventQueue.remove(0);
 		return tempEvent;
