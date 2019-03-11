@@ -158,7 +158,7 @@ public class StoreState extends simulator.SimState {
 		return (int) storeTime.timeNextCustomer();
 	}
 	public int getTimeNextCustomerCheckout() {
-		return (int) storeTime.timeCustomerCheckout();
+		return (int) storeTime.timeCustomerCheckOut();
 	}
 	public int getTimeCustomerPick() {
 		return (int) storeTime.timeCustomerPick();
