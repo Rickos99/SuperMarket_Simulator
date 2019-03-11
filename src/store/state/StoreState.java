@@ -1,6 +1,7 @@
 package store.state;
 
 import simulator.Event;
+import store.time.StoreTime;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class StoreState extends simulator.SimState {
@@ -27,14 +28,14 @@ public class StoreState extends simulator.SimState {
 	
 	private boolean storeIsOpen;
 
-	private FIFO<Customer> checkoutQueue;
+	private FIFO<Customer> checkOutQueue;
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
 	public StoreState() {
 		// TODO: Initialize all parameters in this state
 		storeTime = new StoreTime();
-		checkoutQueue = new FIFO<Customer>();
+		checkOutQueue = new FIFO<Customer>();
 		customerSpawn = new CreateCustomer();
 	}
 
@@ -98,7 +99,30 @@ public class StoreState extends simulator.SimState {
 	public int getCustomersInTotal() {
 		return customersInTotal;
 	}
-
+	
+	public int getRegistersOpen() {
+		return registersOpen;
+	}
+	
+	public boolean getCheckOutQueueIsEmpty() {
+		return checkOutQueue.isEmpty();
+	}
+	
+	public int getTimeNextCustomer() {
+		return (int) storeTime.timeNextCustomer();
+	}
+	public int getTimeNextCustomerCheckout() {
+		return (int) storeTime.timeCustomerCheckout();
+	}
+	public int getTimeCustomerPick() {
+		return (int) storeTime.timeCustomerPick();
+	}
+	
+	public void addCustomerInPayoutLine(Customer customer) {
+		checkOutQueue.add(customer);
+	}
+	
+	
 	@Override
 	public void runSim() {
 		startSimulator();

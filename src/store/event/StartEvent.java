@@ -17,7 +17,7 @@ public class StartEvent extends Event {
 
 	@Override
 	public void runEvent() {
-		double nextExecuteTime = state.getElapsedTime() + state.storeTime.timeNextCustomer();
+		double nextExecuteTime = state.getElapsedTime() + state.getTimeNextCustomer();
 		addEventToQueue(new CustomerArrivedEvent(state, nextExecuteTime));
 		addEventToQueue(new StopEvent(state, stopExecuteTime));
 

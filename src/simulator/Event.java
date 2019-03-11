@@ -1,6 +1,7 @@
 package simulator;
 
 import store.state.CreateCustomer;
+import store.state.Customer;
 import store.state.StoreState;
 
 public abstract class Event {
@@ -9,7 +10,7 @@ public abstract class Event {
 	protected StoreState state;
 	protected String eventDescription;
 	protected EventQueue eventQueue;
-	protected CreateCustomer customer;
+	protected Customer customer;
 
 	/**
 	 * 
