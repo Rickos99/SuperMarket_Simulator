@@ -14,14 +14,14 @@ import store.state.StoreState;
 
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
-	protected StoreState state;
+	protected SimState state;
 
 	/**
 	 * 
 	 * @param state
 	 */
 
-	public EventQueue(StoreState state) {
+	public EventQueue(SimState state) {
 		this.state = state;
 		this.eventQueue = new ArrayList<Event>();
 	}

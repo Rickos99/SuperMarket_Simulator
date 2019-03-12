@@ -14,14 +14,10 @@ import java.util.Observer;
  */
 public abstract class SimView implements Observer {
 	
-	public SimView(SimState state) {
-		state.addObserver(this);
-	}
-	
 	/**
 	 * Method used to save simulation results in console.
 	 */
-	public abstract void printConsole(SimState state);
+	public abstract void printConsole();
 	
 	/**
 	 * Method used to save simulation results in a file.
@@ -29,7 +25,7 @@ public abstract class SimView implements Observer {
 	 * @param filePath designated file path
 	 * @param overwrite overwrite current file path
 	 */
-	public abstract void printFile(SimState state, String filePath, boolean overwrite);
+	public abstract void printFile(String filePath, boolean overwrite);
 
 	@Override
 	public abstract void update(Observable o, Object arg);

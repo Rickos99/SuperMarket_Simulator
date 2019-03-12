@@ -34,11 +34,11 @@ public class StoreView extends SimView {
 		result += generateProgress((StoreState)o);
 		if(!((SimState)o).simulatorIsRunning()) {
 			result += generateResult((StoreState) o);
+			printConsole();
 		}
 	}
 	
 	public StoreView(StoreState state) {
-		super(state);
 		this.result = generateParameters(state);
 	}
 
@@ -46,7 +46,7 @@ public class StoreView extends SimView {
 	 * Print simulation parameters, progress and result to a console window.
 	 */
 	@Override
-	public void printConsole(SimState state) {
+	public void printConsole() {
 		System.out.println(result);
 	}
 
@@ -58,7 +58,7 @@ public class StoreView extends SimView {
 	 * @param overwrite Should a already existing file be overwritten.
 	 */
 	@Override
-	public void printFile(SimState state, String filePath, boolean overwrite) {
+	public void printFile(String filePath, boolean overwrite) {
 		File file = new File(filePath);
 		if (file.isDirectory()) {
 			return;
