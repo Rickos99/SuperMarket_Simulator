@@ -1,10 +1,9 @@
 /**
- * 
+ *
  * @author Nour Aldein Bahtite
  * @author Philip Eriksson
  * @author Rickard Bemm
  * @author André Christofferson
- * 
  */
 package store.state;
 
@@ -49,7 +48,7 @@ public class StoreState extends simulator.SimState {
 	private CreateCustomer customerSpawn;
 
 	/**
-	 * 
+	 *
 	 * @param TIME_SEED
 	 * @param MAX_CUSTOMERS
 	 * @param MAX_REGISTERS
@@ -84,7 +83,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 * @throws NotImplementedException()
@@ -96,9 +95,9 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * 
+	 *
 	 * Create a new customer
-	 * 
+	 *
 	 * @return newCustomer()
 	 */
 	public Customer createNewCustomer() {
@@ -108,7 +107,7 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * A new customer enters the store. The store can accept a new customer only if
 	 * the store doesn't have the maximal number of customer in it
-	 * 
+	 *
 	 * @throws OpenRegisterFailedException else
 	 */
 	public void openNewRegister() {
@@ -122,7 +121,7 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * Close the store and allow the customers (if they found ) to pay for their
 	 * things.
-	 * 
+	 *
 	 * @throws CloseRegisterFailedException else.
 	 */
 	public void closeOneRegister() {
@@ -135,7 +134,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * The store is open and can accept customers.
-	 * 
+	 *
 	 * @return storeIsOpen
 	 */
 	public boolean storeIsOpen() {
@@ -156,7 +155,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the elapsed time
-	 * 
+	 *
 	 * @return elapsedTime.
 	 */
 
@@ -166,7 +165,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * To open the store.
-	 * 
+	 *
 	 * StoreIsOpen change to true.
 	 */
 	public void openStore() {
@@ -190,7 +189,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of customers who wait on the queue to pay their things.
-	 * 
+	 *
 	 * @return checkOutQueue
 	 */
 	public FIFO<Customer> getCheckoutQueue() {
@@ -199,7 +198,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the max number of customers in the store.
-	 * 
+	 *
 	 * @return MAX_CUSTOMERS
 	 */
 	public int getMaxCustomers() {
@@ -208,7 +207,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of all the customers who could and couldn't enter the store.
-	 * 
+	 *
 	 * @return customersInTotal
 	 */
 	public int getCustomersInTotal() {
@@ -218,7 +217,7 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * Get the number of the customers which can be accepted in the store in the
 	 * moment
-	 * 
+	 *
 	 * @return registersOpen
 	 */
 	public int getRegistersOpen() {
@@ -227,7 +226,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * If the check out queue is empty.
-	 * 
+	 *
 	 * @return isEmpty()
 	 */
 	public boolean getCheckOutQueueIsEmpty() {
@@ -236,7 +235,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the first customer who waits in the check out queue for paying his things
-	 * 
+	 *
 	 * @return getFirst()
 	 */
 	public Customer getFirst() {
@@ -245,7 +244,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get queue time between two customers.
-	 * 
+	 *
 	 * @return timeNextCustomer()
 	 */
 	public double getTimeNextCustomer() {
@@ -254,7 +253,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get check out time between two customers.
-	 * 
+	 *
 	 * @return timeCustomerCheckOut()
 	 */
 	public double getTimeNextCustomerCheckout() {
@@ -263,7 +262,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get pick time for customers.
-	 * 
+	 *
 	 * @return timeCustomerPick()
 	 */
 	public double getTimeCustomerPick() {
@@ -272,7 +271,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Add new customer in pay queue
-	 * 
+	 *
 	 * @param customer
 	 */
 	public void addCustomerInPayoutLine(Customer customer) {
@@ -281,7 +280,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get seed time.
-	 * 
+	 *
 	 * @return TIME_SEED
 	 */
 	public long getTIME_SEED() {
@@ -290,7 +289,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the max number of customers.
-	 * 
+	 *
 	 * @return MAX_CUSTOMERS
 	 */
 	public int getMAX_CUSTOMERS() {
@@ -299,7 +298,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get max number of registers.
-	 * 
+	 *
 	 * @return MAX_REGISTERS
 	 */
 	public int getMAX_REGISTERS() {
@@ -308,7 +307,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the speed of arrival.
-	 * 
+	 *
 	 * @return ARRIVAL_SPEED
 	 */
 	public double getARRIVAL_SPEED() {
@@ -317,7 +316,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the minimum time of picking.
-	 * 
+	 *
 	 * @return MIN_PICKING_TIME
 	 */
 	public double getMIN_PICKING_TIME() {
@@ -326,7 +325,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the maximum time of picking.
-	 * 
+	 *
 	 * @return MAX_PICKING_TIME
 	 */
 	public double getMAX_PICKING_TIME() {
@@ -335,7 +334,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the minimum time of check out.
-	 * 
+	 *
 	 * @return MIN_CHECKOUT_TIME
 	 */
 	public double getMIN_CHECKOUT_TIME() {
@@ -343,9 +342,9 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * 
+	 *
 	 * Get the maximum time of check out.
-	 * 
+	 *
 	 * @return MAX_CHECKOUT_TIME
 	 */
 	public double getMAX_CHECKOUT_TIME() {
@@ -354,7 +353,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of customers who paid for their things
-	 * 
+	 *
 	 * @return customersPayed
 	 */
 	public int getCustomersPayed() {
@@ -363,7 +362,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of customers who visited the store
-	 * 
+	 *
 	 * @return customersVisited
 	 */
 	public int getCustomersVisited() {
@@ -372,7 +371,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of the customers who wait in queue.
-	 * 
+	 *
 	 * @return customersInQueue
 	 */
 	public int getCustomersInQueue() {
@@ -381,7 +380,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the number of customers who couldn't go in the store.
-	 * 
+	 *
 	 * @return customersDeniedEntry
 	 */
 	public int getCustomersDeniedEntry() {
@@ -390,7 +389,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the time spent in the queue
-	 * 
+	 *
 	 * @return queueTime
 	 */
 	public double getQueueTime() {
@@ -399,7 +398,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Get the time while the checkout was empty
-	 * 
+	 *
 	 * @return checkoutFreeTime
 	 */
 
@@ -408,7 +407,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return TIME_LAMBDA
 	 */
 	public double getTIME_LAMBDA() {
@@ -417,7 +416,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Uppdate the time when the checout is down.
-	 * 
+	 *
 	 * @param deadRegisterTime
 	 */
 	public void uppdateRegistersDownTime(double deadRegisterTime) {
@@ -426,7 +425,7 @@ public class StoreState extends simulator.SimState {
 
 	/**
 	 * Uppdate the time that spant in queue
-	 * 
+	 *
 	 * @param peopleInQueueTime
 	 */
 	public void uppdateCustomersInQueueTime(double peopleInQueueTime) {
