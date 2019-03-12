@@ -9,7 +9,6 @@ package store.state;
 
 import simulator.Event;
 import simulator.EventQueue;
-import store.event.StartEvent;
 import store.time.StoreTime;
 
 

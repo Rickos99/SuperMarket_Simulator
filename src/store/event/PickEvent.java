@@ -9,10 +9,7 @@
 
 package store.event;
 
-import java.io.IOException;
-
 import simulator.Event;
-import store.state.CreateCustomer;
 import store.state.Customer;
 import store.state.StoreState;
 
