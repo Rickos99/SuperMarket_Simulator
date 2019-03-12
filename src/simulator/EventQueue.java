@@ -25,6 +25,10 @@ public class EventQueue {
 		this.eventQueue = new ArrayList<Event>();
 
 	}
+	
+	public boolean getEventQueueSize() {
+		return eventQueue.size() == 0;
+	}
 
 	/**
 	 * Adds an event to the event queue
@@ -40,9 +44,9 @@ public class EventQueue {
 	 * @return the event first in line.
 	 */
 
-	public Event getEvent() throws IndexOutOfBoundsException {
+	public Event getEvent() {
 		if (eventQueue.size() == 0) {
-			throw new IndexOutOfBoundsException("Event Queue is empty.");
+			
 		}
 		// Sorts the current array via it's getExTime method.
 

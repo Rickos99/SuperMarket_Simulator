@@ -10,7 +10,7 @@ package store.state;
 import simulator.Event;
 import store.event.StartEvent;
 import store.time.StoreTime;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 public class StoreState extends simulator.SimState {
 
@@ -82,17 +82,7 @@ public class StoreState extends simulator.SimState {
 		new StartEvent(this, TIME_STORE_CLOSE);
 	}
 
-	/**
-	 *
-	 * @param id
-	 * @return
-	 * @throws NotImplementedException()
-	 */
 
-	public Customer customer(int id) {
-		// TODO Implement customer(int id)
-		throw new NotImplementedException();
-	}
 
 	/**
 	 *
