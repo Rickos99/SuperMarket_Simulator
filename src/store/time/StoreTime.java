@@ -25,16 +25,16 @@ public class StoreTime {
 
 	}
 	/**
-	 * Returns 
-	 * @return duration for pick event
+	 * Returns time duration for a pick event
+	 * @return duration for a pick event
 	 */
 	public double timeCustomerPick() {
 		return randomUni.next();
 
 	}
 	/**
-	 * 
-	 * @return time duration for checkout event
+	 * Returns time duration for a checkout event
+	 * @return time duration for a checkout event
 	 */
 	public double timeCustomerCheckOut() {
 		return randomUni.next();
