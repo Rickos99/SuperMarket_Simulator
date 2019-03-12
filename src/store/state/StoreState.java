@@ -45,6 +45,20 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
+	/**
+	 * 
+	 * @param TIME_SEED
+	 * @param MAX_CUSTOMERS
+	 * @param MAX_REGISTERS
+	 * @param TIME_STORE_CLOSE
+	 * @param ARRIVAL_SPEED
+	 * @param MIN_PICKING_TIME
+	 * @param MAX_PICKING_TIME
+	 * @param MIN_CHECKOUT_TIME
+	 * @param MAX_CHECKOUT_TIME
+	 * @param TIME_LAMBDA
+	 */
+
 	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED,
 			double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
 			double TIME_LAMBDA) {
@@ -65,6 +79,13 @@ public class StoreState extends simulator.SimState {
 
 		new StartEvent(this, TIME_STORE_CLOSE);
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NotImplementedException()
+	 */
 
 	public Customer customer(int id) {
 		// TODO Implement customer(int id)
