@@ -22,6 +22,7 @@ public class StartEvent extends Event {
 		this.state = state;
 		this.executeTime = 0.0;
 		this.stopExecuteTime = stopExecuteTime;
+		this.eventQueue = state.getEventQueue();
 		addEventToQueue(this);
 
 	}

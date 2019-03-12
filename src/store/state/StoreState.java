@@ -69,7 +69,7 @@ public class StoreState extends simulator.SimState {
 		this.storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
 		this.checkOutQueue = new FIFO<Customer>();
 		this.customerSpawn = new CreateCustomer();
-		this.eventQueue = new EventQueue(this);
+		super.eventQueue = new EventQueue(this);
 		
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
@@ -81,8 +81,6 @@ public class StoreState extends simulator.SimState {
 		this.MIN_CHECKOUT_TIME = MIN_CHECKOUT_TIME;
 		this.MAX_CHECKOUT_TIME = MAX_CHECKOUT_TIME;
 		this.TIME_LAMBDA = TIME_LAMBDA;
-
-		
 	}
 
 
