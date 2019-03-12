@@ -1,3 +1,6 @@
+/**
+ * @author Nour Aldein Bahtite
+ */
 package store.event;
 
 import simulator.Event;

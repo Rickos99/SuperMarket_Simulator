@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
  * This class represent a First-In-First-Out queue.
  * 
  * @author Rickard Bemm
+ * @author Nour Aldein Bahtite
  * @version 1.0
  *
  * @param <E> Object type for each item in queue
@@ -81,8 +82,8 @@ public class FIFO<E> implements Iterable<E> {
 	}
 
 	/**
-	 * Get first item in queue, if queue is empty a
-	 * {@link NoSuchElementException} will be thrown.
+	 * Get first item in queue, if queue is empty a {@link NoSuchElementException}
+	 * will be thrown.
 	 * 
 	 * @return First item in queue
 	 * @throws NoSuchElementException Occurs when queue is empty
@@ -142,8 +143,8 @@ public class FIFO<E> implements Iterable<E> {
 	}
 
 	/**
-	 * Get iterator for queue. Iteration in the queue does not change anything
-	 * in queue.
+	 * Get iterator for queue. Iteration in the queue does not change anything in
+	 * queue.
 	 */
 	@Override
 	public Iterator<E> iterator() {
@@ -186,8 +187,8 @@ public class FIFO<E> implements Iterable<E> {
 	private class Item {
 
 		/**
-		 * Reference to next Item. If there is no next {@code item},
-		 * {@code next} is null.
+		 * Reference to next Item. If there is no next {@code item}, {@code next} is
+		 * null.
 		 */
 		public Item next;
 

@@ -1,3 +1,8 @@
+/**
+ * @author Nour Aldein Bahtite
+ * 
+ */
+
 package store.time;
 
 import java.util.Random;
