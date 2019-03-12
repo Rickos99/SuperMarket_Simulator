@@ -21,5 +21,10 @@ public abstract class SimState extends Observable {
 	public void startSimulator() {
 		simulatorIsRunning = true;
 	}
+	
+	public boolean simulatorIsRunning() {
+		return this.simulatorIsRunning;
+	}
+	
 	abstract public void runSim();
 }
