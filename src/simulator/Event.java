@@ -6,7 +6,6 @@
  */
 package simulator;
 
-import store.state.CreateCustomer;
 import store.state.Customer;
 import store.state.StoreState;
 
@@ -21,7 +20,7 @@ public abstract class Event {
 	public Event(SimState state) {
 		this.eventQueue = state.getEventQueue();
 	}
-	
+
 	/**
 	 *
 	 * 
