@@ -19,7 +19,7 @@ public abstract class Event {
 	protected Customer customer;
 
 	/**
-	 * 
+	 *
 	 * 
 	 * @return time when event is executed.
 	 */
