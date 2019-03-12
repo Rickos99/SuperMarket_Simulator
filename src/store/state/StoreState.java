@@ -245,8 +245,8 @@ public class StoreState extends simulator.SimState {
 	 * 
 	 * @return timeNextCustomer()
 	 */
-	public int getTimeNextCustomer() {
-		return (int) storeTime.timeNextCustomer();
+	public double getTimeNextCustomer() {
+		return storeTime.timeNextCustomer();
 	}
 
 	/**
@@ -254,8 +254,8 @@ public class StoreState extends simulator.SimState {
 	 * 
 	 * @return timeCustomerCheckOut()
 	 */
-	public int getTimeNextCustomerCheckout() {
-		return (int) storeTime.timeCustomerCheckOut();
+	public double getTimeNextCustomerCheckout() {
+		return storeTime.timeCustomerCheckOut();
 	}
 
 	/**
@@ -263,8 +263,8 @@ public class StoreState extends simulator.SimState {
 	 * 
 	 * @return timeCustomerPick()
 	 */
-	public int getTimeCustomerPick() {
-		return (int) storeTime.timeCustomerPick();
+	public double getTimeCustomerPick() {
+		return storeTime.timeCustomerPick();
 	}
 
 	/**
