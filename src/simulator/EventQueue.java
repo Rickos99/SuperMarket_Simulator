@@ -1,3 +1,10 @@
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
+
 package simulator;
 
 import java.util.ArrayList;
@@ -8,10 +15,19 @@ public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected StoreState state;
 
+	/**
+	 * 
+	 * @param state
+	 */
+
 	public EventQueue(StoreState state) {
 		this.state = state;
 		this.eventQueue = new ArrayList<Event>();
 
+	}
+	
+	public boolean getEventQueueSize() {
+		return eventQueue.size() == 0;
 	}
 
 	/**
@@ -28,24 +44,24 @@ public class EventQueue {
 	 * @return the event first in line.
 	 */
 
-	public Event getEvent() throws IndexOutOfBoundsException {
+	public Event getEvent() {
 		if (eventQueue.size() == 0) {
-			throw new IndexOutOfBoundsException("Event Queue is empty.");
+			
 		}
 		// Sorts the current array via it's getExTime method.
 
 		eventQueue = sortEvent(eventQueue);
 		Event nextRunEvent = eventQueue.get(0);
-		
-		//Uppdates registers wasted time.
+
+		// Uppdates registers wasted time.
 		if (state.storeIsOpen()) {
 			state.uppdateRegistersDownTime(
 					state.getRegistersOpen() * (nextRunEvent.getExTime() - state.getElapsedTime()));
 		}
-		//Uppdates time that people have been standing in the queue
+		// Uppdates time that people have been standing in the queue
 		state.uppdateCustomersInQueueTime(
 				state.getCustomersInQueue() * (nextRunEvent.getExTime() - state.getElapsedTime()));
-		
+
 		// Sets time in state to be the time that the event was executed.
 		state.uppdateTimeElapsed(nextRunEvent.getExTime());
 		eventQueue.remove(0);

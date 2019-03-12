@@ -1,5 +1,9 @@
 /**
+ * 
  * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
  * 
  */
 
@@ -7,6 +11,9 @@ package store.time;
 
 import java.util.Random;
 
+/**
+ * This class is used for computing the time of an event.
+ */
 public class UniformRandomStream {
 
 	private Random rand;
@@ -24,6 +31,10 @@ public class UniformRandomStream {
 		this.width = upper - lower;
 	}
 
+	/**
+	 * 
+	 * @return the double value that is needed for the events
+	 */
 	public double next() {
 		return lower + rand.nextDouble() * width;
 	}

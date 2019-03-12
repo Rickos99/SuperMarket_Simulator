@@ -1,3 +1,9 @@
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
 package simulator;
 
 import store.state.CreateCustomer;
@@ -13,7 +19,7 @@ public abstract class Event {
 	protected Customer customer;
 
 	/**
-	 * 
+	 *
 	 * 
 	 * @return time when event is executed.
 	 */
@@ -22,40 +28,34 @@ public abstract class Event {
 		return executeTime;
 	}
 
-	public Customer getCustomerID(){
+	/**
+	 * 
+	 * @return customer id
+	 */
+	public Customer getCustomerID() {
 		return customer;
 	}
-	
-	
-	public String getEventDescription(){
+
+	/**
+	 * 
+	 * @return eventDescription
+	 */
+	public String getEventDescription() {
 		return eventDescription;
 	}
 
 	/**
 	 * Adds an event to the event queue for the specific state.
 	 * 
-	 * @param event
-	 *            adds this to the eventqueue
+	 * @param event adds this to the eventqueue
 	 */
 	public void addEventToQueue(Event event) {
 		this.eventQueue.addEvent(event);
 	}
-	
-	
-	
+
 	/**
 	 * Abstract method which is designed for each event.
 	 */
 	public abstract void runEvent();
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

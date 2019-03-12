@@ -7,8 +7,11 @@ import java.util.NoSuchElementException;
 /**
  * This class represent a First-In-First-Out queue.
  * 
- * @author Rickard Bemm
  * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ * 
  * @version 1.0
  *
  * @param <E> Object type for each item in queue
