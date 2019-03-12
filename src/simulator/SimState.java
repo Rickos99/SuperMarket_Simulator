@@ -1,5 +1,7 @@
 package simulator;
 
+import java.util.Observable;
+
 /**
  * 
  * @author Nour Aldein Bahtite
@@ -9,7 +11,7 @@ package simulator;
  *
  * @version 1.0
  */
-public abstract class SimState {
+public abstract class SimState extends Observable {
 	protected boolean simulatorIsRunning;
 
 	public void stopSimulator() {
@@ -19,6 +21,5 @@ public abstract class SimState {
 	public void startSimulator() {
 		simulatorIsRunning = true;
 	}
-
 	abstract public void runSim();
 }
