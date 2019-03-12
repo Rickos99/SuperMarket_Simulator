@@ -79,7 +79,7 @@ public class StoreState extends simulator.SimState {
 		this.MAX_CHECKOUT_TIME = MAX_CHECKOUT_TIME;
 		this.TIME_LAMBDA = TIME_LAMBDA;
 
-		new StartEvent(this, TIME_STORE_CLOSE);
+		
 	}
 
 
@@ -92,6 +92,10 @@ public class StoreState extends simulator.SimState {
 	 */
 	public Customer createNewCustomer() {
 		return customerSpawn.newCustomer();
+	}
+	
+	public int getTimeStoreClose() {
+		return TIME_STORE_CLOSE;
 	}
 
 	/**

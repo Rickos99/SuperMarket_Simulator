@@ -9,6 +9,7 @@ package simulator;
 
 import java.util.ArrayList;
 
+import store.event.StartEvent;
 import store.state.StoreState;
 
 public class EventQueue {
@@ -23,6 +24,7 @@ public class EventQueue {
 	public EventQueue(StoreState state) {
 		this.state = state;
 		this.eventQueue = new ArrayList<Event>();
+		new StartEvent(state, state.getTimeStoreClose());
 
 	}
 	
