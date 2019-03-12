@@ -22,8 +22,8 @@ public class SimDriver {
 	}
 	
 	public void run() {
+		state.runSim();
 		while(simulatorIsRunning()) {
-			state.runSim();
 			queue.getEvent().runEvent();
 			
 			
