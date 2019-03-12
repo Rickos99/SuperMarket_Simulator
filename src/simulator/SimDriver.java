@@ -8,7 +8,7 @@ public class SimDriver {
 	private EventQueue queue;
 
 	/**
-	 * 
+	 *
 	 * @param TIME_SEED
 	 * @param MAX_CUSTOMERS
 	 * @param MAX_REGISTERS
@@ -20,7 +20,7 @@ public class SimDriver {
 	 * @param MAX_CHECKOUT_TIME
 	 * @param TIME_LAMBDA
 	 */
-	
+
 	public SimDriver(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED,
 			double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
 			double TIME_LAMBDA) {
@@ -32,8 +32,8 @@ public class SimDriver {
 	}
 
 	public void run() {
-		while (simulatorIsRunning()) {
-			state.runSim();
+		state.runSim();
+		while(state.simulatorIsRunning()) {
 			queue.getEvent().runEvent();
 
 		}
