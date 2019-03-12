@@ -13,6 +13,7 @@ import java.util.Observable;
  */
 public abstract class SimState extends Observable {
 	protected boolean simulatorIsRunning;
+	protected EventQueue eventQueue;
 
 	public void stopSimulator() {
 		simulatorIsRunning = false;
@@ -20,6 +21,10 @@ public abstract class SimState extends Observable {
 
 	public void startSimulator() {
 		simulatorIsRunning = true;
+	}
+	
+	public EventQueue getEventQueue() {
+		return eventQueue;
 	}
 	
 	public boolean simulatorIsRunning() {

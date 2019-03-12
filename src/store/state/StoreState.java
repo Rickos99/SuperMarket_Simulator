@@ -8,6 +8,7 @@
 package store.state;
 
 import simulator.Event;
+import simulator.EventQueue;
 import store.event.StartEvent;
 import store.time.StoreTime;
 
@@ -47,6 +48,7 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
+
 	/**
 	 *
 	 * @param TIME_SEED
@@ -64,10 +66,12 @@ public class StoreState extends simulator.SimState {
 	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED,
 			double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
 			double TIME_LAMBDA) {
-		storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
-		checkOutQueue = new FIFO<Customer>();
-		customerSpawn = new CreateCustomer();
-
+		
+		this.storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
+		this.checkOutQueue = new FIFO<Customer>();
+		this.customerSpawn = new CreateCustomer();
+		this.eventQueue = new EventQueue(this);
+		
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
 		this.MAX_REGISTERS = MAX_REGISTERS;
@@ -79,7 +83,7 @@ public class StoreState extends simulator.SimState {
 		this.MAX_CHECKOUT_TIME = MAX_CHECKOUT_TIME;
 		this.TIME_LAMBDA = TIME_LAMBDA;
 
-		new StartEvent(this, TIME_STORE_CLOSE);
+		
 	}
 
 
@@ -92,6 +96,10 @@ public class StoreState extends simulator.SimState {
 	 */
 	public Customer createNewCustomer() {
 		return customerSpawn.newCustomer();
+	}
+	
+	public int getTimeStoreClose() {
+		return TIME_STORE_CLOSE;
 	}
 
 	/**
@@ -109,6 +117,7 @@ public class StoreState extends simulator.SimState {
 			// TODO: throw new OpenRegisterFailedException()
 		}
 	}
+	
 
 	/**
 	 * Close the store and allow the customers (if they found ) to pay for their
