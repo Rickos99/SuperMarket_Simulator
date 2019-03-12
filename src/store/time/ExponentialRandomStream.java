@@ -28,9 +28,4 @@ public class ExponentialRandomStream {
 	public double next() {
 		return -Math.log(rand.nextDouble()) / lambda;
 	}
-
-	public static void main(String[] args) {
-		ExponentialRandomStream obj = new ExponentialRandomStream(5);
-		System.out.println(obj.next());
-	}
 }

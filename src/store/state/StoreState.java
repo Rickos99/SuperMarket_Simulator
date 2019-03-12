@@ -1,8 +1,11 @@
 /**
+ * 
  * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
  * 
  */
-
 package store.state;
 
 import simulator.Event;
@@ -359,7 +362,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * TODO
+	 * Get the number of customers who visited the store
 	 * 
 	 * @return customersVisited
 	 */
@@ -405,7 +408,6 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * TODO
 	 * 
 	 * @return TIME_LAMBDA
 	 */
