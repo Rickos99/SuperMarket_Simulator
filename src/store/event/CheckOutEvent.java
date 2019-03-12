@@ -1,5 +1,10 @@
 /**
+ * 
  * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ * 
  */
 package store.event;
 
@@ -16,12 +21,9 @@ public class CheckOutEvent extends Event {
 	/**
 	 * Constructor if there are avaliable registers and the que is empty.
 	 * 
-	 * @param state
-	 *            current store state
-	 * @param time
-	 *            event execute time
-	 * @param customer
-	 *            event for this customer
+	 * @param state    current store state
+	 * @param time     event execute time
+	 * @param customer event for this customer
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		this.state = state;
@@ -34,14 +36,11 @@ public class CheckOutEvent extends Event {
 
 	/**
 	 * 
-	 * Constructor for if there are customers in the que that are waiting to
-	 * pay.
+	 * Constructor for if there are customers in the que that are waiting to pay.
 	 * 
 	 * 
-	 * @param state
-	 *            current store state
-	 * @param time
-	 *            event execute time
+	 * @param state current store state
+	 * @param time  event execute time
 	 */
 	public CheckOutEvent(StoreState state, double time) {
 		this.state = state;

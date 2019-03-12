@@ -1,3 +1,10 @@
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
+
 package simulator;
 
 import java.util.ArrayList;
@@ -7,6 +14,11 @@ import store.state.StoreState;
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected StoreState state;
+
+	/**
+	 * 
+	 * @param state
+	 */
 
 	public EventQueue(StoreState state) {
 		this.state = state;
@@ -36,16 +48,16 @@ public class EventQueue {
 
 		eventQueue = sortEvent(eventQueue);
 		Event nextRunEvent = eventQueue.get(0);
-		
-		//Uppdates registers wasted time.
+
+		// Uppdates registers wasted time.
 		if (state.storeIsOpen()) {
 			state.uppdateRegistersDownTime(
 					state.getRegistersOpen() * (nextRunEvent.getExTime() - state.getElapsedTime()));
 		}
-		//Uppdates time that people have been standing in the queue
+		// Uppdates time that people have been standing in the queue
 		state.uppdateCustomersInQueueTime(
 				state.getCustomersInQueue() * (nextRunEvent.getExTime() - state.getElapsedTime()));
-		
+
 		// Sets time in state to be the time that the event was executed.
 		state.uppdateTimeElapsed(nextRunEvent.getExTime());
 		eventQueue.remove(0);
