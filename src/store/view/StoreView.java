@@ -3,7 +3,8 @@ package store.view;
 import java.io.File;
 import java.io.PrintWriter;
 import java.text.MessageFormat;
-
+import java.util.Observable;
+import simulator.SimState;
 import simulator.SimView;
 import store.state.StoreState;
 
@@ -11,31 +12,33 @@ import store.state.StoreState;
  * @author Rickard Bemm
  * @author Philip Eriksson
  * @author Nour Aldein Bahtite
- * @author André Christofferson
+ * @author Andrï¿½ Christofferson
  *
  */
 public class StoreView extends SimView {
 
 	private String newLine = "\r\n";
-	private StoreState state;
-
-	/**
-	 * Constructs a new instance of a {@code StoreView} object.
-	 * 
-	 * @param state
-	 */
+	private String result;
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		result += generateProgress((StoreState)o);
+		if(!((SimState)o).simulatorIsRunning()) {
+			result += generateResult((StoreState) o);
+		}
+	}
+	
 	public StoreView(StoreState state) {
-		this.state = state;
+		super(state);
+		this.result = generateParameters(state);
 	}
 
 	/**
 	 * Print simulation parameters, progress and result to a console window.
 	 */
 	@Override
-	public void printConsole() {
-		System.out.println(generateParameters());
-		System.out.println(generateProgress());
-		System.out.println(generateResult());
+	public void printConsole(SimState state) {
+		System.out.println(result);
 	}
 
 	/**
@@ -46,7 +49,7 @@ public class StoreView extends SimView {
 	 * @param overwrite Should a already existing file be overwritten.
 	 */
 	@Override
-	public void printFile(String filePath, boolean overwrite) {
+	public void printFile(SimState state, String filePath, boolean overwrite) {
 		File file = new File(filePath);
 		if (file.isDirectory()) {
 			return;
@@ -60,9 +63,7 @@ public class StoreView extends SimView {
 
 		try {
 			PrintWriter writer = new PrintWriter(file);
-			writer.println(generateParameters());
-			writer.println(generateProgress());
-			writer.println(generateResult());
+			writer.println(result);
 			writer.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -75,7 +76,7 @@ public class StoreView extends SimView {
 	 * 
 	 * @return parameter statistics from the simulator
 	 */
-	private String generateParameters() {
+	private String generateParameters(StoreState state) {
 		String result = generateHeader("Parametrar") + newLine;
 		result += MessageFormat.format("Antal kassor, N...........: {0} \n",
 				state.getMAX_REGISTERS());
@@ -98,7 +99,7 @@ public class StoreView extends SimView {
 	 * @return simulation event description
 	 */
 	
-	private String generateProgress() {
+	private String generateProgress(StoreState state) {
 		String result = generateHeader("FÃ¶rlopp") + newLine;
 		return result;
 	}
@@ -107,7 +108,7 @@ public class StoreView extends SimView {
 	 * 
 	 * @return simulation results
 	 */
-	private String generateResult() {
+	private String generateResult(StoreState state) {
 		String result = generateHeader("Resultat") + newLine;
 		result += MessageFormat.format(
 				"1) Av {0} kunder handlade {1} medan {2} missades \n",

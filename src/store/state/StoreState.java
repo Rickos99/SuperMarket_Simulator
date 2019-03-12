@@ -41,8 +41,9 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
-	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED,
-			double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
+			int TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
+			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
 			double TIME_LAMBDA) {
 		storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
 		checkOutQueue = new FIFO<Customer>();
@@ -84,6 +85,8 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void openNewRegister() {
 		if (registersOpen < MAX_REGISTERS) {
+			setChanged();
+			notifyObservers();
 			registersOpen++;
 		} else {
 			// TODO: throw new OpenRegisterFailedException()
@@ -98,6 +101,8 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void closeOneRegister() {
 		if (registersOpen > 0) {
+			setChanged();
+			notifyObservers();
 			registersOpen--;
 		} else {
 			// TODO: throw new CloseRegisterFailedException()
@@ -118,10 +123,16 @@ public class StoreState extends simulator.SimState {
 	 * false.
 	 */
 	public void closeStore() {
-		storeIsOpen = false;
+		if (storeIsOpen) {
+			setChanged();
+			notifyObservers();
+			storeIsOpen = false;
+		}
 	}
 
 	public void uppdateTimeElapsed(double time) {
+		setChanged();
+		notifyObservers();
 		elapsedTime = time;
 	}
 
@@ -141,13 +152,19 @@ public class StoreState extends simulator.SimState {
 	 * StoreIsOpen change to true.
 	 */
 	public void openStore() {
-		storeIsOpen = true;
+		if (!storeIsOpen) {
+			setChanged();
+			notifyObservers();
+			storeIsOpen = true;
+		}
 	}
 
 	/**
 	 * Get the number of the customers who couldn't enter the store.
 	 */
 	public void increaseCustomerDeniedByOne() {
+		setChanged();
+		notifyObservers();
 		customersDeniedEntry++;
 	}
 
@@ -247,6 +264,8 @@ public class StoreState extends simulator.SimState {
 	 * @param customer
 	 */
 	public void addCustomerInPayoutLine(Customer customer) {
+		setChanged();
+		notifyObservers();
 		checkOutQueue.add(customer);
 	}
 
@@ -372,15 +391,21 @@ public class StoreState extends simulator.SimState {
 	}
 
 	public void uppdateRegistersDownTime(double deadRegisterTime) {
+		setChanged();
+		notifyObservers();
 		checkoutFreeTime += deadRegisterTime;
 	}
 
 	public void uppdateCustomersInQueueTime(double peopleInQueueTime) {
+		setChanged();
+		notifyObservers();
 		queueTime += peopleInQueueTime;
 	}
 
 	@Override
 	public void runSim() {
+		setChanged();
+		notifyObservers();
 		startSimulator();
 	}
 
