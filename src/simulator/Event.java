@@ -18,6 +18,10 @@ public abstract class Event {
 	protected EventQueue eventQueue;
 	protected Customer customer;
 
+	public Event(SimState state) {
+		this.eventQueue = state.getEventQueue();
+	}
+	
 	/**
 	 *
 	 * 

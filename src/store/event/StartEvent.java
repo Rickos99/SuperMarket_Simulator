@@ -18,6 +18,7 @@ public class StartEvent extends Event {
 	public String eventDescription = "Store opens";
 
 	public StartEvent(StoreState state, double stopExecuteTime) {
+		super(state);
 		this.state = state;
 		this.executeTime = 0.0;
 		this.stopExecuteTime = stopExecuteTime;

@@ -17,6 +17,7 @@ public class StopEvent extends Event {
 	public String eventDescription = "Store closed";
 
 	public StopEvent(StoreState state, double stopTime) {
+		super(state);
 		this.state = state;
 		this.executeTime = stopTime;
 

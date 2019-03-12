@@ -26,6 +26,7 @@ public class CheckOutEvent extends Event {
 	 * @param customer event for this customer
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
+		super(state);
 		this.state = state;
 		this.state.closeOneRegister();
 		this.executeTime = time;

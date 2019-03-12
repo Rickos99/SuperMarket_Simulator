@@ -21,6 +21,7 @@ public class PickEvent extends Event {
 	public String eventDescription = "Costumer picking products";
 
 	public PickEvent(StoreState state, double time, Customer customer) {
+		super(state);
 		this.executeTime = time;
 		this.state = state;
 		this.customer = customer;

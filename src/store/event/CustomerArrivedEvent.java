@@ -17,6 +17,7 @@ public class CustomerArrivedEvent extends Event {
 	private String eventDescription = "Customer Arrived";
 
 	public CustomerArrivedEvent(StoreState state, double time) {
+		super(state);
 		this.state = state;
 		this.executeTime = time;
 		this.customer = state.createNewCustomer();
