@@ -33,8 +33,8 @@ public class SimDriver {
 
 	public void run() {
 		state.runSim();
-		System.out.println("AAA");
-		while (queue.getEventQueueSize()) {
+	
+		while (!queue.getEventQueueIsEmpty()) {
 			queue.getEvent().runEvent();
 		}
 	}

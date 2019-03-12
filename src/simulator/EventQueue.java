@@ -28,7 +28,7 @@ public class EventQueue {
 
 	}
 	
-	public boolean getEventQueueSize() {
+	public boolean getEventQueueIsEmpty() {
 		return eventQueue.size() == 0;
 	}
 
