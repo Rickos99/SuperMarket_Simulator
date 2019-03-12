@@ -44,6 +44,7 @@ public class CheckOutEvent extends Event {
 	 * @param time  event execute time
 	 */
 	public CheckOutEvent(StoreState state, double time) {
+		super(state);
 		this.state = state;
 		this.state.closeOneRegister();
 		this.executeTime = time;
