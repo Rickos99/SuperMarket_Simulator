@@ -8,6 +8,7 @@
 package store.state;
 
 import simulator.Event;
+import simulator.EventQueue;
 import store.event.StartEvent;
 import store.time.StoreTime;
 
@@ -46,6 +47,7 @@ public class StoreState extends simulator.SimState {
 	private FIFO<Customer> checkOutQueue;
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
+	private EventQueue eventQueue;
 
 	/**
 	 *
@@ -67,7 +69,8 @@ public class StoreState extends simulator.SimState {
 		storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
 		checkOutQueue = new FIFO<Customer>();
 		customerSpawn = new CreateCustomer();
-
+		eventQueue = new EventQueue(this);
+		
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
 		this.MAX_REGISTERS = MAX_REGISTERS;
@@ -113,6 +116,7 @@ public class StoreState extends simulator.SimState {
 			// TODO: throw new OpenRegisterFailedException()
 		}
 	}
+	
 
 	/**
 	 * Close the store and allow the customers (if they found ) to pay for their
