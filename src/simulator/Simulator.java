@@ -1,28 +1,30 @@
 package simulator;
 
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
 public class Simulator {
 
 	private SimState state;
 	private EventQueue queue;
 
 	/**
+	 * Create a new instance of Simulator
 	 * 
-	 * @param TIME_SEED
-	 * @param MAX_CUSTOMERS
-	 * @param MAX_REGISTERS
-	 * @param TIME_STORE_CLOSE
-	 * @param ARRIVAL_SPEED
-	 * @param MIN_PICKING_TIME
-	 * @param MAX_PICKING_TIME
-	 * @param MIN_CHECKOUT_TIME
-	 * @param MAX_CHECKOUT_TIME
-	 * @param TIME_LAMBDA
+	 * @param state A simulator state
 	 */
-	public Simulator(SimState state, EventQueue eventQueue) {
+	public Simulator(SimState state, Event startEvent) {
 		this.state = state;
-		this.queue = eventQueue;
+		this.queue = state.getEventQueue();
+		state.getEventQueue().addEvent(startEvent);
 	}
 
+	/**
+	 * Run simulator
+	 */
 	public void run() {
 		state.runSim();
 

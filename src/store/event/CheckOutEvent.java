@@ -1,3 +1,9 @@
+package store.event;
+
+import simulator.Event;
+import store.state.Customer;
+import store.state.StoreState;
+
 /**
  * 
  * @author Nour Aldein Bahtite
@@ -6,12 +12,6 @@
  * @author André Christofferson
  * 
  */
-package store.event;
-
-import simulator.Event;
-import store.state.Customer;
-import store.state.StoreState;
-
 public class CheckOutEvent extends Event {
 
 	private String eventDescription = "Customer paying for products";
@@ -26,12 +26,10 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		super(state);
-		this.state = state;
-		this.state.closeOneRegister();
+		state.closeOneRegister();
 		this.executeTime = time;
 		this.customer = customer;
 		this.isPeopleInQueue = false;
-
 	}
 
 	/**
@@ -44,8 +42,7 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time) {
 		super(state);
-		this.state = state;
-		this.state.closeOneRegister();
+		state.closeOneRegister();
 		this.executeTime = time;
 		// Gets the first custommer in the queue and deletes it from the queue.
 		this.customer = state.getFirst();
@@ -55,18 +52,18 @@ public class CheckOutEvent extends Event {
 
 	@Override
 	public void runEvent() {
-		double newExecuteTime = state.getElapsedTime() + state.getTimeNextCustomerCheckout();
+		double newExecuteTime = state.getElapsedTime() + ((StoreState)state).getTimeNextCustomerCheckout();
 		if (isPeopleInQueue) {
-			// Open upp a new register.
-			state.openNewRegister();
+			// Open up a new register.
+			((StoreState)state).openNewRegister();
 			// Checks to see if there are anymore customers in the queue.
-			if (!state.getCheckOutQueueIsEmpty()) {
-				addEventToQueue(new CheckOutEvent(state, newExecuteTime));
+			if (!((StoreState)state).getCheckOutQueueIsEmpty()) {
+				addEventToQueue(new CheckOutEvent((StoreState)state, newExecuteTime));
 
 			}
 
 		} else {
-			state.openNewRegister();
+			((StoreState)state).openNewRegister();
 			// No new event since there are no people in the queue.
 		}
 

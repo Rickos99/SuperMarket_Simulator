@@ -89,7 +89,7 @@ public class StoreView extends SimView {
 		String result = generateHeader("Parametrar") + newLine;
 		result += MessageFormat.format("Antal kassor, N...........: {0} \n", state.getMAX_REGISTERS());
 		result += MessageFormat.format("Max som ryms, M...........: {0} \n", state.getMAX_CUSTOMERS());
-		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n", state.getTIME_LAMBDA());
+		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n", state.getARRIVAL_SPEED());
 		result += MessageFormat.format("Plocktider, [P_min, P_max]: [{0}..{1}] \n", state.getMIN_PICKING_TIME(),
 				state.getMAX_PICKING_TIME());
 		result += MessageFormat.format("Betaltider, [K_min, K_max]: [{0}..{1}] \n", state.getMIN_CHECKOUT_TIME(),

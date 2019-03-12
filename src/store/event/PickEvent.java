@@ -1,3 +1,9 @@
+package store.event;
+
+import simulator.Event;
+import store.state.Customer;
+import store.state.StoreState;
+
 /**
  * 
  * @author Nour Aldein Bahtite
@@ -6,13 +12,6 @@
  * @author André Christofferson
  * 
  */
-
-package store.event;
-
-import simulator.Event;
-import store.state.Customer;
-import store.state.StoreState;
-
 public class PickEvent extends Event {
 
 	public String eventDescription = "Costumer picking products";
@@ -20,37 +19,24 @@ public class PickEvent extends Event {
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
 		this.executeTime = time;
-		this.state = state;
 		this.customer = customer;
-
 	}
-
-	/**
-	 *
-	 * 
-	 * 
-	 *
-	 */
 
 	@Override
 	public void runEvent() {
-		// Checks if there are avaliable registers to pay in and if the que is
+		// Checks if there are available registers to pay in and if the que is
 		// empty.
 		try {
-			double checkOutTime = state.getElapsedTime() + state.getTimeNextCustomer();
-			if (state.getRegistersOpen() > 0 && state.getCheckOutQueueIsEmpty()) {
+			double checkOutTime = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
+			if (((StoreState)state).getRegistersOpen() > 0 && ((StoreState)state).getCheckOutQueueIsEmpty()) {
 				// Adds a checkout event with no people in the queue and there
-				// are
-				// avaliable registers.
-				addEventToQueue(new CheckOutEvent(state, checkOutTime, customer));
+				// are Available registers.
+				addEventToQueue(new CheckOutEvent((StoreState)state, checkOutTime, customer));
 			} else {
-				// Adds a checkout event where there are customers alrdy in the
-				// queue.
-				// and places the customer who wants to buy in the back of the
-				// FIFO
-				// queue.
-				state.addCustomerInPayoutLine(customer);
-				addEventToQueue(new CheckOutEvent(state, checkOutTime));
+				// Adds a checkout event where there are customers already in the queue.
+				// and places the customer who wants to buy in the back of the FIFO queue.
+				((StoreState)state).addCustomerInPayoutLine(customer);
+				addEventToQueue(new CheckOutEvent((StoreState)state, checkOutTime));
 			}
 		} catch (Exception e) {
 			System.out.println("Ojj, nu vare något galet.");

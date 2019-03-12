@@ -1,23 +1,18 @@
-/**
- *
- * @author Nour Aldein Bahtite
- * @author Philip Eriksson
- * @author Rickard Bemm
- * @author André Christofferson
- */
 package store.state;
 
 import simulator.Event;
 import simulator.EventQueue;
 import store.time.StoreTime;
 
-
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
 public class StoreState extends simulator.SimState {
 
-	/**
-	 * Final variables cannot be changed while the program is running.
-	 */
-
+	// Constants
 	private final long TIME_SEED;
 	private final int MAX_CUSTOMERS;
 	private final int MAX_REGISTERS;
@@ -27,18 +22,17 @@ public class StoreState extends simulator.SimState {
 	private final double MAX_PICKING_TIME;
 	private final double MIN_CHECKOUT_TIME;
 	private final double MAX_CHECKOUT_TIME;
-	private final double TIME_LAMBDA;
 
+	// Customer statistics
 	private int customersPayed;
 	private int customersInTotal;
 	private int customersVisited;
 	private int customersInQueue;
 	private int customersDeniedEntry;
 
+	// Checkout statistics
 	private int registersOpen;
-
 	private double queueTime;
-	private double elapsedTime;
 	private double checkoutFreeTime;
 
 	private boolean storeIsOpen;
@@ -47,30 +41,29 @@ public class StoreState extends simulator.SimState {
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
-
 	/**
-	 *
-	 * @param TIME_SEED
-	 * @param MAX_CUSTOMERS
-	 * @param MAX_REGISTERS
-	 * @param TIME_STORE_CLOSE
-	 * @param ARRIVAL_SPEED
-	 * @param MIN_PICKING_TIME
-	 * @param MAX_PICKING_TIME
-	 * @param MIN_CHECKOUT_TIME
-	 * @param MAX_CHECKOUT_TIME
-	 * @param TIME_LAMBDA
+	 * Construct an instance of StoreState
+	 * 
+	 * @param TIME_SEED         Seed to generate random number
+	 * @param MAX_CUSTOMERS     Maximum number of costumers allowed in store at once
+	 * @param MAX_REGISTERS     Maximum number of registers available in store
+	 * @param TIME_STORE_CLOSE  At what time store closes
+	 * @param ARRIVAL_SPEED     Speed of which costumers arrive at
+	 * @param MIN_PICKING_TIME  Minimum time a costumer can pick items in
+	 * @param MAX_PICKING_TIME  Maximum time a costumer can pick items in
+	 * @param MIN_CHECKOUT_TIME Minimum time a costumer can checkout in
+	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
 	 */
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
+			int TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
+			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
+			EventQueue eventQueue) {
+		super(eventQueue);
 
-	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, int TIME_STORE_CLOSE, double ARRIVAL_SPEED,
-			double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
-			double TIME_LAMBDA) {
-		
-		this.storeTime = new StoreTime(TIME_LAMBDA, TIME_SEED);
+		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED);
 		this.checkOutQueue = new FIFO<Customer>();
 		this.customerSpawn = new CreateCustomer();
-		super.eventQueue = new EventQueue(this);
-		
+
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
 		this.MAX_REGISTERS = MAX_REGISTERS;
@@ -80,13 +73,9 @@ public class StoreState extends simulator.SimState {
 		this.MAX_PICKING_TIME = MAX_PICKING_TIME;
 		this.MIN_CHECKOUT_TIME = MIN_CHECKOUT_TIME;
 		this.MAX_CHECKOUT_TIME = MAX_CHECKOUT_TIME;
-		this.TIME_LAMBDA = TIME_LAMBDA;
 	}
 
-
-
 	/**
-	 *
 	 * Create a new customer
 	 *
 	 * @return newCustomer()
@@ -94,7 +83,12 @@ public class StoreState extends simulator.SimState {
 	public Customer createNewCustomer() {
 		return customerSpawn.newCustomer();
 	}
-	
+
+	/**
+	 * Get at what time store will close at.
+	 * 
+	 * @return what time store will close at
+	 */
 	public int getTimeStoreClose() {
 		return TIME_STORE_CLOSE;
 	}
@@ -114,7 +108,6 @@ public class StoreState extends simulator.SimState {
 			// TODO: throw new OpenRegisterFailedException()
 		}
 	}
-	
 
 	/**
 	 * Close the store and allow the customers (if they found ) to pay for their
@@ -153,22 +146,6 @@ public class StoreState extends simulator.SimState {
 		}
 	}
 
-	public void uppdateTimeElapsed(double time) {
-		setChanged();
-		notifyObservers();
-		elapsedTime = time;
-	}
-
-	/**
-	 * Get the elapsed time
-	 *
-	 * @return elapsedTime.
-	 */
-
-	public double getTimeElapsed() {
-		return elapsedTime;
-	}
-
 	/**
 	 * To open the store.
 	 *
@@ -183,7 +160,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * Get the number of the customers who couldn't enter the store.
+	 * Increase the number of customers who couldn't enter the store by one.
 	 */
 	public void increaseCustomerDeniedByOne() {
 		setChanged();
@@ -193,10 +170,6 @@ public class StoreState extends simulator.SimState {
 
 	public StoreTime getStoreTime() {
 		return storeTime;
-	}
-
-	public double getElapsedTime() {
-		return elapsedTime;
 	}
 
 	/**
@@ -421,15 +394,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 *
-	 * @return TIME_LAMBDA
-	 */
-	public double getTIME_LAMBDA() {
-		return TIME_LAMBDA;
-	}
-
-	/**
-	 * Uppdate the time when the checout is down.
+	 * Update the time when the checkout is down.
 	 *
 	 * @param deadRegisterTime
 	 */
@@ -440,7 +405,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * Uppdate the time that spant in queue
+	 * Update the time that spent in queue
 	 *
 	 * @param peopleInQueueTime
 	 */
@@ -457,8 +422,20 @@ public class StoreState extends simulator.SimState {
 		startSimulator();
 	}
 
-	private void executeEvent(Event e) {
-		e.runEvent();
-	}
+	@Override
+	public void updateTimeElapsed(Event event) {
+		setChanged();
+		notifyObservers();
+		
+		// Updates registers wasted time
+		if (storeIsOpen) {
+			checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
+		}
+		
+		// Updates time that people have been standing in the queue
+		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
 
+		// Sets time to be the time that the event was executed.
+		elapsedTime += event.getExTime();
+	}
 }

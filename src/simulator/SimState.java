@@ -12,24 +12,36 @@ import java.util.Observable;
  * @version 1.0
  */
 public abstract class SimState extends Observable {
+	protected double elapsedTime;
 	protected boolean simulatorIsRunning;
 	protected EventQueue eventQueue;
 
-	public void stopSimulator() {
-		simulatorIsRunning = false;
+	public SimState(EventQueue eventQueue) {
+		this.eventQueue = eventQueue;
 	}
-
-	public void startSimulator() {
+	
+	public final void startSimulator() {
 		simulatorIsRunning = true;
 	}
 	
-	public EventQueue getEventQueue() {
+	public final void stopSimulator() {
+		setChanged();
+		notifyObservers();
+		simulatorIsRunning = false;
+	}
+	
+	public final boolean simulatorIsRunning() {
+		return this.simulatorIsRunning;
+	}
+
+	public final double getElapsedTime() {
+		return elapsedTime;
+	}
+	
+	public final EventQueue getEventQueue() {
 		return eventQueue;
 	}
 	
-	public boolean simulatorIsRunning() {
-		return this.simulatorIsRunning;
-	}
-	
+	abstract public void updateTimeElapsed(Event event);
 	abstract public void runSim();
 }

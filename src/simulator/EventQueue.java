@@ -12,17 +12,21 @@ import java.util.ArrayList;
 import store.event.StartEvent;
 import store.state.StoreState;
 
+/**
+ * @author Nour Aldein Bahtite
+ * @author Philip Eriksson
+ * @author Rickard Bemm
+ * @author André Christofferson
+ */
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected SimState state;
 
 	/**
-	 * 
+	 * Create a new instance of EventQueue
 	 * @param state
 	 */
-
-	public EventQueue(SimState state) {
-		this.state = state;
+	public EventQueue() {
 		this.eventQueue = new ArrayList<Event>();
 	}
 	
@@ -43,27 +47,13 @@ public class EventQueue {
 	 * 
 	 * @return the event first in line.
 	 */
-
 	public Event getEvent() {
 		if (eventQueue.size() == 0) {
 			
 		}
 		// Sorts the current array via it's getExTime method.
-
 		eventQueue = sortEvent(eventQueue);
 		Event nextRunEvent = eventQueue.get(0);
-
-		// Uppdates registers wasted time.
-		if (state.storeIsOpen()) {
-			state.uppdateRegistersDownTime(
-					state.getRegistersOpen() * (nextRunEvent.getExTime() - state.getElapsedTime()));
-		}
-		// Uppdates time that people have been standing in the queue
-		state.uppdateCustomersInQueueTime(
-				state.getCustomersInQueue() * (nextRunEvent.getExTime() - state.getElapsedTime()));
-
-		// Sets time in state to be the time that the event was executed.
-		state.uppdateTimeElapsed(nextRunEvent.getExTime());
 		eventQueue.remove(0);
 		return nextRunEvent;
 	}
@@ -86,9 +76,8 @@ public class EventQueue {
 			tempRight.add(list.get(midPoint));
 			midPoint++;
 		}
-		/// Blir lite dumt med namnen h�r men va fan, kommer p� n�
-		/// b�ttre p� ngn
-		/// dag.
+		/// Blir lite dumt med namnen här men va fan, kommer på nå
+		/// bättre ngn dag.
 		tempLeft = sortEvent(tempLeft);
 		tempRight = sortEvent(tempRight);
 
