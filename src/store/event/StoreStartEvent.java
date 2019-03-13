@@ -1,6 +1,7 @@
 package store.event;
 
 import simulator.Event;
+import simulator.StartEvent;
 import store.state.StoreState;
 
 /**
@@ -11,13 +12,13 @@ import store.state.StoreState;
  * @author André Christofferson
  * 
  */
-public class StartEvent extends Event {
+public class StoreStartEvent extends StartEvent {
 
 	private final double stopExecuteTime;
 	public String eventDescription = "Store opens";
 
-	public StartEvent(StoreState state, double stopExecuteTime) {
-		super(state);
+	public StoreStartEvent(StoreState state, double stopExecuteTime) {
+		super(state, stopExecuteTime);
 		this.executeTime = 0.0;
 		this.stopExecuteTime = stopExecuteTime;
 		addEventToQueue(this);
@@ -27,7 +28,7 @@ public class StartEvent extends Event {
 	public void runEvent() {
 		double nextExecuteTime = state.getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
 		addEventToQueue(new CustomerArrivedEvent((StoreState)state, nextExecuteTime));
-		addEventToQueue(new StopEvent((StoreState)state, stopExecuteTime));
+		addEventToQueue(new StoreStopEvent((StoreState)state, stopExecuteTime));
 	}
 
 }
