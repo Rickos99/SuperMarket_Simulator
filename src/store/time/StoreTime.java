@@ -10,8 +10,9 @@
 package store.time;
 
 public class StoreTime {
-	private ExponentialRandomStream randomExcept;
-	private UniformRandomStream randomUni;
+
+	private ExponentialRandomStream customerArrivedGenerator;
+	private UniformRandomStream customerPickGenerator, customerCheckOutGenerator;
 
 	/**
 	 * Construct a new Time Object
@@ -20,9 +21,10 @@ public class StoreTime {
 	 * @param seed
 	 */
 
-	public StoreTime(double lambda, long seed) {
-		this.randomExcept = new ExponentialRandomStream(lambda, seed);
-		this.randomUni = new UniformRandomStream(lambda, seed);
+	public StoreTime(double lambda, long seed, double minPick,double maxPick, double minCheckOut, double maxCheckOut) {
+		this.customerArrivedGenerator = new ExponentialRandomStream(lambda, seed);
+		this.customerPickGenerator = new UniformRandomStream(minPick,maxPick, seed);
+		this.customerCheckOutGenerator = new UniformRandomStream(minCheckOut,maxCheckOut, seed);
 
 	}
 
@@ -32,7 +34,7 @@ public class StoreTime {
 	 * @Return time for next customer
 	 */
 	public double timeNextCustomer() {
-		return randomExcept.next();
+		return customerArrivedGenerator.next();
 
 	}
 
@@ -42,7 +44,7 @@ public class StoreTime {
 	 * @return duration for a pick event
 	 */
 	public double timeCustomerPick() {
-		return randomUni.next();
+		return customerPickGenerator.next();
 
 	}
 
@@ -52,6 +54,8 @@ public class StoreTime {
 	 * @return time duration for a checkout event
 	 */
 	public double timeCustomerCheckOut() {
-		return randomUni.next();
+		return customerCheckOutGenerator.next();
 	}
+
+	
 }
