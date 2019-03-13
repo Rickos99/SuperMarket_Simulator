@@ -1,17 +1,32 @@
 import simulator.Event;
 import simulator.EventQueue;
 import simulator.Simulator;
-import store.event.StartEvent;
+import store.event.StoreStartEvent;
+import store.event.StoreStopEvent;
 import store.state.StoreState;
 import store.view.StoreView;;
 
 public class MainDriver {
 
 	public static void main(String[] args) {
+		
+		long TIME_SEED = 5;				//Seed to generate random number
+		int	MAX_CUSTOMERS = 20;			//Maximum number of costumers allowed in store at once
+		int	MAX_REGISTERS = 4;			//Maximum number of registers available in store
+		int TIME_STORE_CLOSE = 22;		//At what time store closes
+		double ARRIVAL_SPEED = 1;		//Speed of which costumers arrive at
+		double MIN_PICKING_TIME = 2;	//Minimum time a costumer can pick items in
+		double MAX_PICKING_TIME = 4;	//Maximum time a costumer can pick items in
+		double MIN_CHECKOUT_TIME = 1;	//Minimum time a costumer can checkout in
+		double MAX_CHECKOUT_TIME = 3;	//Time a costumer can checkout in
+		
 		// Create instances of various objects
 		EventQueue eventQueue = new EventQueue();
-		StoreState state = new StoreState(13, 7, 2, 10, 3.0, 0.6, 0.9, 0.35, 0.6, eventQueue);
-		Event startEvent = new StartEvent(state, 0);
+		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS, TIME_STORE_CLOSE,
+										  ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME, 
+										  MAX_CHECKOUT_TIME, eventQueue);
+		Event startEvent = new StoreStartEvent(state);
+		Event stopEvent = new StoreStopEvent(state, TIME_STORE_CLOSE);
 		StoreView view = new StoreView(state);
 		
 		state.addObserver(view);
