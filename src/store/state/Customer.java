@@ -22,7 +22,7 @@ public class Customer {
 	
 	/**
 	 * 
-	 * @return Cstomer id
+	 * @return Customer id
 	 */
 	public int getId() {
 		return this.id;
