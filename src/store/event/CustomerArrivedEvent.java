@@ -14,7 +14,7 @@ import store.state.StoreState;
  */
 public class CustomerArrivedEvent extends Event {
 
-	private String eventDescription = "Customer Arrived";
+	private String eventDescription = "Arrive";
 	private String eventUserDescription;
 	Customer customer;
 	

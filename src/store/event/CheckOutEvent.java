@@ -15,7 +15,7 @@ import store.state.StoreState;
 public class CheckOutEvent extends Event {
 	
 	
-	private String eventDescription = "Customer paying for products";
+	private String eventDescription = "Checkout";
 	private String eventUserDescription;
 	private boolean isPeopleInQueue;
 	Customer customer;

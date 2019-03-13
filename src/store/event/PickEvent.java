@@ -14,7 +14,7 @@ import store.state.StoreState;
  */
 public class PickEvent extends Event {
 
-	public String eventDescription = "Costumer picking products";
+	public String eventDescription = "Pick";
 	private String eventUserDescription;
 	Customer customer;
 	
