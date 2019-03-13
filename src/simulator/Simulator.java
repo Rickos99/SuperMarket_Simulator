@@ -26,11 +26,13 @@ public class Simulator {
 	/**
 	 * Run simulator
 	 */
-	public void run() {
+	public void run(){
 		state.runSim();
 
 		while (state.simulatorIsRunning) {
 			queue.getEvent().runEvent();
+			state.updateTimeElapsed(queue.getEvent());
+			queue.removeEvent();
 		}
 	}
 

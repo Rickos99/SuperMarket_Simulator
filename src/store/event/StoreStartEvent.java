@@ -18,7 +18,7 @@ public class StoreStartEvent extends StartEvent {
 	public StoreStartEvent(StoreState state) {
 		super(state);
 		this.executeTime = 0.0;
-		addEventToQueue(this);
+
 	}
 
 	@Override
