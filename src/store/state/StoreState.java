@@ -412,8 +412,6 @@ public class StoreState extends simulator.SimState {
 
 	@Override
 	public void runSim() {
-		setChanged();
-		notifyObservers();
 		startSimulator();
 	}
 	//FOR VIEW
