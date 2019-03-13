@@ -21,7 +21,7 @@ public class FIFO{
 	 * @return first customer in queue.
 	 */
 	public Customer getFirst() {
-		return fifoQueue.remove(fifoQueue.size()-1);
+		return fifoQueue.remove(0);
 	}
 	
 	public String toString() {

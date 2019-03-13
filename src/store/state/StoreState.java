@@ -1,11 +1,7 @@
 package store.state;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import simulator.Event;
 import simulator.EventQueue;
-import store.event.CheckOutEvent;
 import store.time.StoreTime;
 
 /**
