@@ -1,6 +1,7 @@
 import simulator.Event;
 import simulator.EventQueue;
 import simulator.Simulator;
+import store.event.StoreCloseEvent;
 import store.event.StoreStartEvent;
 import store.event.StoreStopEvent;
 import store.state.StoreState;
@@ -26,6 +27,7 @@ public class MainDriver {
 										  ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME, 
 										  MAX_CHECKOUT_TIME, eventQueue);
 		Event startEvent = new StoreStartEvent(state);
+		Event CloseEvent = new StoreCloseEvent(state, TIME_STORE_CLOSE);
 		Event stopEvent = new StoreStopEvent(state, TIME_STORE_CLOSE);
 		StoreView view = new StoreView(state);
 		
