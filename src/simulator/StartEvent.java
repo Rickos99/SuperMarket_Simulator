@@ -3,21 +3,16 @@ package simulator;
 import store.event.StoreStopEvent;
 import store.state.StoreState;
 
-public class StartEvent extends Event{
+public abstract class StartEvent extends Event{
 	
-	protected double stopEventExecuteTime;
 
 	
-	public StartEvent(SimState state, double stopEventExecuteTime) {
+	public StartEvent(SimState state) {
 		super(state);
-		this.stopEventExecuteTime = stopEventExecuteTime;
+		this.executeTime = 0;
 		addEventToQueue(this);
 	}
 
 
-	public void runEvent() {
-		addEventToQueue(new StopEvent(state, stopEventExecuteTime));
-		
-	}
-
+	public abstract void runEvent();
 }
