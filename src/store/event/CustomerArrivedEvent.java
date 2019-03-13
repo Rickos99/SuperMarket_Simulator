@@ -1,6 +1,7 @@
 package store.event;
 
 import simulator.Event;
+import store.state.Customer;
 import store.state.StoreState;
 
 /**
@@ -14,7 +15,8 @@ import store.state.StoreState;
 public class CustomerArrivedEvent extends Event {
 
 	private String eventDescription = "Customer Arrived";
-
+	Customer customer;
+	
 	public CustomerArrivedEvent(StoreState state, double time) {
 		super(state);
 		this.executeTime = time;

@@ -15,7 +15,8 @@ import store.state.StoreState;
 public class PickEvent extends Event {
 
 	public String eventDescription = "Costumer picking products";
-
+	Customer customer;
+	
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
 		this.executeTime = time;

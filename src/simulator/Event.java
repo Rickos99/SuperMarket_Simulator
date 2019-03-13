@@ -1,7 +1,7 @@
 package simulator;
 
-import store.state.Customer;
-import store.state.StoreState;
+
+
 
 /**
  * @author Nour Aldein Bahtite

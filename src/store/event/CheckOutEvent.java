@@ -13,9 +13,11 @@ import store.state.StoreState;
  * 
  */
 public class CheckOutEvent extends Event {
-
+	
+	
 	private String eventDescription = "Customer paying for products";
 	private boolean isPeopleInQueue;
+	Customer customer;
 
 	/**
 	 * Constructor if there are avaliable registers and the que is empty.
