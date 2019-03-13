@@ -41,7 +41,7 @@ public class StoreState extends simulator.SimState {
 
 	private boolean storeIsOpen;
 
-	private FIFO<CheckOutEvent> checkOutQueue;
+	private FIFO<Customer> checkOutQueue;
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
@@ -66,7 +66,7 @@ public class StoreState extends simulator.SimState {
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME,
 						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
-		this.checkOutQueue = new FIFO<CheckOutEvent>();
+		this.checkOutQueue = new FIFO<Customer>();
 		this.customerSpawn = new CreateCustomer();
 		
 		
@@ -244,11 +244,11 @@ public class StoreState extends simulator.SimState {
 	 *
 	 * @param customer
 	 */
-	public void addToCheckoutQueue(CheckOutEvent event) {
-		checkOutQueue.add(event);
+	public void addToCheckoutQueue(Customer c) {
+		checkOutQueue.add(c);
 	}
 	
-	public CheckOutEvent getFirstFromCheckoutQueue() {
+	public Customer getFirstFromCheckoutQueue() {
 		return checkOutQueue.getFirst();
 	}
 

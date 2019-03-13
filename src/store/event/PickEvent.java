@@ -28,13 +28,11 @@ public class PickEvent extends Event {
 	public void runEvent() {
 		StoreState s = (StoreState) state;
 		s.updateState(this);
-		double checkOutTime = (s.getElapsedTime() + s.getTimeNextCustomerCheckout());
-		if (s.getCustomersInQueue() == 0) {
+		if (s.checkOutQueueIsEmpty()) {
 			s.closeOneRegister();
-			eventQueue.addEvent(new CheckOutEvent(s, checkOutTime, customer));
+			eventQueue.addEvent(new CheckOutEvent(s, s.getElapsedTime(), customer));
 		} else {
-			s.getFirstFromCheckoutQueue().runEvent();
-			s.addToCheckoutQueue(new CheckOutEvent(s, checkOutTime, customer));
+			s.addToCheckoutQueue(customer);
 		}
 	}
 }

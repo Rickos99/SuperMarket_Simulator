@@ -34,5 +34,12 @@ public class CheckOutEvent extends Event {
 		StoreState s = (StoreState) state;
 		s.increaseCustomerPayedByOne();
 		s.decreaseCustomersInStoreByOne();
+		if(s.checkOutQueueIsEmpty()) {
+			s.openNewRegister();
+		} else {
+			double checkoutTime = s.getElapsedTime() + s.getTimeNextCustomerCheckout();
+			Customer nextCustomer = s.getFirstFromCheckoutQueue();
+			eventQueue.addEvent(new CheckOutEvent(s, checkoutTime, nextCustomer));
+		}
 	}
 }
