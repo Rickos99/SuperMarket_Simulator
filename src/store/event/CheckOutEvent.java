@@ -26,7 +26,6 @@ public class CheckOutEvent extends Event {
 		super.eventDescription = "Checkout";
 		super.eventUserDescription = customer.toString();
 		super.executeTime = time;
-		state.closeOneRegister();
 	}
 
 	@Override
@@ -37,7 +36,6 @@ public class CheckOutEvent extends Event {
 		if(s.checkOutQueueIsEmpty()) {
 			s.openNewRegister();
 		} else {
-			
 			double checkoutTime = s.getElapsedTime() + s.getTimeNextCustomerCheckout();
 			Customer nextCustomer = s.getCheckoutQueue().removeFirst();
 			eventQueue.addEvent(new CheckOutEvent(s, checkoutTime, nextCustomer));
