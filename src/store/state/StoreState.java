@@ -175,6 +175,10 @@ public class StoreState extends simulator.SimState {
 	public void increaseCustomerPayedByOne() {
 		customersPayed++;
 	}
+	
+	public void increaseCustomersInStoreByOne() {
+		customersInStore++;
+	}
 
 	/**
 	 * Get the number of all the customers who could and couldn't enter the store.

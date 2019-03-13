@@ -29,7 +29,6 @@ public class Simulator {
 
 		while (state.simulatorIsRunning) {
 			queue.getEvent().runEvent();
-			state.updateState(queue.getEvent());
 			queue.removeEvent();
 		}
 	}

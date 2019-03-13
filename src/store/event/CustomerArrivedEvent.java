@@ -38,19 +38,22 @@ public class CustomerArrivedEvent extends Event {
 	 */
 	@Override
 	public void runEvent() {
-		//System.out.println("CUSTOMER RUN"+this.customer);
-		double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
-		if (((StoreState)state).storeIsOpen()) {
-
-			//double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
-			if (((StoreState)state).getCustomersInStore() < ((StoreState)state).getMAX_CUSTOMERS()) {
-				((StoreState)state).increaseCustomerVisitedByOne();
-				double newPickTime = state.getElapsedTime() + ((StoreState)state).getTimeCustomerPick();
-				addEventToQueue(new PickEvent((StoreState)state, newPickTime, customer));
+		StoreState s = ((StoreState)state);
+		
+		if (s.storeIsOpen()) {
+			s.increaseCustomerVisitedByOne();
+			if(s.getCustomersInStore() > s.getMAX_CUSTOMERS()) {
+				s.increaseCustomerDeniedByOne();
 			} else {
-				((StoreState)state).increaseCustomerDeniedByOne();
+				s.increaseCustomersInStoreByOne();
+				double pickTime = state.getElapsedTime() + s.getTimeCustomerPick();
+				eventQueue.addEvent(new PickEvent(s, pickTime, customer));
 			}
-			addEventToQueue(new CustomerArrivedEvent((StoreState)state, newTimeCustomer));
+			s.updateState(this);
+			double newTimeCustomer = s.getElapsedTime() + s.getTimeNextCustomer();
+			eventQueue.addEvent(new CustomerArrivedEvent(s, newTimeCustomer));
 		}
+		
+			
 	}
 }
