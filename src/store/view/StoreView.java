@@ -114,13 +114,15 @@ public class StoreView extends SimView {
 					new Object[] { "Tid", "Händelse", "Kund", "?", "led", "ledT", "I",
 							"$", ":-(", "köat", "köT", "köar", "[Kassakö..]" });
 		}
+		String customerId = state.getCustomerWhoPerformedEvent();
+
 		result += String.format(format,
 				new Object[] { new DecimalFormat("#.##").format(state.getElapsedTime()),
-						"Händelse", "Kund", state.storeIsOpen() ? "Ö" : "S",
-						state.getRegistersOpen(), state.getCheckoutFreeTime(),
-						state.getCustomersInTotal(), state.getCustomersPayed(),
-						state.getCustomersDeniedEntry(), "-", state.getQueueTime(),
-						state.getCustomersInQueue(), "<Queue>" });
+						state.getEventDescription(), customerId == null ? "" : customerId,
+						state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(),
+						state.getCheckoutFreeTime(), state.getCustomersInTotal(),
+						state.getCustomersPayed(), state.getCustomersDeniedEntry(), "-",
+						state.getQueueTime(), state.getCustomersInQueue(), "<Queue>" });
 		return result;
 	}
 
