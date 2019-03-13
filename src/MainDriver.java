@@ -1,10 +1,8 @@
-import simulator.Event;
 import simulator.EventQueue;
 import simulator.Simulator;
 import simulator.StopEvent;
 import store.event.StoreCloseEvent;
 import store.event.StoreStartEvent;
-import store.event.StoreCloseEvent;
 import store.state.StoreState;
 import store.view.StoreView;;
 
@@ -12,15 +10,15 @@ public class MainDriver {
 
 	public static void main(String[] args) {
 
-		long TIME_SEED = 1234; // Seed to generate random number
-		int MAX_CUSTOMERS = 5; // Maximum number of costumers allowed in store at once
-		int MAX_REGISTERS = 2; // Maximum number of registers available in store
-		int TIME_STORE_CLOSE = 10; // At what time store closes
-		double ARRIVAL_SPEED = 1.0; // Speed of which costumers arrive at
-		double MIN_PICKING_TIME = 0.5; // Minimum time a costumer can pick items in
-		double MAX_PICKING_TIME = 1.0; // Maximum time a costumer can pick items in
-		double MIN_CHECKOUT_TIME = 2.0; // Minimum time a costumer can checkout in
-		double MAX_CHECKOUT_TIME = 3.0; // Time a costumer can checkout in
+		long TIME_SEED = 1234; 			// Seed to generate random number
+		int MAX_CUSTOMERS = 5; 			// Maximum number of costumers allowed in store at once
+		int MAX_REGISTERS = 2; 			// Maximum number of registers available in store
+		int TIME_STORE_CLOSE = 10; 		// At what time store closes
+		double ARRIVAL_SPEED = 1.0d; 	// Speed of which costumers arrive at
+		double MIN_PICKING_TIME = 0.5; 	// Minimum time a costumer can pick items in
+		double MAX_PICKING_TIME = 1; 	// Maximum time a costumer can pick items in
+		double MIN_CHECKOUT_TIME = 2; 	// Minimum time a costumer can checkout in
+		double MAX_CHECKOUT_TIME = 3; 	// Time a costumer can checkout in
 
 		// Create instances of various objects
 		EventQueue eventQueue = new EventQueue();

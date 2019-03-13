@@ -12,6 +12,12 @@ import store.state.StoreState;
  *
  */
 public class StoreCloseEvent extends Event {
+	
+	/**
+	 * 
+	 * @param state
+	 * @param time
+	 */
 
 	public StoreCloseEvent(StoreState state, double time) {
 		super(state);
