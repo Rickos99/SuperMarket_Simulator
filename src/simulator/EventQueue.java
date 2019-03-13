@@ -44,6 +44,10 @@ public class EventQueue {
 	public void addEvent(Event event) {
 		eventQueue.add(event);
 	}
+	
+	public void removeEvent() {
+		eventQueue.remove(0);
+	}
 
 	/**
 	 * 
@@ -55,9 +59,10 @@ public class EventQueue {
 		}
 		// Sorts the current array via it's getExTime method.
 		eventQueue = sortEvent(eventQueue);
-		Event nextRunEvent = eventQueue.get(0);
-		eventQueue.remove(0);
-		return nextRunEvent;
+		return eventQueue.get(0);
+	}
+	public int getQueueSize() {
+		return eventQueue.size();
 	}
 
 	private static ArrayList<Event> sortEvent(ArrayList<Event> list) {

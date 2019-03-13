@@ -18,7 +18,7 @@ public class StoreStopEvent extends StopEvent {
 	public StoreStopEvent(StoreState state, double stopTime) {
 		super(state, stopTime);
 		this.executeTime = stopTime;
-		addEventToQueue(this);
+
 	}
 
 	/**

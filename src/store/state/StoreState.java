@@ -426,6 +426,7 @@ public class StoreState extends simulator.SimState {
 	public void updateTimeElapsed(Event event) {
 		setChanged();
 		notifyObservers();
+		System.out.println("Current time = "+ elapsedTime);
 		
 		// Updates registers wasted time
 		if (storeIsOpen) {
