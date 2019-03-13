@@ -78,7 +78,7 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * Create a new customer
 	 *
-	 * @return newCustomer()
+	 * @return newCustomer() method
 	 */
 	public Customer createNewCustomer() {
 		return customerSpawn.newCustomer();
