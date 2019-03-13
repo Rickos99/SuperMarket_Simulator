@@ -44,12 +44,11 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time) {
 		super(state);
-		super.eventDescription = "Customer paying for products";
-		super.eventUserDescription = customer.toString();
+		super.eventDescription = "Checkout";
+		super.executeTime = time;
 		state.closeOneRegister();
-		this.executeTime = time;
 		// Gets the first customer in the queue and deletes it from the queue.
-		this.customer = state.getFirst();
+		this.customer = state.getFirstCustomerInCheckout();
 		this.isPeopleInQueue = true;
 
 	}
@@ -61,13 +60,13 @@ public class CheckOutEvent extends Event {
 			// Open up a new register.
 			((StoreState)state).openNewRegister();
 			// Checks to see if there are anymore customers in the queue.
-			if (!((StoreState)state).getCheckOutQueueIsEmpty()) {
+			if (!((StoreState)state).checkOutQueueIsEmpty()) {
 				addEventToQueue(new CheckOutEvent((StoreState)state, newExecuteTime));
-
 			}
 
 		} else {
 			((StoreState)state).openNewRegister();
+			((StoreState)state).increaseCustomerPayedByOne();
 			// No new event since there are no people in the queue.
 		}
 

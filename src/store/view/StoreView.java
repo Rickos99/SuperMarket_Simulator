@@ -14,6 +14,9 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Observable;
+
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import simulator.SimState;
 import simulator.SimView;
 import store.state.StoreState;
@@ -117,12 +120,12 @@ public class StoreView extends SimView {
 		String customerId = state.getCustomerWhoPerformedEvent();
 
 		result += String.format(format,
-				new Object[] { new DecimalFormat("#.##").format(state.getElapsedTime()),
+				new Object[] { cutDecimals(state.getElapsedTime()),
 						state.getEventDescription(), customerId == null ? "-" : customerId,
 						state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(),
-						state.getCheckoutFreeTime(), state.getCustomersInStore(),
+						cutDecimals(state.getCheckoutFreeTime()), state.getCustomersInStore(),
 						state.getCustomersPayed(), state.getCustomersDeniedEntry(), "-",
-						state.getQueueTime(), state.getCustomersInQueue(), "<Queue>" });
+						cutDecimals(state.getQueueTime()), state.getCustomersInQueue(), "<Queue>" });
 		return result;
 	}
 
@@ -161,5 +164,9 @@ public class StoreView extends SimView {
 			headerString += "=";
 		}
 		return headerString + newLine;
+	}
+	
+	private String cutDecimals(double d) {
+		return new DecimalFormat("#.##").format(d);
 	}
 }

@@ -40,15 +40,14 @@ public class CustomerArrivedEvent extends Event {
 		if (((StoreState)state).storeIsOpen()) {
 
 			double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
-			if (((StoreState)state).getCustomersInTotal() >= ((StoreState)state).getMaxCustomers()) {
-				((StoreState)state).increaseCustomerDeniedByOne();
-				addEventToQueue(new CustomerArrivedEvent((StoreState)state, newTimeCustomer));
-			} else {
+			if (((StoreState)state).getCustomersInStore() < ((StoreState)state).getMAX_CUSTOMERS()) {
+				((StoreState)state).increaseCustomerVisitedByOne();
 				double newPickTime = state.getElapsedTime() + ((StoreState)state).getTimeCustomerPick();
-				addEventToQueue(new CustomerArrivedEvent((StoreState)state, newTimeCustomer));
 				addEventToQueue(new PickEvent((StoreState)state, newPickTime, customer));
+			} else {
+				((StoreState)state).increaseCustomerDeniedByOne();
 			}
+			addEventToQueue(new CustomerArrivedEvent((StoreState)state, newTimeCustomer));
 		}
 	}
-
 }
