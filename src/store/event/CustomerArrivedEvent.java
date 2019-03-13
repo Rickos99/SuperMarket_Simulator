@@ -14,13 +14,12 @@ import store.state.StoreState;
  */
 public class CustomerArrivedEvent extends Event {
 
-	private String eventDescription = "Customer Arrived";
-	private String eventUserDescription;
 	Customer customer;
 	
 	public CustomerArrivedEvent(StoreState state, double time) {
 		super(state);
-		super.eventDescription = eventDescription;
+		super.eventDescription = "Customer arrived";
+		
 		this.executeTime = time;
 		this.customer = state.createNewCustomer();
 		super.eventUserDescription = customer.toString();

@@ -4,10 +4,13 @@ import store.state.StoreState;
 
 public class StopEvent extends Event {
 
+
 	public StopEvent(SimState state, double executeTime) {
 		super(state);
+		super.eventDescription = "Stop simulator";
+		super.eventUserDescription = "-";
 		this.executeTime = executeTime;
-	
+		
 	}
 
 	public void runEvent() {
@@ -15,10 +18,5 @@ public class StopEvent extends Event {
 
 	}
 
-	@Override
-	public String getEventUserDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

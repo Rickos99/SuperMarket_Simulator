@@ -12,11 +12,11 @@ import store.state.StoreState;
  *
  */
 public class StoreCloseEvent extends Event {
-	private String eventUserDescription = "-";
+
 	public StoreCloseEvent(StoreState state, double time) {
 		super(state);
-		super.eventDescription = eventDescription;
-		super.eventUserDescription = eventUserDescription;
+		super.eventDescription = "Store closing";
+		super.eventUserDescription = "-";
 		this.executeTime = time;
 	}
 
