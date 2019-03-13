@@ -63,7 +63,8 @@ public class StoreState extends simulator.SimState {
 			double MAX_CHECKOUT_TIME, EventQueue eventQueue) {
 		super(eventQueue);
 
-		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED);
+		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME,
+						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
 		this.checkOutQueue = new FIFO<Customer>();
 		this.customerSpawn = new CreateCustomer();
 

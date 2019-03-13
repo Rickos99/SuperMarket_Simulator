@@ -38,5 +38,8 @@ public class UniformRandomStream {
 	public double next() {
 		return lower + rand.nextDouble() * width;
 	}
+	
+
+	
 
 }
