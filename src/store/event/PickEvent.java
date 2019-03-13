@@ -28,9 +28,9 @@ public class PickEvent extends Event {
 	public void runEvent() {
 		StoreState s = (StoreState) state;
 		s.updateState(this);
-		if (s.checkOutQueueIsEmpty()) {
+		if (s.getRegistersOpen() > 0) {
 			s.closeOneRegister();
-			eventQueue.addEvent(new CheckOutEvent(s, s.getElapsedTime(), customer));
+			eventQueue.addEvent(new CheckOutEvent(s, s.getElapsedTime() + s.getTimeNextCustomerCheckout(), customer));
 		} else {
 			s.addToCheckoutQueue(customer);
 		}
