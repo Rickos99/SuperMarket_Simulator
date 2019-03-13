@@ -21,6 +21,7 @@ public class PickEvent extends Event {
 		super(state);
 		this.executeTime = time;
 		this.customer = customer;
+		this.eventUserDescription = customer.toString();
 	}
 
 	@Override

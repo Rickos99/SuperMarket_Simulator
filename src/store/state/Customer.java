@@ -24,8 +24,8 @@ public class Customer {
 	 * 
 	 * @return Customer id
 	 */
-	public int getId() {
-		return this.id;
+	public String toString() {
+		return Integer.toString(id);
 	}
 
 }
