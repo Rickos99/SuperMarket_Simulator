@@ -85,7 +85,7 @@ public class FIFO<E> implements Iterable<E> {
 	}
 
 	/**
-	 * Get first item in queue, if queue is empty a {@link NoSuchElementException}
+	 * Get first item in queue and remove first element, if queue is empty a {@link NoSuchElementException}
 	 * will be thrown.
 	 * 
 	 * @return First item in queue

@@ -2,6 +2,7 @@ package store.state;
 
 import simulator.Event;
 import simulator.EventQueue;
+import store.event.CheckOutEvent;
 import store.time.StoreTime;
 
 /**
@@ -27,7 +28,6 @@ public class StoreState extends simulator.SimState {
 	private int customersPayed;
 	private int customersInStore;
 	private int customersVisited;
-	private int customersInQueue;
 	private int customersDeniedEntry;
 
 	// Checkout statistics
@@ -41,7 +41,7 @@ public class StoreState extends simulator.SimState {
 
 	private boolean storeIsOpen;
 
-	private FIFO<Customer> checkOutQueue;
+	private FIFO<CheckOutEvent> checkOutQueue;
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
@@ -66,7 +66,7 @@ public class StoreState extends simulator.SimState {
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME,
 						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
-		this.checkOutQueue = new FIFO<Customer>();
+		this.checkOutQueue = new FIFO<CheckOutEvent>();
 		this.customerSpawn = new CreateCustomer();
 		
 		
@@ -179,6 +179,10 @@ public class StoreState extends simulator.SimState {
 	public void increaseCustomersInStoreByOne() {
 		customersInStore++;
 	}
+	
+	public void decreaseCustomersInStoreByOne() {
+		customersInStore--;
+	}
 
 	/**
 	 * Get the number of all the customers who could and couldn't enter the store.
@@ -206,15 +210,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public boolean checkOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
-	}
-
-	/**
-	 * Get the first customer who waits in the check out queue for paying his things
-	 *
-	 * @return getFirst()
-	 */
-	public Customer getFirstCustomerInCheckout() {
-		return checkOutQueue.getFirst();
 	}
 
 	/**
@@ -249,10 +244,12 @@ public class StoreState extends simulator.SimState {
 	 *
 	 * @param customer
 	 */
-	public void addCustomerInPayoutLine(Customer customer) {
-		setChanged();
-		notifyObservers();
-		checkOutQueue.add(customer);
+	public void addToCheckoutQueue(CheckOutEvent event) {
+		checkOutQueue.add(event);
+	}
+	
+	public CheckOutEvent getFirstFromCheckoutQueue() {
+		return checkOutQueue.getFirst();
 	}
 
 	/**
@@ -352,7 +349,7 @@ public class StoreState extends simulator.SimState {
 	 * @return customersInQueue
 	 */
 	public int getCustomersInQueue() {
-		return customersInQueue;
+		return checkOutQueue.size();
 	}
 
 	/**
@@ -372,10 +369,6 @@ public class StoreState extends simulator.SimState {
 
 	public double getCheckoutFreeTime() {
 		return checkoutFreeTime;
-	}
-	
-	public FIFO<Customer> getCheckOutQueue() {
-		return checkOutQueue;
 	}
 
 	/**
@@ -405,11 +398,6 @@ public class StoreState extends simulator.SimState {
 		startSimulator();
 	}
 
-	// FOR VIEW
-	public double getCheckOutFreeTime() {
-		return checkoutFreeTime;
-	}
-
 	public double getQueueTime() {
 		return queueTime;
 	}
@@ -436,7 +424,7 @@ public class StoreState extends simulator.SimState {
 		}
 
 		// Updates time that people have been standing in the queue
-		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
+		queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
 
 		// Sets time to be the time that the event was executed.
 		elapsedTime = event.getExTime();
