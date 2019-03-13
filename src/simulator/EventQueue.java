@@ -11,27 +11,19 @@ import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
-
-
-
-/**
- * @author Nour Aldein Bahtite
- * @author Philip Eriksson
- * @author Rickard Bemm
- * @author André Christofferson
- */
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected SimState state;
 
 	/**
 	 * Create a new instance of EventQueue
+	 * 
 	 * @param state
 	 */
 	public EventQueue() {
 		this.eventQueue = new ArrayList<Event>();
 	}
-	
+
 	public boolean getEventQueueIsEmpty() {
 		return eventQueue.size() == 0;
 	}
@@ -44,7 +36,7 @@ public class EventQueue {
 	public void addEvent(Event event) {
 		eventQueue.add(event);
 	}
-	
+
 	public void removeEvent() {
 		eventQueue.remove(0);
 	}
@@ -60,12 +52,13 @@ public class EventQueue {
 		// Sorts the current array via it's getExTime method.
 		eventQueue = sortEvent(eventQueue);
 		String s = "";
-		for(Event x : eventQueue) {
-			s+="["+x+"]";
+		for (Event x : eventQueue) {
+			s += "[" + x + "]";
 		}
 		System.out.println(s);
 		return eventQueue.get(0);
 	}
+
 	public int getQueueSize() {
 		return eventQueue.size();
 	}
