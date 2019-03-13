@@ -1,5 +1,6 @@
 package store.state;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import simulator.Event;
@@ -43,7 +44,7 @@ public class StoreState extends simulator.SimState {
 
 	private boolean storeIsOpen;
 
-	private LinkedList<Customer> checkOutQueue;
+	private FIFO checkOutQueue;
 	private StoreTime storeTime;
 	private CreateCustomer customerSpawn;
 
@@ -68,7 +69,7 @@ public class StoreState extends simulator.SimState {
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME,
 						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
-		this.checkOutQueue = new LinkedList<Customer>();
+		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
 		
 		
@@ -214,7 +215,7 @@ public class StoreState extends simulator.SimState {
 		return checkOutQueue.isEmpty();
 	}
 	
-	public LinkedList<Customer> getCheckoutQueue(){
+	public FIFO getCheckoutQueue(){
 		return checkOutQueue;
 	}
 
@@ -251,7 +252,7 @@ public class StoreState extends simulator.SimState {
 	 * @param customer
 	 */
 	public void addToCheckoutQueue(Customer c) {
-		checkOutQueue.addLast(c);
+		checkOutQueue.add(c);
 	}
 	
 	public Customer getFirstFromCheckoutQueue() {
@@ -355,7 +356,7 @@ public class StoreState extends simulator.SimState {
 	 * @return customersInQueue
 	 */
 	public int getCustomersInQueue() {
-		return checkOutQueue.size();
+		return checkOutQueue.queueSize();
 	}
 
 	/**

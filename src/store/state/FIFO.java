@@ -32,8 +32,16 @@ public class FIFO{
 		return result;
 	}
 	
+	public boolean isEmpty() {
+		if(fifoQueue.size() == 0) {
+			return true;
+		}
+		return false;
+	}
 	
-	
+	public int queueSize() {
+		return fifoQueue.size();
+	}
 	
 	
 	
