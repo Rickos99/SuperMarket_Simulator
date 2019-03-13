@@ -1,6 +1,5 @@
 package store.event;
 
-import simulator.Event;
 import simulator.StartEvent;
 import store.state.StoreState;
 
@@ -14,7 +13,6 @@ import store.state.StoreState;
  */
 public class StoreStartEvent extends StartEvent {
 
-
 	public String eventDescription = "Store opens";
 
 	public StoreStartEvent(StoreState state) {
@@ -25,8 +23,8 @@ public class StoreStartEvent extends StartEvent {
 
 	@Override
 	public void runEvent() {
-		double nextExecuteTime = state.getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
-		addEventToQueue(new CustomerArrivedEvent((StoreState)state, nextExecuteTime));
+		double nextExecuteTime = state.getElapsedTime() + ((StoreState) state).getTimeNextCustomer();
+		addEventToQueue(new CustomerArrivedEvent((StoreState) state, nextExecuteTime));
 	}
 
 }
