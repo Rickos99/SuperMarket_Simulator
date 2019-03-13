@@ -9,6 +9,8 @@ package simulator;
 
 import java.util.ArrayList;
 
+import javax.management.RuntimeErrorException;
+
 
 
 
@@ -49,7 +51,7 @@ public class EventQueue {
 	 */
 	public Event getEvent() {
 		if (eventQueue.size() == 0) {
-			
+			throw new RuntimeException("Queue is empty");
 		}
 		// Sorts the current array via it's getExTime method.
 		eventQueue = sortEvent(eventQueue);
