@@ -1,8 +1,5 @@
 package simulator;
 
-
-import store.state.StoreState;
-
 public abstract class StartEvent extends Event {
 	
 	/**
@@ -11,11 +8,9 @@ public abstract class StartEvent extends Event {
 	 */
 	public StartEvent(SimState state) {
 		super(state);
-		super.eventDescription = "Simulator starting";
+		super.eventDescription = "Start";
 		super.eventUserDescription = "-";
 		this.executeTime = 0;
-		
-		
 	}
 
 	public abstract void runEvent();

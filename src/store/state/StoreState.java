@@ -388,6 +388,10 @@ public class StoreState extends simulator.SimState {
 	public double getCheckoutFreeTime() {
 		return checkoutFreeTime;
 	}
+	
+	public FIFO<Customer> getCheckOutQueue() {
+		return checkOutQueue;
+	}
 
 	/**
 	 * Update the time when the checkout is down.

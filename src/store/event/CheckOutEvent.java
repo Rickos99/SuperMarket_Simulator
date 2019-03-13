@@ -14,14 +14,11 @@ import store.state.StoreState;
  */
 public class CheckOutEvent extends Event {
 	
-	
-	private String eventDescription = "Checkout";
-	private String eventUserDescription;
 	private boolean isPeopleInQueue;
-	Customer customer;
+	private Customer customer;
 
 	/**
-	 * Constructor if there are avaliable registers and the que is empty.
+	 * Constructor if there are available registers and the queue is empty.
 	 * 
 	 * @param state    current store state
 	 * @param time     event execute time
@@ -29,14 +26,13 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		super(state);
-		super.eventDescription = "Customer paying for products";
+		super.eventDescription = "Checkout";
 		super.eventUserDescription = customer.toString();
+		super.executeTime = time;
 		state.closeOneRegister();
-		this.executeTime = time;
 		this.customer = customer;
 		this.isPeopleInQueue = false;
 	}
-
 
 	/**
 	 * 
@@ -52,7 +48,7 @@ public class CheckOutEvent extends Event {
 		super.eventUserDescription = customer.toString();
 		state.closeOneRegister();
 		this.executeTime = time;
-		// Gets the first custommer in the queue and deletes it from the queue.
+		// Gets the first customer in the queue and deletes it from the queue.
 		this.customer = state.getFirst();
 		this.isPeopleInQueue = true;
 

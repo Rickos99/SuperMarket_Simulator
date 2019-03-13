@@ -13,16 +13,13 @@ import store.state.StoreState;
  */
 public class StoreStartEvent extends StartEvent {
 
-
 	public StoreStartEvent(StoreState state) {
 		super(state);
 		super.eventDescription = "Open";
 		super.eventUserDescription = "-";
-		this.executeTime = 0.0;
-
+		super.executeTime = 0.0;
 	}
 	
-
 	@Override
 	public void runEvent() {
 		((StoreState) state).openStore();

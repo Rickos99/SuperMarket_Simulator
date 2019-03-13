@@ -14,18 +14,15 @@ import store.state.StoreState;
  */
 public class PickEvent extends Event {
 
-
-	Customer customer;
+	private Customer customer;
 	
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
-		super.eventDescription = "Pick items";
+		super.eventDescription = "Pick";
 		super.eventUserDescription = customer.toString();
-		this.executeTime = time;
+		super.executeTime = time;
 		this.customer = customer;
 	}
-
-	
 	
 	@Override
 	public void runEvent() {

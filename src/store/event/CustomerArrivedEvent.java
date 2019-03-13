@@ -13,21 +13,16 @@ import store.state.StoreState;
  * 
  */
 public class CustomerArrivedEvent extends Event {
-
 	
-	Customer customer;
+	private Customer customer;
 	
 	public CustomerArrivedEvent(StoreState state, double time) {
 		super(state);
-		super.eventDescription = "Customer arrived";
-		
-		this.executeTime = time;
+		super.eventDescription = "Arrived";
 		this.customer = state.createNewCustomer();
 		super.eventUserDescription = customer.toString();
-		
+		super.executeTime = time;
 	}
-	
-	
 
 	/**
 	 * state.storeTime.timeNextCustomer() blir storetime objektet som vi
