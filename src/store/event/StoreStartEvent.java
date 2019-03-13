@@ -14,13 +14,12 @@ import store.state.StoreState;
  */
 public class StoreStartEvent extends StartEvent {
 
-	private final double stopExecuteTime;
+
 	public String eventDescription = "Store opens";
 
-	public StoreStartEvent(StoreState state, double stopExecuteTime) {
-		super(state, stopExecuteTime);
+	public StoreStartEvent(StoreState state) {
+		super(state);
 		this.executeTime = 0.0;
-		this.stopExecuteTime = stopExecuteTime;
 		addEventToQueue(this);
 	}
 
@@ -28,7 +27,6 @@ public class StoreStartEvent extends StartEvent {
 	public void runEvent() {
 		double nextExecuteTime = state.getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
 		addEventToQueue(new CustomerArrivedEvent((StoreState)state, nextExecuteTime));
-		addEventToQueue(new StoreStopEvent((StoreState)state, stopExecuteTime));
 	}
 
 }
