@@ -240,7 +240,7 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * Add new customer in pay queue
+	 * Add new customer in payment queue
 	 *
 	 * @param customer
 	 */
