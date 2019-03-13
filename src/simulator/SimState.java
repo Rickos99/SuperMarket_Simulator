@@ -41,7 +41,8 @@ public abstract class SimState extends Observable {
 	public final EventQueue getEventQueue() {
 		return eventQueue;
 	}
+	abstract public void updateState(Event event);
 	
-	abstract public void updateTimeElapsed(Event event);
+	
 	abstract public void runSim();
 }

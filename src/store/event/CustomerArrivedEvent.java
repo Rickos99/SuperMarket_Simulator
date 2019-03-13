@@ -21,6 +21,7 @@ public class CustomerArrivedEvent extends Event {
 		super(state);
 		this.executeTime = time;
 		this.customer = state.createNewCustomer();
+		this.eventUserDescription = customer.toString();
 	}
 
 	/**

@@ -18,7 +18,7 @@ public class Simulator {
 	 */
 	public Simulator(SimState state, EventQueue queue) {
 		this.state = state;
-		this.queue = state.getEventQueue();
+		this.queue = queue;
 	}
 
 	/**
@@ -28,9 +28,8 @@ public class Simulator {
 		state.runSim();
 
 		while (state.simulatorIsRunning) {
-			System.out.println(queue.getQueueSize());
 			queue.getEvent().runEvent();
-			state.updateTimeElapsed(queue.getEvent());
+			state.updateState(queue.getEvent());
 			queue.removeEvent();
 		}
 	}
