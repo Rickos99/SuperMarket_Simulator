@@ -438,7 +438,7 @@ public class StoreState extends simulator.SimState {
 		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
 
 		// Sets time to be the time that the event was executed.
-		elapsedTime = event.getExTime();
+		elapsedTime += event.getExTime()-elapsedTime;
 		
 		//DESCRIPTION OF EVENT
 		
