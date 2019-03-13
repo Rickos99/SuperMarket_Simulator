@@ -1,7 +1,6 @@
 package store.event;
 
 import simulator.Event;
-import simulator.StopEvent;
 import store.state.StoreState;
 
 /**
@@ -14,21 +13,12 @@ import store.state.StoreState;
  */
 public class StoreCloseEvent extends Event {
 
-	public String eventDescription = "Store closed";
-
-	public StoreCloseEvent(StoreState state, double executeTime) {
+	public StoreCloseEvent(StoreState state, double time) {
 		super(state);
-		this.executeTime = executeTime;
-
+		this.executeTime = time;
 	}
 
-	/**
-	 * Only purpose for this event is to stop other events from being added to the
-	 * eventQue. Sets storeOpen to false so that
-	 */
-	@Override
 	public void runEvent() {
 		((StoreState) state).closeStore();
 	}
-
 }

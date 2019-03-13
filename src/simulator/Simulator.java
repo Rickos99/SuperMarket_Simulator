@@ -16,12 +16,9 @@ public class Simulator {
 	 * 
 	 * @param state A simulator state
 	 */
-	public Simulator(SimState state, Event startEvent, Event stopEvent, Event storeCloseEvent) {
+	public Simulator(SimState state, EventQueue queue) {
 		this.state = state;
 		this.queue = state.getEventQueue();
-		queue.addEvent(startEvent);
-		queue.addEvent(stopEvent);
-		queue.addEvent(storeCloseEvent);
 	}
 
 	/**

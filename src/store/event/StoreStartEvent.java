@@ -11,14 +11,13 @@ import store.state.StoreState;
  * @author André Christofferson
  * 
  */
-public class StoreOpenEvent extends StartEvent {
+public class StoreStartEvent extends StartEvent {
 
 	public String eventDescription = "Store opens";
 
-	public StoreOpenEvent(StoreState state) {
+	public StoreStartEvent(StoreState state) {
 		super(state);
 		this.executeTime = 0.0;
-
 
 	}
 
