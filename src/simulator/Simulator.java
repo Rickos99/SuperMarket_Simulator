@@ -30,6 +30,7 @@ public class Simulator {
 		state.runSim();
 
 		while (state.simulatorIsRunning) {
+			System.out.println(queue.getQueueSize());
 			queue.getEvent().runEvent();
 			state.updateTimeElapsed(queue.getEvent());
 			queue.removeEvent();

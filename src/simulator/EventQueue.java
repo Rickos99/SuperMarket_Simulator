@@ -59,6 +59,9 @@ public class EventQueue {
 		eventQueue = sortEvent(eventQueue);
 		return eventQueue.get(0);
 	}
+	public int getQueueSize() {
+		return eventQueue.size();
+	}
 
 	private static ArrayList<Event> sortEvent(ArrayList<Event> list) {
 		if (list.size() == 1) {
