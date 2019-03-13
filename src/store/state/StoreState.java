@@ -16,7 +16,7 @@ public class StoreState extends simulator.SimState {
 	private final long TIME_SEED;
 	private final int MAX_CUSTOMERS;
 	private final int MAX_REGISTERS;
-	private final int TIME_STORE_CLOSE;
+	private final double TIME_STORE_CLOSE;
 	private final double ARRIVAL_SPEED;
 	private final double MIN_PICKING_TIME;
 	private final double MAX_PICKING_TIME;
@@ -55,7 +55,7 @@ public class StoreState extends simulator.SimState {
 	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
 	 */
 	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
-			int TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
+			double TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
 			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
 			EventQueue eventQueue) {
 		super(eventQueue);
@@ -89,7 +89,7 @@ public class StoreState extends simulator.SimState {
 	 * 
 	 * @return what time store will close at
 	 */
-	public int getTimeStoreClose() {
+	public double getTimeStoreClose() {
 		return TIME_STORE_CLOSE;
 	}
 

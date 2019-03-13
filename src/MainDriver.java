@@ -13,7 +13,7 @@ public class MainDriver {
 		long TIME_SEED = 5;				//Seed to generate random number
 		int	MAX_CUSTOMERS = 20;			//Maximum number of costumers allowed in store at once
 		int	MAX_REGISTERS = 4;			//Maximum number of registers available in store
-		int TIME_STORE_CLOSE = 22;		//At what time store closes
+		double TIME_STORE_CLOSE = 22.00;//At what time store closes
 		double ARRIVAL_SPEED = 1;		//Speed of which costumers arrive at
 		double MIN_PICKING_TIME = 2;	//Minimum time a costumer can pick items in
 		double MAX_PICKING_TIME = 4;	//Maximum time a costumer can pick items in

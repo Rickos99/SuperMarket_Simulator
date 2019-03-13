@@ -1,6 +1,5 @@
 package store.event;
 
-import simulator.Event;
 import simulator.StopEvent;
 import store.state.StoreState;
 
@@ -23,12 +22,12 @@ public class StoreStopEvent extends StopEvent {
 	}
 
 	/**
-	 * Only purpose for this event is to stop other events from being added to
-	 * the eventQue. Sets storeOpen to false so that
+	 * Only purpose for this event is to stop other events from being added to the
+	 * eventQue. Sets storeOpen to false so that
 	 */
 	@Override
 	public void runEvent() {
-		((StoreState)state).closeStore();
+		((StoreState) state).closeStore();
 	}
 
 }
