@@ -15,13 +15,13 @@ public class StoreCloseEvent extends Event {
 	private String eventUserDescription = "-";
 	public StoreCloseEvent(StoreState state, double time) {
 		super(state);
+		super.eventDescription = eventDescription;
+		super.eventUserDescription = eventUserDescription;
 		this.executeTime = time;
 	}
 
 	public void runEvent() {
 		((StoreState) state).closeStore();
 	}
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
+
 }

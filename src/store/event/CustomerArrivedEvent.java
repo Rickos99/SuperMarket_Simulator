@@ -20,13 +20,14 @@ public class CustomerArrivedEvent extends Event {
 	
 	public CustomerArrivedEvent(StoreState state, double time) {
 		super(state);
+		super.eventDescription = eventDescription;
 		this.executeTime = time;
 		this.customer = state.createNewCustomer();
-		this.eventUserDescription = customer.toString();
+		super.eventUserDescription = customer.toString();
+		
 	}
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
+	
+	
 
 	/**
 	 * state.storeTime.timeNextCustomer() blir storetime objektet som vi

@@ -29,16 +29,14 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		super(state);
+		super.eventDescription = eventDescription;
 		state.closeOneRegister();
 		this.executeTime = time;
 		this.customer = customer;
-		this.eventUserDescription = customer.toString();
+		super.eventUserDescription = customer.toString();
 		this.isPeopleInQueue = false;
 	}
-	
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
+
 
 	/**
 	 * 

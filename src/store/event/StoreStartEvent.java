@@ -17,12 +17,12 @@ public class StoreStartEvent extends StartEvent {
 
 	public StoreStartEvent(StoreState state) {
 		super(state);
+		super.eventDescription = eventDescription;
+		super.eventUserDescription = eventUserDescription;
 		this.executeTime = 0.0;
 
 	}
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
+	
 
 	@Override
 	public void runEvent() {
