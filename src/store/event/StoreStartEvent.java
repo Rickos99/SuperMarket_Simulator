@@ -16,7 +16,7 @@ public class StoreStartEvent extends StartEvent {
 
 	public StoreStartEvent(StoreState state) {
 		super(state);
-		super.eventDescription = "Store opens";
+		super.eventDescription = "Open";
 		super.eventUserDescription = "-";
 		this.executeTime = 0.0;
 

@@ -14,6 +14,7 @@ import store.state.StoreState;
  */
 public class CustomerArrivedEvent extends Event {
 
+	
 	Customer customer;
 	
 	public CustomerArrivedEvent(StoreState state, double time) {

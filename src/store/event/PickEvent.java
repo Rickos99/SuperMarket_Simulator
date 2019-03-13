@@ -14,6 +14,7 @@ import store.state.StoreState;
  */
 public class PickEvent extends Event {
 
+
 	Customer customer;
 	
 	public PickEvent(StoreState state, double time, Customer customer) {
