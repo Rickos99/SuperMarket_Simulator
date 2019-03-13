@@ -68,7 +68,9 @@ public class StoreState extends simulator.SimState {
 						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
 		this.checkOutQueue = new FIFO<Customer>();
 		this.customerSpawn = new CreateCustomer();
-
+		
+		
+		this.registersOpen = MAX_REGISTERS;
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
 		this.MAX_REGISTERS = MAX_REGISTERS;
@@ -148,9 +150,9 @@ public class StoreState extends simulator.SimState {
 	 * StoreIsOpen change to true.
 	 */
 	public void openStore() {
-		if (!storeIsOpen) {
-			storeIsOpen = true;
-		}
+		
+		storeIsOpen = true;
+		
 	}
 
 	/**
@@ -433,7 +435,7 @@ public class StoreState extends simulator.SimState {
 		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
 
 		// Sets time to be the time that the event was executed.
-		elapsedTime += event.getExTime() - elapsedTime;
+		elapsedTime = event.getExTime();
 
 		// DESCRIPTION OF EVENT
 
@@ -442,7 +444,7 @@ public class StoreState extends simulator.SimState {
 
 		// Updates which customer who performed the event.
 		customerWhoPerformedEvent = event.getEventUserDescription();
-
+		
 		setChanged();
 		notifyObservers();
 	}

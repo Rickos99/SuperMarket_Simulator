@@ -50,7 +50,6 @@ public class CheckOutEvent extends Event {
 		// Gets the first customer in the queue and deletes it from the queue.
 		this.customer = state.getFirstCustomerInCheckout();
 		this.isPeopleInQueue = true;
-
 	}
 
 	@Override
@@ -59,12 +58,14 @@ public class CheckOutEvent extends Event {
 		if (isPeopleInQueue) {
 			// Open up a new register.
 			((StoreState)state).openNewRegister();
+			((StoreState)state).increaseCustomerPayedByOne();
 			// Checks to see if there are anymore customers in the queue.
 			if (!((StoreState)state).checkOutQueueIsEmpty()) {
 				addEventToQueue(new CheckOutEvent((StoreState)state, newExecuteTime));
 			}
 
 		} else {
+			
 			((StoreState)state).openNewRegister();
 			((StoreState)state).increaseCustomerPayedByOne();
 			// No new event since there are no people in the queue.

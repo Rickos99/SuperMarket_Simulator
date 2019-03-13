@@ -54,6 +54,10 @@ public abstract class Event {
 		this.eventQueue.addEvent(event);
 	}
 	
+	public String toString() {
+		return eventDescription + eventUserDescription;
+		
+	}
 
 	/**
 	 * Abstract method which is designed for each event.

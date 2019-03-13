@@ -22,6 +22,7 @@ public class CustomerArrivedEvent extends Event {
 		this.customer = state.createNewCustomer();
 		super.eventUserDescription = customer.toString();
 		super.executeTime = time;
+
 	}
 
 	/**
@@ -37,9 +38,11 @@ public class CustomerArrivedEvent extends Event {
 	 */
 	@Override
 	public void runEvent() {
+		//System.out.println("CUSTOMER RUN"+this.customer);
+		double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
 		if (((StoreState)state).storeIsOpen()) {
 
-			double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
+			//double newTimeCustomer = ((StoreState)state).getElapsedTime() + ((StoreState)state).getTimeNextCustomer();
 			if (((StoreState)state).getCustomersInStore() < ((StoreState)state).getMAX_CUSTOMERS()) {
 				((StoreState)state).increaseCustomerVisitedByOne();
 				double newPickTime = state.getElapsedTime() + ((StoreState)state).getTimeCustomerPick();

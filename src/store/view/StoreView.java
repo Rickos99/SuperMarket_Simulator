@@ -15,7 +15,6 @@ import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Observable;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 import simulator.SimState;
 import simulator.SimView;

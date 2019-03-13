@@ -29,7 +29,7 @@ public class PickEvent extends Event {
 		// Checks if there are available registers to pay in and if the que is
 		// empty.
 		double checkOutTime = ((StoreState) state).getElapsedTime()
-				+ ((StoreState) state).getTimeNextCustomer();
+				+ ((StoreState) state).getTimeNextCustomerCheckout();
 		if (((StoreState) state).getRegistersOpen() > 0
 				&& ((StoreState) state).checkOutQueueIsEmpty()) {
 			// Adds a checkout event with no people in the queue and there
