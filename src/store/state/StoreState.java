@@ -102,8 +102,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void openNewRegister() {
 		if (registersOpen < MAX_REGISTERS) {
-			setChanged();
-			notifyObservers();
 			registersOpen++;
 		} else {
 			// TODO: throw new OpenRegisterFailedException()
@@ -118,8 +116,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void closeOneRegister() {
 		if (registersOpen > 0) {
-			setChanged();
-			notifyObservers();
 			registersOpen--;
 		} else {
 			// TODO: throw new CloseRegisterFailedException()
@@ -141,8 +137,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void closeStore() {
 		if (storeIsOpen) {
-			setChanged();
-			notifyObservers();
 			storeIsOpen = false;
 		}
 	}
@@ -153,9 +147,7 @@ public class StoreState extends simulator.SimState {
 	 * StoreIsOpen change to true.
 	 */
 	public void openStore() {
-		
 		storeIsOpen = true;
-		
 	}
 
 	/**
@@ -384,8 +376,6 @@ public class StoreState extends simulator.SimState {
 	 * @param deadRegisterTime
 	 */
 	public void uppdateRegistersDownTime(double deadRegisterTime) {
-		setChanged();
-		notifyObservers();
 		checkoutFreeTime += deadRegisterTime;
 	}
 
@@ -395,8 +385,6 @@ public class StoreState extends simulator.SimState {
 	 * @param peopleInQueueTime
 	 */
 	public void uppdateCustomersInQueueTime(double peopleInQueueTime) {
-		setChanged();
-		notifyObservers();
 		queueTime += peopleInQueueTime;
 	}
 
