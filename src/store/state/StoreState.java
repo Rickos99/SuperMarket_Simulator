@@ -34,6 +34,10 @@ public class StoreState extends simulator.SimState {
 	private int registersOpen;
 	private double queueTime;
 	private double checkoutFreeTime;
+	
+	// Event descriptions
+	private String eventDescription;
+	private String customerWhoPerformedEvent;
 
 	private boolean storeIsOpen;
 
@@ -54,10 +58,9 @@ public class StoreState extends simulator.SimState {
 	 * @param MIN_CHECKOUT_TIME Minimum time a costumer can checkout in
 	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
 	 */
-	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
-			double TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
-			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
-			EventQueue eventQueue) {
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, double TIME_STORE_CLOSE,
+			double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME,
+			double MAX_CHECKOUT_TIME, EventQueue eventQueue) {
 		super(eventQueue);
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED);
@@ -423,20 +426,30 @@ public class StoreState extends simulator.SimState {
 	}
 
 	@Override
-	public void updateTimeElapsed(Event event) {
-		setChanged();
-		notifyObservers();
-		System.out.println("Current time = "+ elapsedTime);
+	public void updateState(Event event) {
+		// TIME
 		
 		// Updates registers wasted time
 		if (storeIsOpen) {
 			checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
 		}
-		
+
 		// Updates time that people have been standing in the queue
 		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
 
 		// Sets time to be the time that the event was executed.
 		elapsedTime = event.getExTime();
+		
+		//DESCRIPTION OF EVENT
+		
+		// Updates event that occured
+		eventDescription = event.getEventDescription();
+		
+		// Updates which customer who performed the event.
+		customerWhoPerformedEvent = event.getEventUserDescription();
+		
+		setChanged();
+		notifyObservers();
 	}
+
 }

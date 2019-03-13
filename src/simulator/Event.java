@@ -14,7 +14,9 @@ public abstract class Event {
 	protected double executeTime;
 	protected SimState state;
 	protected String eventDescription;
+	protected String eventUserDescription;
 	protected EventQueue eventQueue;
+	
 	
 	public Event(SimState state) {
 		this.state = state;
@@ -46,6 +48,10 @@ public abstract class Event {
 	 */
 	public void addEventToQueue(Event event) {
 		this.eventQueue.addEvent(event);
+	}
+	
+	public String getEventUserDescription() {
+		return eventUserDescription;
 	}
 
 	/**

@@ -31,6 +31,7 @@ public class CheckOutEvent extends Event {
 		state.closeOneRegister();
 		this.executeTime = time;
 		this.customer = customer;
+		this.eventUserDescription = customer.toString();
 		this.isPeopleInQueue = false;
 	}
 
