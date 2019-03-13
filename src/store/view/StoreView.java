@@ -11,6 +11,7 @@ package store.view;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Observable;
 import simulator.SimState;
@@ -103,18 +104,23 @@ public class StoreView extends SimView {
 	 * @return simulation event description
 	 */
 	private String generateProgress(StoreState state) {
-		String format = "%5s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %s" + newLine;
+		String format = "%7s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %s"
+				+ newLine;
 		String result = "";
 		if (!progressHeaderGenerated) {
+			progressHeaderGenerated = true;
 			result += generateHeader("Förlopp");
 			result += String.format(format,
 					new Object[] { "Tid", "Händelse", "Kund", "?", "led", "ledT", "I",
 							"$", ":-(", "köat", "köT", "köar", "[Kassakö..]" });
 		}
-		result += String.format(format, new Object[] { state.getElapsedTime(), "Händelse",
-				"Kund", state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(), state.getCheckoutFreeTime(),
-						state.getCustomersInTotal(), state.getCustomersPayed(), state.getCustomersDeniedEntry(),
-						"-", state.getQueueTime(), state.getCustomersInQueue(), "<Queue>"});
+		result += String.format(format,
+				new Object[] { new DecimalFormat("#.##").format(state.getElapsedTime()),
+						"Händelse", "Kund", state.storeIsOpen() ? "Ö" : "S",
+						state.getRegistersOpen(), state.getCheckoutFreeTime(),
+						state.getCustomersInTotal(), state.getCustomersPayed(),
+						state.getCustomersDeniedEntry(), "-", state.getQueueTime(),
+						state.getCustomersInQueue(), "<Queue>" });
 		return result;
 	}
 
