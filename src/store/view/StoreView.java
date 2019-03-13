@@ -45,6 +45,7 @@ public class StoreView extends SimView {
 		if (!state.simulatorIsRunning()) {
 			result += generateResult(state);
 			printConsole();
+			printFile("C:/temp/Spermarket_DEDS.log", true);
 		}
 	}
 
