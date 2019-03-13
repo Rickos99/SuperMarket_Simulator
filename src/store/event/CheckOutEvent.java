@@ -29,11 +29,11 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time, Customer customer) {
 		super(state);
-		super.eventDescription = eventDescription;
+		super.eventDescription = "Customer paying for products";
+		super.eventUserDescription = customer.toString();
 		state.closeOneRegister();
 		this.executeTime = time;
 		this.customer = customer;
-		super.eventUserDescription = customer.toString();
 		this.isPeopleInQueue = false;
 	}
 
@@ -48,6 +48,8 @@ public class CheckOutEvent extends Event {
 	 */
 	public CheckOutEvent(StoreState state, double time) {
 		super(state);
+		super.eventDescription = "Customer paying for products";
+		super.eventUserDescription = customer.toString();
 		state.closeOneRegister();
 		this.executeTime = time;
 		// Gets the first custommer in the queue and deletes it from the queue.

@@ -12,12 +12,12 @@ import store.state.StoreState;
  * 
  */
 public class StoreStartEvent extends StartEvent {
-	private String eventUserDescription = "-";
+
 
 	public StoreStartEvent(StoreState state) {
 		super(state);
 		super.eventDescription = "Open";
-		super.eventUserDescription = eventUserDescription;
+		super.eventUserDescription = "-";
 		this.executeTime = 0.0;
 
 	}
