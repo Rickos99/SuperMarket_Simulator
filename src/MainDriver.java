@@ -33,7 +33,7 @@ public class MainDriver {
 		state.addObserver(view);
 
 		// Run simulator
-		new Simulator(state, startEvent, stopEvent).run();
+		new Simulator(state, eventQueue).run();
 	}
 
 }
