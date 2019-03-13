@@ -31,6 +31,7 @@ public class CheckOutEvent extends Event {
 	@Override
 	public void runEvent() {
 		StoreState s = (StoreState) state;
+		s.updateState(this);
 		s.increaseCustomerPayedByOne();
 		s.decreaseCustomersInStoreByOne();
 		if(s.checkOutQueueIsEmpty()) {
