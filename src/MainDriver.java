@@ -1,9 +1,10 @@
 import simulator.Event;
 import simulator.EventQueue;
 import simulator.Simulator;
+import simulator.StopEvent;
 import store.event.StoreCloseEvent;
 import store.event.StoreStartEvent;
-import store.event.StoreStopEvent;
+import store.event.StoreCloseEvent;
 import store.state.StoreState;
 import store.view.StoreView;;
 
@@ -26,15 +27,17 @@ public class MainDriver {
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS, TIME_STORE_CLOSE,
 										  ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME, 
 										  MAX_CHECKOUT_TIME, eventQueue);
-		Event startEvent = new StoreStartEvent(state);
-		Event CloseEvent = new StoreCloseEvent(state, TIME_STORE_CLOSE);
-		Event stopEvent = new StoreStopEvent(state, TIME_STORE_CLOSE);
 		StoreView view = new StoreView(state);
+		
+		// Create and add events
+		eventQueue.addEvent(new StoreStartEvent(state));
+		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
+		eventQueue.addEvent(new StopEvent(state, 999));
 		
 		state.addObserver(view);
 		
 		// Run simulator
-		new Simulator(state, startEvent, stopEvent).run();
+		new Simulator(state).run();
 	}
 
 }
