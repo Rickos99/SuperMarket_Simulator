@@ -1,6 +1,6 @@
 package simulator;
 
-import store.event.StoreStopEvent;
+import store.event.StoreCloseEvent;
 import store.state.StoreState;
 
 public abstract class StartEvent extends Event {
