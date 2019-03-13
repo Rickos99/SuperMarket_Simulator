@@ -20,13 +20,14 @@ public class PickEvent extends Event {
 	
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
+		super.eventDescription = eventDescription;
+		super.eventUserDescription = eventUserDescription;
 		this.executeTime = time;
 		this.customer = customer;
 		this.eventUserDescription = customer.toString();
 	}
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
+
+	
 	
 	@Override
 	public void runEvent() {

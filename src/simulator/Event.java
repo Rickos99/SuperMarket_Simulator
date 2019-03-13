@@ -41,7 +41,9 @@ public abstract class Event {
 		return eventDescription;
 	}
 	
-	public abstract String getEventUserDescription();
+	public String getEventUserDescription() {
+		return eventUserDescription;
+	}
 
 	/**
 	 * Adds an event to the event queue for the specific state.
