@@ -37,8 +37,9 @@ public class CheckOutEvent extends Event {
 		if(s.checkOutQueueIsEmpty()) {
 			s.openNewRegister();
 		} else {
+			
 			double checkoutTime = s.getElapsedTime() + s.getTimeNextCustomerCheckout();
-			Customer nextCustomer = s.getFirstFromCheckoutQueue();
+			Customer nextCustomer = s.getCheckoutQueue().removeFirst();
 			eventQueue.addEvent(new CheckOutEvent(s, checkoutTime, nextCustomer));
 		}
 	}
