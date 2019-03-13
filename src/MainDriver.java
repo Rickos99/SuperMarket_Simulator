@@ -32,9 +32,9 @@ public class MainDriver {
 		
 		Event stopEvent = new StopEvent(state, 99999999);
 		StoreView view = new StoreView(state);
-		
+
 		state.addObserver(view);
-		
+
 		// Run simulator
 		new Simulator(state, startEvent, stopEvent, storeCloseEvent).run();
 	}
