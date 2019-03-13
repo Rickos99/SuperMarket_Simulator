@@ -24,7 +24,7 @@ public class StoreStartEvent extends StartEvent {
 	public void runEvent() {
 		((StoreState) state).openStore();
 		double nextExecuteTime = state.getElapsedTime() + ((StoreState) state).getTimeNextCustomer();
-		addEventToQueue(new CustomerArrivedEvent((StoreState) state, nextExecuteTime));
+		eventQueue.addEvent(new CustomerArrivedEvent((StoreState) state, nextExecuteTime));
 	}
 
 }

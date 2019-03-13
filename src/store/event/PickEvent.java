@@ -26,21 +26,13 @@ public class PickEvent extends Event {
 
 	@Override
 	public void runEvent() {
-		// Checks if there are available registers to pay in and if the que is
-		// empty.
 		double checkOutTime = ((StoreState) state).getElapsedTime()
 				+ ((StoreState) state).getTimeNextCustomerCheckout();
-		if (((StoreState) state).getRegistersOpen() > 0
-				&& ((StoreState) state).checkOutQueueIsEmpty()) {
-			// Adds a checkout event with no people in the queue and there
-			// are Available registers.
-			addEventToQueue(
-					new CheckOutEvent((StoreState) state, checkOutTime, customer));
-		} else {
-			// Adds a checkout event where there are customers already in the queue.
-			// and places the customer who wants to buy in the back of the FIFO queue.
+		if(((StoreState) state).getRegistersOpen() > 0) {
+			((StoreState)state).closeOneRegister();
+			eventQueue.addEvent(new CheckOutEvent((StoreState) state, checkOutTime, customer));
+		}else {
 			((StoreState) state).addCustomerInPayoutLine(customer);
-			addEventToQueue(new CheckOutEvent((StoreState) state, checkOutTime));
 		}
 	}
 
