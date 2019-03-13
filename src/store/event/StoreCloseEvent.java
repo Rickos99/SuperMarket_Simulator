@@ -27,7 +27,9 @@ public class StoreCloseEvent extends Event {
 	}
 
 	public void runEvent() {
-		((StoreState) state).closeStore();
+		StoreState s = (StoreState) state;
+		s.updateState(this);
+		s.closeStore();
 	}
 
 }

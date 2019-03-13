@@ -22,9 +22,12 @@ public class StoreStartEvent extends StartEvent {
 	
 	@Override
 	public void runEvent() {
-		((StoreState) state).openStore();
-		double nextExecuteTime = state.getElapsedTime() + ((StoreState) state).getTimeNextCustomer();
-		eventQueue.addEvent(new CustomerArrivedEvent((StoreState) state, nextExecuteTime));
+		StoreState s = (StoreState) state;
+		s.updateState(this);
+		s.openStore();
+		
+		double nextExecuteTime = state.getElapsedTime() + s.getTimeNextCustomer();
+		eventQueue.addEvent(new CustomerArrivedEvent(s, nextExecuteTime));
 	}
 
 }
