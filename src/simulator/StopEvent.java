@@ -15,4 +15,10 @@ public class StopEvent extends Event {
 
 	}
 
+	@Override
+	public String getEventUserDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

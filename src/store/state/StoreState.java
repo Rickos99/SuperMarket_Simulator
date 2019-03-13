@@ -377,14 +377,6 @@ public class StoreState extends simulator.SimState {
 		return customersDeniedEntry;
 	}
 
-	/**
-	 * Get the time spent in the queue
-	 *
-	 * @return queueTime
-	 */
-	public double getQueueTime() {
-		return queueTime;
-	}
 
 	/**
 	 * Get the time while the checkout was empty
@@ -424,6 +416,25 @@ public class StoreState extends simulator.SimState {
 		notifyObservers();
 		startSimulator();
 	}
+	//FOR VIEW
+	public double getCheckOutFreeTime() {
+		return checkoutFreeTime;
+	} 
+	
+	public double getQueueTime() {
+		return queueTime;
+	} 
+	public double getElapsedTime() {
+		return elapsedTime;
+	}
+	public String getEventDescription() {
+		return eventDescription;
+	}
+	public String getCustomerWhoPerformedEvent() {
+		return customerWhoPerformedEvent;
+	}
+	
+	
 
 	@Override
 	public void updateState(Event event) {

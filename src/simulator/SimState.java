@@ -34,7 +34,7 @@ public abstract class SimState extends Observable {
 		return this.simulatorIsRunning;
 	}
 
-	public final double getElapsedTime() {
+	public double getElapsedTime() {
 		return elapsedTime;
 	}
 	

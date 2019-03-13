@@ -40,6 +40,8 @@ public abstract class Event {
 	public String getEventDescription() {
 		return eventDescription;
 	}
+	
+	public abstract String getEventUserDescription();
 
 	/**
 	 * Adds an event to the event queue for the specific state.
@@ -50,9 +52,6 @@ public abstract class Event {
 		this.eventQueue.addEvent(event);
 	}
 	
-	public String getEventUserDescription() {
-		return eventUserDescription;
-	}
 
 	/**
 	 * Abstract method which is designed for each event.

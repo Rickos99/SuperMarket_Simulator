@@ -16,6 +16,7 @@ public class CheckOutEvent extends Event {
 	
 	
 	private String eventDescription = "Customer paying for products";
+	private String eventUserDescription;
 	private boolean isPeopleInQueue;
 	Customer customer;
 
@@ -33,6 +34,10 @@ public class CheckOutEvent extends Event {
 		this.customer = customer;
 		this.eventUserDescription = customer.toString();
 		this.isPeopleInQueue = false;
+	}
+	
+	public String getEventUserDescription() {
+		return eventUserDescription;
 	}
 
 	/**

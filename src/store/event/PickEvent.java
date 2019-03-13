@@ -15,6 +15,7 @@ import store.state.StoreState;
 public class PickEvent extends Event {
 
 	public String eventDescription = "Costumer picking products";
+	private String eventUserDescription;
 	Customer customer;
 	
 	public PickEvent(StoreState state, double time, Customer customer) {
@@ -23,7 +24,10 @@ public class PickEvent extends Event {
 		this.customer = customer;
 		this.eventUserDescription = customer.toString();
 	}
-
+	public String getEventUserDescription() {
+		return eventUserDescription;
+	}
+	
 	@Override
 	public void runEvent() {
 		// Checks if there are available registers to pay in and if the que is

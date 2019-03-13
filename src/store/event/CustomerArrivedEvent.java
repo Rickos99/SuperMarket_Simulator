@@ -15,6 +15,7 @@ import store.state.StoreState;
 public class CustomerArrivedEvent extends Event {
 
 	private String eventDescription = "Customer Arrived";
+	private String eventUserDescription;
 	Customer customer;
 	
 	public CustomerArrivedEvent(StoreState state, double time) {
@@ -22,6 +23,9 @@ public class CustomerArrivedEvent extends Event {
 		this.executeTime = time;
 		this.customer = state.createNewCustomer();
 		this.eventUserDescription = customer.toString();
+	}
+	public String getEventUserDescription() {
+		return eventUserDescription;
 	}
 
 	/**
