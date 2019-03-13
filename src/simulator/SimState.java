@@ -25,9 +25,9 @@ public abstract class SimState extends Observable {
 	}
 	
 	public final void stopSimulator() {
+		simulatorIsRunning = false;
 		setChanged();
 		notifyObservers();
-		simulatorIsRunning = false;
 	}
 	
 	public final boolean simulatorIsRunning() {
