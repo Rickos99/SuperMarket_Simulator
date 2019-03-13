@@ -25,7 +25,7 @@ public class StoreState extends simulator.SimState {
 
 	// Customer statistics
 	private int customersPayed;
-	private int customersInTotal;
+	private int customersInStore;
 	private int customersVisited;
 	private int customersInQueue;
 	private int customersDeniedEntry;
@@ -34,7 +34,7 @@ public class StoreState extends simulator.SimState {
 	private int registersOpen;
 	private double queueTime;
 	private double checkoutFreeTime;
-	
+
 	// Event descriptions
 	private String eventDescription;
 	private String customerWhoPerformedEvent;
@@ -58,9 +58,10 @@ public class StoreState extends simulator.SimState {
 	 * @param MIN_CHECKOUT_TIME Minimum time a costumer can checkout in
 	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
 	 */
-	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, double TIME_STORE_CLOSE,
-			double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME,
-			double MAX_CHECKOUT_TIME, EventQueue eventQueue) {
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
+			double TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
+			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
+			EventQueue eventQueue) {
 		super(eventQueue);
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED);
@@ -85,15 +86,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public Customer createNewCustomer() {
 		return customerSpawn.newCustomer();
-	}
-
-	/**
-	 * Get at what time store will close at.
-	 * 
-	 * @return what time store will close at
-	 */
-	public double getTimeStoreClose() {
-		return TIME_STORE_CLOSE;
 	}
 
 	/**
@@ -156,8 +148,6 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void openStore() {
 		if (!storeIsOpen) {
-			setChanged();
-			notifyObservers();
 			storeIsOpen = true;
 		}
 	}
@@ -166,31 +156,21 @@ public class StoreState extends simulator.SimState {
 	 * Increase the number of customers who couldn't enter the store by one.
 	 */
 	public void increaseCustomerDeniedByOne() {
-		setChanged();
-		notifyObservers();
 		customersDeniedEntry++;
 	}
 
-	public StoreTime getStoreTime() {
-		return storeTime;
+	/**
+	 * Increase the number of customers that have been visited the store by one.
+	 */
+	public void increaseCustomerVisitedByOne() {
+		customersVisited++;
 	}
 
 	/**
-	 * Get the number of customers who wait on the queue to pay their things.
-	 *
-	 * @return checkOutQueue
+	 * Increase the number of customers payed by one.
 	 */
-	public FIFO<Customer> getCheckoutQueue() {
-		return checkOutQueue;
-	}
-
-	/**
-	 * Get the max number of customers in the store.
-	 *
-	 * @return MAX_CUSTOMERS
-	 */
-	public int getMaxCustomers() {
-		return MAX_CUSTOMERS;
+	public void increaseCustomerPayedByOne() {
+		customersPayed++;
 	}
 
 	/**
@@ -198,8 +178,8 @@ public class StoreState extends simulator.SimState {
 	 *
 	 * @return customersInTotal
 	 */
-	public int getCustomersInTotal() {
-		return customersInTotal;
+	public int getCustomersInStore() {
+		return customersInStore;
 	}
 
 	/**
@@ -217,7 +197,7 @@ public class StoreState extends simulator.SimState {
 	 *
 	 * @return isEmpty()
 	 */
-	public boolean getCheckOutQueueIsEmpty() {
+	public boolean checkOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
 	}
 
@@ -226,7 +206,7 @@ public class StoreState extends simulator.SimState {
 	 *
 	 * @return getFirst()
 	 */
-	public Customer getFirst() {
+	public Customer getFirstCustomerInCheckout() {
 		return checkOutQueue.getFirst();
 	}
 
@@ -377,7 +357,6 @@ public class StoreState extends simulator.SimState {
 		return customersDeniedEntry;
 	}
 
-
 	/**
 	 * Get the time while the checkout was empty
 	 *
@@ -418,30 +397,32 @@ public class StoreState extends simulator.SimState {
 	public void runSim() {
 		startSimulator();
 	}
-	//FOR VIEW
+
+	// FOR VIEW
 	public double getCheckOutFreeTime() {
 		return checkoutFreeTime;
-	} 
-	
+	}
+
 	public double getQueueTime() {
 		return queueTime;
-	} 
+	}
+
 	public double getElapsedTime() {
 		return elapsedTime;
 	}
+
 	public String getEventDescription() {
 		return eventDescription;
 	}
+
 	public String getCustomerWhoPerformedEvent() {
 		return customerWhoPerformedEvent;
 	}
-	
-	
 
 	@Override
 	public void updateState(Event event) {
 		// TIME
-		
+
 		// Updates registers wasted time
 		if (storeIsOpen) {
 			checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
@@ -451,16 +432,16 @@ public class StoreState extends simulator.SimState {
 		queueTime += customersInQueue * (event.getExTime() - elapsedTime);
 
 		// Sets time to be the time that the event was executed.
-		elapsedTime += event.getExTime()-elapsedTime;
-		
-		//DESCRIPTION OF EVENT
-		
+		elapsedTime += event.getExTime() - elapsedTime;
+
+		// DESCRIPTION OF EVENT
+
 		// Updates event that occured
 		eventDescription = event.getEventDescription();
-		
+
 		// Updates which customer who performed the event.
 		customerWhoPerformedEvent = event.getEventUserDescription();
-		
+
 		setChanged();
 		notifyObservers();
 	}
