@@ -26,18 +26,20 @@ import store.state.StoreState;
  */
 public class StoreView extends SimView {
 
+	private boolean progressHeaderGenerated = false;
+	private boolean paramsHasGenerated = false;
 	private String newLine = "\r\n";
 	private String result;
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
-		result += generateProgress((StoreState)o);
-		if(!((SimState)o).simulatorIsRunning()) {
+		result += generateProgress((StoreState) o);
+		if (!((SimState) o).simulatorIsRunning()) {
 			result += generateResult((StoreState) o);
 			printConsole();
 		}
 	}
-	
+
 	public StoreView(StoreState state) {
 		this.result = generateParameters(state);
 	}
@@ -60,14 +62,8 @@ public class StoreView extends SimView {
 	@Override
 	public void printFile(String filePath, boolean overwrite) {
 		File file = new File(filePath);
-		if (file.isDirectory()) {
+		if (file.isDirectory() || (!overwrite && file.exists())) {
 			return;
-		}
-
-		if (!overwrite) {
-			if (file.exists()) {
-				return;
-			}
 		}
 
 		try {
@@ -86,15 +82,19 @@ public class StoreView extends SimView {
 	 * @return parameter statistics from the simulator
 	 */
 	private String generateParameters(StoreState state) {
-		String result = generateHeader("Parametrar") + newLine;
-		result += MessageFormat.format("Antal kassor, N...........: {0} \n", state.getMAX_REGISTERS());
-		result += MessageFormat.format("Max som ryms, M...........: {0} \n", state.getMAX_CUSTOMERS());
-		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n", state.getARRIVAL_SPEED());
-		result += MessageFormat.format("Plocktider, [P_min, P_max]: [{0}..{1}] \n", state.getMIN_PICKING_TIME(),
-				state.getMAX_PICKING_TIME());
-		result += MessageFormat.format("Betaltider, [K_min, K_max]: [{0}..{1}] \n", state.getMIN_CHECKOUT_TIME(),
-				state.getMAX_CHECKOUT_TIME());
-		result += MessageFormat.format("Frö, F....................: {0} \n", state.getTIME_SEED());
+		String result = generateHeader("Parametrar");
+		result += MessageFormat.format("Antal kassor, N...........: {0} \n",
+				state.getMAX_REGISTERS());
+		result += MessageFormat.format("Max som ryms, M...........: {0} \n",
+				state.getMAX_CUSTOMERS());
+		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n",
+				state.getARRIVAL_SPEED());
+		result += MessageFormat.format("Plocktider, [P_min, P_max]: [{0}..{1}] \n",
+				state.getMIN_PICKING_TIME(), state.getMAX_PICKING_TIME());
+		result += MessageFormat.format("Betaltider, [K_min, K_max]: [{0}..{1}] \n",
+				state.getMIN_CHECKOUT_TIME(), state.getMAX_CHECKOUT_TIME());
+		result += MessageFormat.format("Frö, F....................: {0} \n",
+				state.getTIME_SEED());
 		return result;
 	}
 
@@ -103,9 +103,19 @@ public class StoreView extends SimView {
 	 * 
 	 * @return simulation event description
 	 */
-	
 	private String generateProgress(StoreState state) {
-		String result = generateHeader("Förlopp") + newLine;
+		String format = "%5s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %10s" + newLine;
+		String result = "";
+		if (!progressHeaderGenerated) {
+			result += generateHeader("Förlopp");
+			result += String.format(format,
+					new Object[] { "Tid", "Händelse", "Kund", "?", "led", "ledT", "I",
+							"$", ":-(", "köat", "köT", "köar", "[Kassakö..]" });
+		}
+		result += String.format(format, new Object[] { state.getElapsedTime(), "Händelse",
+				"Kund", state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(), state.getCheckoutFreeTime(),
+						state.getCustomersInTotal(), state.getCustomersPayed(), state.getCustomersDeniedEntry(),
+						"-", state.getQueueTime(), state.getCustomersInQueue(), "<Queue>"});
 		return result;
 	}
 
@@ -115,17 +125,20 @@ public class StoreView extends SimView {
 	 * @return simulation results
 	 */
 	private String generateResult(StoreState state) {
-		String result = generateHeader("Resultat") + newLine;
-		result += MessageFormat.format("1) Av {0} kunder handlade {1} medan {2} missades \n",
-				state.getCustomersInTotal(), state.getCustomersPayed(), state.getCustomersDeniedEntry());
-		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n", state.getMAX_REGISTERS(),
-				state.getCheckoutFreeTime());
+		String result = generateHeader("Resultat");
+		result += MessageFormat.format(
+				"1) Av {0} kunder handlade {1} medan {2} missades \n",
+				state.getCustomersInTotal(), state.getCustomersPayed(),
+				state.getCustomersDeniedEntry());
+		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n",
+				state.getMAX_REGISTERS(), state.getCheckoutFreeTime());
 		result += MessageFormat.format(
 				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1} av tiden från öppning tills sista kunden betalat). \n",
 				"<KASSOR_LEDIG_TID_AVG>", "<PROCENT>");
-		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersPayed(),
-				"<TOTAL_KÖTID_FÖR_KUNDER");
-		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", "<KÖTID_AVG>");
+		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n",
+				state.getCustomersPayed(), "<TOTAL_KÖTID_FÖR_KUNDER");
+		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n",
+				"<KÖTID_AVG>");
 		return result;
 	}
 
@@ -135,12 +148,11 @@ public class StoreView extends SimView {
 	 * @param headerText describes the current event executed.
 	 * @return header description of the event
 	 */
-
 	private String generateHeader(String headerText) {
-		String headerString = headerText + "\r\n";
+		String headerString = newLine + headerText + newLine;
 		for (int i = 0; i < headerText.length(); i++) {
 			headerString += "=";
 		}
-		return headerString;
+		return headerString + newLine;
 	}
 }
