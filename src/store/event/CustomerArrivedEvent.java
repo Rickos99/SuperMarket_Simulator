@@ -27,7 +27,7 @@ public class CustomerArrivedEvent extends Event {
 	/**
 	 * state.storeTime.timeNextCustomer() blir storetime objektet som vi
 	 * skapar i storestate. state.customersInTotal blir antalet kunder i
-	 * aff�ren.
+	 * affären.
 	 * 
 	 * state.getStoreOpen checks if the store is opened or closed. Only need
 	 * to chekc if the store is oppened here since if the store is opened
