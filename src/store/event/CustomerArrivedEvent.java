@@ -39,6 +39,7 @@ public class CustomerArrivedEvent extends Event {
 	@Override
 	public void runEvent() {
 		StoreState s = ((StoreState)state);
+		s.updateState(this);
 		
 		if (s.storeIsOpen()) {
 			s.increaseCustomerVisitedByOne();
@@ -49,7 +50,6 @@ public class CustomerArrivedEvent extends Event {
 				double pickTime = state.getElapsedTime() + s.getTimeCustomerPick();
 				eventQueue.addEvent(new PickEvent(s, pickTime, customer));
 			}
-			s.updateState(this);
 			double newTimeCustomer = s.getElapsedTime() + s.getTimeNextCustomer();
 			eventQueue.addEvent(new CustomerArrivedEvent(s, newTimeCustomer));
 		}
