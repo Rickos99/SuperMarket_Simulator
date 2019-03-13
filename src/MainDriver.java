@@ -21,11 +21,11 @@ public class MainDriver {
 		double MAX_CHECKOUT_TIME = 3d; 	// Time a costumer can checkout in
 
 		// Create instances of various objects
+		StoreView view = new StoreView();
 		EventQueue eventQueue = new EventQueue();
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS, TIME_STORE_CLOSE,
 										  ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME, 
 										  MAX_CHECKOUT_TIME, eventQueue);
-		StoreView view = new StoreView(state);
 		
 		// Create and add events
 		eventQueue.addEvent(new StoreStartEvent(state));

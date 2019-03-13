@@ -29,21 +29,23 @@ import store.state.StoreState;
  */
 public class StoreView extends SimView {
 
+	private boolean parametersGenerated = false;
 	private boolean progressHeaderGenerated = false;
 	private String newLine = "\r\n";
-	private String result;
+	private String result = "";
 
 	@Override
 	public void update(Observable o, Object arg) {
-		result += generateProgress((StoreState) o);
-		if (!((SimState) o).simulatorIsRunning()) {
-			result += generateResult((StoreState) o);
+		StoreState state = (StoreState) o;
+		if(!parametersGenerated) {
+			result += generateParameters(state);
+			parametersGenerated = true;
+		}
+		result += generateProgress(state);
+		if (!state.simulatorIsRunning()) {
+			result += generateResult(state);
 			printConsole();
 		}
-	}
-
-	public StoreView(StoreState state) {
-		this.result = generateParameters(state);
 	}
 
 	/**
