@@ -10,14 +10,14 @@ public class MainDriver {
 
 	public static void main(String[] args) {
 		
-		long TIME_SEED = 5;				//Seed to generate random number
-		int	MAX_CUSTOMERS = 20;			//Maximum number of costumers allowed in store at once
-		int	MAX_REGISTERS = 4;			//Maximum number of registers available in store
-		int TIME_STORE_CLOSE = 22;		//At what time store closes
+		long TIME_SEED = 1234;				//Seed to generate random number
+		int	MAX_CUSTOMERS = 5;			//Maximum number of costumers allowed in store at once
+		int	MAX_REGISTERS = 2;			//Maximum number of registers available in store
+		int TIME_STORE_CLOSE = 10;		//At what time store closes
 		double ARRIVAL_SPEED = 1;		//Speed of which costumers arrive at
-		double MIN_PICKING_TIME = 2;	//Minimum time a costumer can pick items in
-		double MAX_PICKING_TIME = 4;	//Maximum time a costumer can pick items in
-		double MIN_CHECKOUT_TIME = 1;	//Minimum time a costumer can checkout in
+		double MIN_PICKING_TIME = 0.5;	//Minimum time a costumer can pick items in
+		double MAX_PICKING_TIME = 1;	//Maximum time a costumer can pick items in
+		double MIN_CHECKOUT_TIME = 2;	//Minimum time a costumer can checkout in
 		double MAX_CHECKOUT_TIME = 3;	//Time a costumer can checkout in
 		
 		// Create instances of various objects
