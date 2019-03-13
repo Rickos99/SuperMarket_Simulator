@@ -32,7 +32,7 @@ public class MainDriver {
 		// Create and add events
 		eventQueue.addEvent(new StoreStartEvent(state));
 		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
-		eventQueue.addEvent(new StopEvent(state, 9999999));
+		eventQueue.addEvent(new StopEvent(state, 999));
 		
 		state.addObserver(view);
 
