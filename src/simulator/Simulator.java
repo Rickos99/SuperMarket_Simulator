@@ -28,7 +28,7 @@ public class Simulator {
 	public void run() {
 		state.runSim();
 
-		while (!queue.getEventQueueIsEmpty()) {
+		while (state.simulatorIsRunning) {
 			queue.getEvent().runEvent();
 		}
 	}
