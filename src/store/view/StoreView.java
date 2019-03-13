@@ -27,7 +27,6 @@ import store.state.StoreState;
 public class StoreView extends SimView {
 
 	private boolean progressHeaderGenerated = false;
-	private boolean paramsHasGenerated = false;
 	private String newLine = "\r\n";
 	private String result;
 
@@ -104,7 +103,7 @@ public class StoreView extends SimView {
 	 * @return simulation event description
 	 */
 	private String generateProgress(StoreState state) {
-		String format = "%5s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %10s" + newLine;
+		String format = "%5s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %s" + newLine;
 		String result = "";
 		if (!progressHeaderGenerated) {
 			result += generateHeader("Förlopp");
