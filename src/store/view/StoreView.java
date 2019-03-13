@@ -118,9 +118,9 @@ public class StoreView extends SimView {
 
 		result += String.format(format,
 				new Object[] { new DecimalFormat("#.##").format(state.getElapsedTime()),
-						state.getEventDescription(), customerId == null ? "" : customerId,
+						state.getEventDescription(), customerId == null ? "-" : customerId,
 						state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(),
-						state.getCheckoutFreeTime(), state.getCustomersInTotal(),
+						state.getCheckoutFreeTime(), state.getCustomersInStore(),
 						state.getCustomersPayed(), state.getCustomersDeniedEntry(), "-",
 						state.getQueueTime(), state.getCustomersInQueue(), "<Queue>" });
 		return result;
@@ -135,7 +135,7 @@ public class StoreView extends SimView {
 		String result = generateHeader("Resultat");
 		result += MessageFormat.format(
 				"1) Av {0} kunder handlade {1} medan {2} missades \n",
-				state.getCustomersInTotal(), state.getCustomersPayed(),
+				state.getCustomersVisited(), state.getCustomersPayed(),
 				state.getCustomersDeniedEntry());
 		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n",
 				state.getMAX_REGISTERS(), state.getCheckoutFreeTime());
