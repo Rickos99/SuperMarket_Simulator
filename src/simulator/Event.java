@@ -15,8 +15,7 @@ public abstract class Event {
 	protected SimState state;
 	protected String eventDescription;
 	protected EventQueue eventQueue;
-	protected Customer customer;
-
+	
 	public Event(SimState state) {
 		this.state = state;
 		this.eventQueue = state.getEventQueue();
@@ -30,16 +29,7 @@ public abstract class Event {
 	public double getExTime() {
 		return executeTime;
 	}
-
-	/**
-	 * Get costumer id.
-	 * 
-	 * @return customer id
-	 */
-	public Customer getCustomerID() {
-		return customer;
-	}
-
+	
 	/**
 	 * Get event description.
 	 * 
