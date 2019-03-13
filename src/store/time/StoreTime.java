@@ -19,6 +19,11 @@ public class StoreTime {
 	 * 
 	 * @param lambda
 	 * @param seed
+	 * @param minPick 
+	 * @param maxPick
+	 * @param minCheckOut
+	 * @param maxCheckOut
+	 * 
 	 */
 
 	public StoreTime(double lambda, long seed, double minPick,double maxPick, double minCheckOut, double maxCheckOut) {
