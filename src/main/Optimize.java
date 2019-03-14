@@ -34,7 +34,14 @@ public class Optimize implements OptimizeTesting {
 		new Simulator(state, eventQueue).run();
 		return state.getCustomersDeniedEntry();
 	}
-
+	public int metod22(long seed) {
+		int missedCustomers = metod1(seed, MAX_CUSTOMERS);
+		int max_Registers = 1;
+		while (metod1(seed, max_Registers) > missedCustomers) {
+			max_Registers ++;
+		}
+		return max_Registers;
+	}
 	public int metod2(long seed) {
 		int MAX_REGISTERS = MAX_CUSTOMERS;
 		int bestRun = MAX_REGISTERS;
