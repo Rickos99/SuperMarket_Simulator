@@ -23,12 +23,13 @@ public class Optimize {
 			TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
 			MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue);
 	
-public StoreState metod1() {
+public StoreState metod1(StoreState state) {
 	eventQueue.addEvent(new StoreStartEvent(state));
 	eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
 	eventQueue.addEvent(new StopEvent(state, 999));
 	new Simulator(state, eventQueue).run();
 	return state;
 }
+
 
 }
