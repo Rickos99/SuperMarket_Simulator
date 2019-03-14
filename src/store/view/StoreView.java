@@ -41,10 +41,12 @@ public class StoreView extends SimView {
 			result += generateParameters(state);
 			parametersGenerated = true;
 		}
-		result += generateProgress(state);
-		if (!state.simulatorIsRunning()) {
+		if(state.simulatorIsRunning()) {
+			result += generateProgress(state);
+		} else { 
 			result += generateResult(state);
 			printConsole();
+			printFile("C:/temp/Spermarket_DEDS.log", true);
 		}
 	}
 

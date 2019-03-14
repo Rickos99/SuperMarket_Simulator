@@ -9,8 +9,6 @@ package simulator;
 
 import java.util.ArrayList;
 
-import javax.management.RuntimeErrorException;
-
 public class EventQueue {
 	private ArrayList<Event> eventQueue;
 	protected SimState state;
