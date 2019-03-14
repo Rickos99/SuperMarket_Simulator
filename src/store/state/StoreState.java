@@ -182,11 +182,15 @@ public class StoreState extends simulator.SimState {
 	public void increaseCustomerPayedByOne() {
 		customersPayed++;
 	}
-
+	/**
+	 * Increase the number of customers payed by one
+	 */
 	public void increaseCustomersInStoreByOne() {
 		customersInStore++;
 	}
-
+	/**
+	 * Decrease amount of customers currently in store
+	 */
 	public void decreaseCustomersInStoreByOne() {
 		customersInStore--;
 	}
@@ -260,11 +264,17 @@ public class StoreState extends simulator.SimState {
 		checkOutQueue.add(c);
 		customersInQueueTotal++;
 	}
-
+	/**
+	 * Get amount of customers that have been in queue
+	 * @return amount of customers that have been in queue
+	 */
 	public int getCustomersInQueueTotal() {
 		return customersInQueueTotal;
 	}
-
+	/**
+	 *  Get first customer in checkout queue
+	 * @return first customer in checkout queue
+	 */
 	public Customer getFirstFromCheckoutQueue() {
 		return checkOutQueue.getFirst();
 	}
@@ -405,19 +415,32 @@ public class StoreState extends simulator.SimState {
 	public void runSim() {
 		startSimulator();
 	}
-
+	/**
+	 * 
+	 * @return amount of time customers have been queueing in total
+	 */
 	public double getQueueTime() {
 		return queueTime;
 	}
-
+	
+	/**
+	 * 
+	 * @return current simulated time
+	 */
 	public double getElapsedTime() {
 		return elapsedTime;
 	}
-
+	/**
+	 * 
+	 * @return type of event
+	 */
 	public String getEventDescription() {
 		return eventDescription;
 	}
-
+	/**
+	 * 
+	 * @return the customer who did an event
+	 */
 	public String getCustomerWhoPerformedEvent() {
 		return customerWhoPerformedEvent;
 	}
