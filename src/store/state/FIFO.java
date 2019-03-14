@@ -29,10 +29,12 @@ public class FIFO {
 		String result = "";
 		if (fifoQueue.isEmpty()) {
 			result += "[]";
-		} else {
+		}else{
+			result += "[";
 			for (Customer customer : fifoQueue) {
-				result += "[" + customer + "]";
+				result += customer + ",";
 			}
+			result = result.substring(0,result.length()-1) + "]";
 		}
 		return result;
 	}
