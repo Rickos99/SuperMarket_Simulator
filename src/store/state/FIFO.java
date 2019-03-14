@@ -2,18 +2,19 @@ package store.state;
 
 import java.util.ArrayList;
 
-public class FIFO{
-	
+public class FIFO {
+
 	private ArrayList<Customer> fifoQueue;
-	
+
 	public FIFO() {
 		this.fifoQueue = new ArrayList<Customer>();
-		
+
 	}
-	
+
 	public void add(Customer customer) {
 		fifoQueue.add(customer);
 	}
+
 	/**
 	 * 
 	 *
@@ -23,27 +24,28 @@ public class FIFO{
 	public Customer getFirst() {
 		return fifoQueue.remove(0);
 	}
-	
+
 	public String toString() {
 		String result = "";
-		for(Customer customer : fifoQueue) {
-			result+= "["+customer+"]";
+		if (fifoQueue.isEmpty()) {
+			result += "[]";
+		} else {
+			for (Customer customer : fifoQueue) {
+				result += "[" + customer + "]";
+			}
 		}
 		return result;
 	}
-	
+
 	public boolean isEmpty() {
-		if(fifoQueue.size() == 0) {
+		if (fifoQueue.size() == 0) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public int queueSize() {
 		return fifoQueue.size();
 	}
-	
-	
-	
-	
+
 }
