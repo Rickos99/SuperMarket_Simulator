@@ -10,7 +10,9 @@ public class StopEvent extends Event {
 	}
 
 	public void runEvent() {
+		state.updateState(this);
 		state.stopSimulator();
+		
 	}
 
 
