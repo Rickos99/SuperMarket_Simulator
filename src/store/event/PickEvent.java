@@ -5,12 +5,12 @@ import store.state.Customer;
 import store.state.StoreState;
 
 /**
- * 
+ *
  * @author Nour Aldein Bahtite
  * @author Philip Eriksson
  * @author Rickard Bemm
  * @author André Christofferson
- * 
+ *
  */
 public class PickEvent extends Event {
 
@@ -39,7 +39,7 @@ public class PickEvent extends Event {
 			s.closeOneRegister();
 			eventQueue.addEvent(new CheckOutEvent(s, s.getElapsedTime() + s.getTimeNextCustomerCheckout(), customer));
 		} else {
-			
+
 			s.addToCheckoutQueue(customer);
 		}
 	}
