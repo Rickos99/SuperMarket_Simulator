@@ -32,6 +32,7 @@ public class StoreView extends SimView {
 	private boolean progressHeaderGenerated = false;
 	private String newLine = "\r\n";
 	private String result = "";
+	private String FilePath = "";
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -44,9 +45,20 @@ public class StoreView extends SimView {
 			result += generateProgress(state);
 		} else {
 			result += generateResult(state);
-			printConsole();
-			printFile("C:/temp/Spermarket_DEDS.log", true);
+			if(FilePath.equals("")) {
+				printConsole();
+			} else {
+				printFile(FilePath, true);
+			}
 		}
+	}
+	
+	public StoreView() {
+		
+	}
+	
+	public StoreView(String filePath) {
+		this.FilePath = filePath;
 	}
 
 	/**
