@@ -17,25 +17,35 @@ public class Optimize {
 	double MAX_PICKING_TIME = 1d; // Maximum time a costumer can pick items in
 	double MIN_CHECKOUT_TIME = 2d; // Minimum time a costumer can checkout in
 	double MAX_CHECKOUT_TIME = 3d; // Time a costumer can checkout in
-	
+
 	EventQueue eventQueue = new EventQueue();
 	StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS,
 			TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
 			MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue);
-	
-public StoreState metod1(StoreState state) {
-	eventQueue.addEvent(new StoreStartEvent(state));
-	eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
-	eventQueue.addEvent(new StopEvent(state, 999));
-	new Simulator(state, eventQueue).run();
-	return state;
-}
-public StoreState metod2(StoreState state) {
-	while (state.getCustomersDeniedEntry() > 0) {
-		MAX_REGISTERS ++;
-		metod1(state);
+
+	public StoreState metod1(StoreState state) {
+		eventQueue.addEvent(new StoreStartEvent(state));
+		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
+		eventQueue.addEvent(new StopEvent(state, 999));
+		new Simulator(state, eventQueue).run();
+		return state;
 	}
-	return state;
-}
+
+	public StoreState metod2(StoreState state) {
+		while (state.getCustomersDeniedEntry() > 0) {
+			MAX_REGISTERS++;
+			metod1(state);
+		}
+		return state;
+	}
+
+	public void metod3(int seed) {
+		Random random = new Random(seed);
+		double dN;
+
+		do {
+			
+		} while (dN > 1);
+	}
 
 }
