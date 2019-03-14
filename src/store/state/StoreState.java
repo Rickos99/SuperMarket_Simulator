@@ -28,6 +28,7 @@ public class StoreState extends simulator.SimState {
 	private int customersInStore;
 	private int customersVisited;
 	private int customersDeniedEntry;
+	private int customersInQueueTotal;
 
 	// Checkout statistics
 	private int registersOpen;
@@ -68,6 +69,7 @@ public class StoreState extends simulator.SimState {
 		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
 		
+		this.customersInQueueTotal = 0;
 		this.registersOpen = MAX_REGISTERS;
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
@@ -240,6 +242,11 @@ public class StoreState extends simulator.SimState {
 	 */
 	public void addToCheckoutQueue(Customer c) {
 		checkOutQueue.add(c);
+		customersInQueueTotal++;
+	}
+	
+	public int getCustomersInQueueTotal(){
+		return customersInQueueTotal;
 	}
 
 	
