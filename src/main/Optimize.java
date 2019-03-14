@@ -30,6 +30,12 @@ public StoreState metod1(StoreState state) {
 	new Simulator(state, eventQueue).run();
 	return state;
 }
-
+public StoreState metod2(StoreState state) {
+	while (state.getCustomersDeniedEntry() > 0) {
+		MAX_REGISTERS ++;
+		metod1(state);
+	}
+	return state;
+}
 
 }
