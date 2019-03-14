@@ -69,7 +69,7 @@ public class MainDriver {
 		
 		stateX.addObserver(viewX);
 
-//		new Simulator(stateX, eventQueueX).run();
+		new Simulator(stateX, eventQueueX).run();
 	
 	}
 

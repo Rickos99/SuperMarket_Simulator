@@ -424,7 +424,7 @@ public class StoreState extends simulator.SimState {
 
 	@Override
 	public void updateState(Event event) {
-		if (!(event.getEventDescription() == "Stop")) {
+		if (storeIsOpen || customersInStore > 0) {
 			// Updates registers wasted time
 			checkOutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
 			
