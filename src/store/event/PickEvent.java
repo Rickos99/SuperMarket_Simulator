@@ -16,6 +16,12 @@ public class PickEvent extends Event {
 
 	private Customer customer;
 
+	/**
+	 * 
+	 * @param state
+	 * @param time
+	 * @param customer
+	 */
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
 		super.eventDescription = "Pick";

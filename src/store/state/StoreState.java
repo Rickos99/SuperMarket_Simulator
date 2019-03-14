@@ -50,24 +50,15 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * Construct an instance of StoreState
 	 * 
-	 * @param TIME_SEED
-	 *            Seed to generate random number
-	 * @param MAX_CUSTOMERS
-	 *            Maximum number of costumers allowed in store at once
-	 * @param MAX_REGISTERS
-	 *            Maximum number of registers available in store
-	 * @param TIME_STORE_CLOSE
-	 *            At what time store closes
-	 * @param ARRIVAL_SPEED
-	 *            Speed of which costumers arrive at
-	 * @param MIN_PICKING_TIME
-	 *            Minimum time a costumer can pick items in
-	 * @param MAX_PICKING_TIME
-	 *            Maximum time a costumer can pick items in
-	 * @param MIN_CHECKOUT_TIME
-	 *            Minimum time a costumer can checkout in
-	 * @param MAX_CHECKOUT_TIME
-	 *            Maximum time a costumer can checkout in
+	 * @param TIME_SEED         Seed to generate random number
+	 * @param MAX_CUSTOMERS     Maximum number of costumers allowed in store at once
+	 * @param MAX_REGISTERS     Maximum number of registers available in store
+	 * @param TIME_STORE_CLOSE  At what time store closes
+	 * @param ARRIVAL_SPEED     Speed of which costumers arrive at
+	 * @param MIN_PICKING_TIME  Minimum time a costumer can pick items in
+	 * @param MAX_PICKING_TIME  Maximum time a costumer can pick items in
+	 * @param MIN_CHECKOUT_TIME Minimum time a costumer can checkout in
+	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
 	 */
 	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, double TIME_STORE_CLOSE,
 			double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME,
@@ -78,8 +69,7 @@ public class StoreState extends simulator.SimState {
 				MAX_CHECKOUT_TIME);
 		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
-		
-		
+
 		this.TIME_SIM_STOP = TIME_SIM_STOP;
 		this.customersInQueueTotal = 0;
 		this.registersOpen = MAX_REGISTERS;
@@ -108,34 +98,39 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * A new customer enters the store. The store can accept a new customer only
-	 * if the store doesn't have the maximal number of customer in it
+	 * Open a new registers for payment.
 	 *
-	 * @throws OpenRegisterFailedException
-	 *             else
+	 * else If the highest number of registers is biggar than the open
+	 * registers @throws OpenRegisterFailedException
 	 */
 	public void openNewRegister() {
 		if (registersOpen < MAX_REGISTERS) {
 			registersOpen++;
 		} else {
 			// TODO: throw new OpenRegisterFailedException()
+			throw new RuntimeException("All registers are open!");
 		}
 	}
 
 	/**
-	 * Close the store and allow the customers (if they found ) to pay for their
-	 * things.
+	 * close a register
 	 *
-	 * @throws CloseRegisterFailedException
-	 *             else.
+	 * Else if all registers are close @throws CloseRegisterFailedException else.
 	 */
 	public void closeOneRegister() {
 		if (registersOpen > 0) {
 			registersOpen--;
 		} else {
 			// TODO: throw new CloseRegisterFailedException()
+			throw new RuntimeException("All registers are close!");
+
 		}
 	}
+
+	/**
+	 * 
+	 * @return the time when the sim is stop.
+	 */
 	public double getTIME_SIM_STOP() {
 		return TIME_SIM_STOP;
 	}
@@ -150,8 +145,8 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * The store is closed and doesn't accept new customers. Change storeIsOpen
-	 * to false.
+	 * The store is closed and doesn't accept new customers. Change storeIsOpen to
+	 * false.
 	 */
 	public void closeStore() {
 		if (storeIsOpen) {
@@ -188,12 +183,14 @@ public class StoreState extends simulator.SimState {
 	public void increaseCustomerPayedByOne() {
 		customersPayed++;
 	}
+
 	/**
 	 * Increase the number of customers payed by one
 	 */
 	public void increaseCustomersInStoreByOne() {
 		customersInStore++;
 	}
+
 	/**
 	 * Decrease amount of customers currently in store
 	 */
@@ -202,18 +199,16 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * Get the number of all the customers who could and couldn't enter the
-	 * store.
+	 * Get the number of all the customers who are in the store.
 	 *
-	 * @return customersInTotal
+	 * @return customers In Store
 	 */
 	public int getCustomersInStore() {
 		return customersInStore;
 	}
 
 	/**
-	 * Get the number of the customers which can be accepted in the store in the
-	 * moment
+	 * Get the number of the registers which are open and accepted payment.
 	 *
 	 * @return registersOpen
 	 */
@@ -222,14 +217,18 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * If the check out queue is empty.
 	 *
-	 * @return isEmpty()
+	 *
+	 * @return isEmpty() method.
 	 */
 	public boolean checkOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
 	}
 
+	/**
+	 * 
+	 * @return check out queue.
+	 */
 	public FIFO getCheckoutQueue() {
 		return checkOutQueue;
 	}
@@ -270,15 +269,19 @@ public class StoreState extends simulator.SimState {
 		checkOutQueue.add(c);
 		customersInQueueTotal++;
 	}
+
 	/**
-	 * Get amount of customers that have been in queue
+	 * Get amount of customers that have been in queue in total.
+	 * 
 	 * @return amount of customers that have been in queue
 	 */
 	public int getCustomersInQueueTotal() {
 		return customersInQueueTotal;
 	}
+
 	/**
-	 *  Get first customer in checkout queue
+	 * Get first customer in checkout queue
+	 * 
 	 * @return first customer in checkout queue
 	 */
 	public Customer getFirstFromCheckoutQueue() {
@@ -347,7 +350,12 @@ public class StoreState extends simulator.SimState {
 	public double getMIN_CHECKOUT_TIME() {
 		return MIN_CHECKOUT_TIME;
 	}
-	
+
+	/**
+	 * get the spec elapsed time.
+	 * 
+	 * @return specElapsedTime
+	 */
 	public double getSpecElapsedTime() {
 		return specElapsedTime;
 	}
@@ -421,6 +429,7 @@ public class StoreState extends simulator.SimState {
 	public void runSim() {
 		startSimulator();
 	}
+
 	/**
 	 * 
 	 * @return amount of time customers have been queueing in total
@@ -428,7 +437,7 @@ public class StoreState extends simulator.SimState {
 	public double getQueueTime() {
 		return queueTime;
 	}
-	
+
 	/**
 	 * 
 	 * @return current simulated time
@@ -436,6 +445,7 @@ public class StoreState extends simulator.SimState {
 	public double getElapsedTime() {
 		return elapsedTime;
 	}
+
 	/**
 	 * 
 	 * @return type of event
@@ -443,6 +453,7 @@ public class StoreState extends simulator.SimState {
 	public String getEventDescription() {
 		return eventDescription;
 	}
+
 	/**
 	 * 
 	 * @return the customer who did an event
@@ -456,31 +467,29 @@ public class StoreState extends simulator.SimState {
 		if (storeIsOpen || customersInStore > 0) {
 			// Updates registers wasted time
 			checkOutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
-			
+
 			// Updates time that people have been standing in the queue
 			queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
-			
+
 			// Temp time for results:
 			specElapsedTime = event.getExTime();
-			
-			
-			
+
 		}
 
 		// DESCRIPTION OF EVENT
 
 		// Updates event that occured
 		eventDescription = event.getEventDescription();
-		
+
 		// Updates event that occured
 		eventDescription = event.getEventDescription();
-		
+
 		// Updates which customer who performed the event.
 		customerWhoPerformedEvent = event.getEventUserDescription();
-		
+
 		// Sets time to be the time that the event was executed.
 		elapsedTime = event.getExTime();
-		
+
 		setChanged();
 		notifyObservers();
 	}
