@@ -123,7 +123,7 @@ public class StoreView extends SimView {
 			result += String.format(format,
 					new Object[] { cutDecimals(state.getElapsedTime()), state.getEventDescription(),
 							customerId == null ? "-" : customerId, state.storeIsOpen() ? "Ö" : "S",
-							state.getRegistersOpen(), cutDecimals(state.getCheckoutFreeTime()),
+							state.getRegistersOpen(), cutDecimals(state.getCheckOutFreeTime()),
 							state.getCustomersInStore(), state.getCustomersPayed(), state.getCustomersDeniedEntry(),
 							state.getCustomersInQueueTotal(), cutDecimals(state.getQueueTime()),
 							state.getCustomersInQueue(), state.getCheckoutQueue().toString() });
@@ -141,11 +141,12 @@ public class StoreView extends SimView {
 		result += MessageFormat.format("1) Av {0} kunder handlade {1} medan {2} missades \n",
 				state.getCustomersVisited(), state.getCustomersPayed(), state.getCustomersDeniedEntry());
 		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n", state.getMAX_REGISTERS(),
-				state.getCheckoutFreeTime());
+				cutDecimals(state.getCheckOutFreeTime()));
 		result += MessageFormat.format(
-				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1} av tiden från öppning tills sista kunden betalat). \n",
-				"<KASSOR_LEDIG_TID_AVG>", "<PROCENT>");
-		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersPayed(),
+				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1}% av tiden från öppning tills sista kunden betalat). \n",
+				//TODO: Måste till buss men fixa procent!! :D
+				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals((state.getElapsedTime()/state.getTIME_STORE_CLOSE())));
+		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
 				"<TOTAL_KÖTID_FÖR_KUNDER");
 		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", "<KÖTID_AVG>");
 		return result;

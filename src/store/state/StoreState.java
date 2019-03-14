@@ -48,27 +48,35 @@ public class StoreState extends simulator.SimState {
 	/**
 	 * Construct an instance of StoreState
 	 * 
-	 * @param TIME_SEED         Seed to generate random number
-	 * @param MAX_CUSTOMERS     Maximum number of costumers allowed in store at once
-	 * @param MAX_REGISTERS     Maximum number of registers available in store
-	 * @param TIME_STORE_CLOSE  At what time store closes
-	 * @param ARRIVAL_SPEED     Speed of which costumers arrive at
-	 * @param MIN_PICKING_TIME  Minimum time a costumer can pick items in
-	 * @param MAX_PICKING_TIME  Maximum time a costumer can pick items in
-	 * @param MIN_CHECKOUT_TIME Minimum time a costumer can checkout in
-	 * @param MAX_CHECKOUT_TIME Maximum time a costumer can checkout in
+	 * @param TIME_SEED
+	 *            Seed to generate random number
+	 * @param MAX_CUSTOMERS
+	 *            Maximum number of costumers allowed in store at once
+	 * @param MAX_REGISTERS
+	 *            Maximum number of registers available in store
+	 * @param TIME_STORE_CLOSE
+	 *            At what time store closes
+	 * @param ARRIVAL_SPEED
+	 *            Speed of which costumers arrive at
+	 * @param MIN_PICKING_TIME
+	 *            Minimum time a costumer can pick items in
+	 * @param MAX_PICKING_TIME
+	 *            Maximum time a costumer can pick items in
+	 * @param MIN_CHECKOUT_TIME
+	 *            Minimum time a costumer can checkout in
+	 * @param MAX_CHECKOUT_TIME
+	 *            Maximum time a costumer can checkout in
 	 */
-	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS,
-			double TIME_STORE_CLOSE, double ARRIVAL_SPEED, double MIN_PICKING_TIME,
-			double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME, double MAX_CHECKOUT_TIME,
-			EventQueue eventQueue) {
+	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, double TIME_STORE_CLOSE,
+			double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME,
+			double MAX_CHECKOUT_TIME, EventQueue eventQueue) {
 		super(eventQueue);
 
-		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME,
-						MAX_PICKING_TIME,MIN_CHECKOUT_TIME,MAX_CHECKOUT_TIME);
+		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME,
+				MAX_CHECKOUT_TIME);
 		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
-		
+
 		this.customersInQueueTotal = 0;
 		this.registersOpen = MAX_REGISTERS;
 		this.TIME_SEED = TIME_SEED;
@@ -91,11 +99,16 @@ public class StoreState extends simulator.SimState {
 		return customerSpawn.newCustomer();
 	}
 
+	public double getTIME_STORE_CLOSE() {
+		return TIME_STORE_CLOSE;
+	}
+
 	/**
-	 * A new customer enters the store. The store can accept a new customer only if
-	 * the store doesn't have the maximal number of customer in it
+	 * A new customer enters the store. The store can accept a new customer only
+	 * if the store doesn't have the maximal number of customer in it
 	 *
-	 * @throws OpenRegisterFailedException else
+	 * @throws OpenRegisterFailedException
+	 *             else
 	 */
 	public void openNewRegister() {
 		if (registersOpen < MAX_REGISTERS) {
@@ -109,7 +122,8 @@ public class StoreState extends simulator.SimState {
 	 * Close the store and allow the customers (if they found ) to pay for their
 	 * things.
 	 *
-	 * @throws CloseRegisterFailedException else.
+	 * @throws CloseRegisterFailedException
+	 *             else.
 	 */
 	public void closeOneRegister() {
 		if (registersOpen > 0) {
@@ -129,8 +143,8 @@ public class StoreState extends simulator.SimState {
 	}
 
 	/**
-	 * The store is closed and doesn't accept new customers. Change storeIsOpen to
-	 * false.
+	 * The store is closed and doesn't accept new customers. Change storeIsOpen
+	 * to false.
 	 */
 	public void closeStore() {
 		if (storeIsOpen) {
@@ -167,17 +181,18 @@ public class StoreState extends simulator.SimState {
 	public void increaseCustomerPayedByOne() {
 		customersPayed++;
 	}
-	
+
 	public void increaseCustomersInStoreByOne() {
 		customersInStore++;
 	}
-	
+
 	public void decreaseCustomersInStoreByOne() {
 		customersInStore--;
 	}
 
 	/**
-	 * Get the number of all the customers who could and couldn't enter the store.
+	 * Get the number of all the customers who could and couldn't enter the
+	 * store.
 	 *
 	 * @return customersInTotal
 	 */
@@ -203,8 +218,8 @@ public class StoreState extends simulator.SimState {
 	public boolean checkOutQueueIsEmpty() {
 		return checkOutQueue.isEmpty();
 	}
-	
-	public FIFO getCheckoutQueue(){
+
+	public FIFO getCheckoutQueue() {
 		return checkOutQueue;
 	}
 
@@ -244,12 +259,11 @@ public class StoreState extends simulator.SimState {
 		checkOutQueue.add(c);
 		customersInQueueTotal++;
 	}
-	
-	public int getCustomersInQueueTotal(){
+
+	public int getCustomersInQueueTotal() {
 		return customersInQueueTotal;
 	}
 
-	
 	public Customer getFirstFromCheckoutQueue() {
 		return checkOutQueue.getFirst();
 	}
@@ -369,11 +383,9 @@ public class StoreState extends simulator.SimState {
 	 * @return checkoutFreeTime
 	 */
 
-	public double getCheckoutFreeTime() {
+	public double getCheckOutFreeTime() {
 		return checkOutFreeTime;
 	}
-
-	
 
 	/**
 	 * Update the time that spent in queue
@@ -405,30 +417,29 @@ public class StoreState extends simulator.SimState {
 		return customerWhoPerformedEvent;
 	}
 
-	
-
 	@Override
 	public void updateState(Event event) {
-		// TIME
-
-		// Updates registers wasted time
-		
-		checkOutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
-
-		// Updates time that people have been standing in the queue
-		System.out.println(getCustomersInQueue());
-		queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
-		System.out.println(getCustomersInQueue());
-		// Sets time to be the time that the event was executed.
-		elapsedTime = event.getExTime();
-
+		if (!(event.getEventDescription() == "Stop")) {
+			// Updates registers wasted time
+			checkOutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
+			
+			// Updates time that people have been standing in the queue
+			queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
+			
+		}
 		// DESCRIPTION OF EVENT
 
 		// Updates event that occured
 		eventDescription = event.getEventDescription();
-
+		
+		// Updates event that occured
+		eventDescription = event.getEventDescription();
+		
 		// Updates which customer who performed the event.
 		customerWhoPerformedEvent = event.getEventUserDescription();
+		
+		// Sets time to be the time that the event was executed.
+		elapsedTime = event.getExTime();
 		
 		setChanged();
 		notifyObservers();
