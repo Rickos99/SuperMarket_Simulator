@@ -34,6 +34,7 @@ public class StoreState extends simulator.SimState {
 	private int registersOpen;
 	private double queueTime;
 	private double checkOutFreeTime;
+	private double specElapsedTime;
 
 	// Event descriptions
 	private String eventDescription;
@@ -330,6 +331,10 @@ public class StoreState extends simulator.SimState {
 	public double getMIN_CHECKOUT_TIME() {
 		return MIN_CHECKOUT_TIME;
 	}
+	
+	public double getSpecElapsedTime() {
+		return specElapsedTime;
+	}
 
 	/**
 	 *
@@ -426,7 +431,13 @@ public class StoreState extends simulator.SimState {
 			// Updates time that people have been standing in the queue
 			queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
 			
+			// Temp time for results:
+			specElapsedTime = event.getExTime();
+			
+			
+			
 		}
+
 		// DESCRIPTION OF EVENT
 
 		// Updates event that occured
