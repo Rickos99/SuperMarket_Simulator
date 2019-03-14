@@ -59,7 +59,9 @@ public abstract class Event {
 		this.eventQueue.addEvent(event);
 	}
 	
-	
+	/**
+	 * @return String that tells type of event
+	 */
 	public String toString() {
 		return eventDescription + eventUserDescription;
 		
