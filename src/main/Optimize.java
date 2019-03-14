@@ -31,12 +31,12 @@ public class Optimize {
 		return state;
 	}
 
-	public StoreState metod2(StoreState state) {
+	public int metod2(StoreState state) {
 		while (state.getCustomersDeniedEntry() > 0) {
 			MAX_REGISTERS++;
 			metod1(state);
 		}
-		return state;
+		return MAX_REGISTERS;
 	}
 
 	public void metod3(int seed) {
