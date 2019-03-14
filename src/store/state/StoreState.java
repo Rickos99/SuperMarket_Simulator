@@ -410,9 +410,8 @@ public class StoreState extends simulator.SimState {
 		// TIME
 
 		// Updates registers wasted time
-		if (storeIsOpen) {
-			checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
-		}
+
+		checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
 
 		// Updates time that people have been standing in the queue
 		queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
