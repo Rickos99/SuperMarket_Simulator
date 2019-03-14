@@ -22,11 +22,12 @@ public class Optimize {
 		double MAX_PICKING_TIME = 1d; // Maximum time a costumer can pick items in
 		double MIN_CHECKOUT_TIME = 2d; // Minimum time a costumer can checkout in
 		double MAX_CHECKOUT_TIME = 3d; // Time a costumer can checkout in
+		double SIM_STOP_TIME = 999d; // At what time simulator will stop
 		
 		EventQueue eventQueue = new EventQueue();
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS,
 				TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
-				MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue);
+				MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue, SIM_STOP_TIME);
 		
 		eventQueue.addEvent(new StoreStartEvent(state));
 		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
