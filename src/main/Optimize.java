@@ -39,9 +39,10 @@ public class Optimize {
 	}
 
 	public int metod2(long seed) {
+		int MAX_REGISTERS = 0;
 		while (state.getCustomersDeniedEntry() > 0) {
 			MAX_REGISTERS++;
-			metod1(state);
+			metod1(seed, MAX_REGISTERS);
 		}
 		return MAX_REGISTERS;
 	}
