@@ -47,19 +47,14 @@ public class Optimize implements OptimizeTesting {
 		Random random = new Random(seed);
 		int maxLeastRegisters = 0;
 		int leastRegistersIteration = 0;
-		int i = 0;
 
-		while (i <= 100) {
+		for(int i = 0; i < 100; i++) {
 			leastRegistersIteration = metod2(random.nextLong());
-			if(maxLeastRegisters == 0 || leastRegistersIteration < maxLeastRegisters) {
+			if(leastRegistersIteration > maxLeastRegisters) {
 				maxLeastRegisters = leastRegistersIteration;
 			}
-			if (maxLeastRegisters == leastRegistersIteration) {
-				i++;
-			} else {
-				i = 0;
-			}
 		}
+		System.out.println(maxLeastRegisters);
 	}
 
 	/// FOR RESULTS VIEW
