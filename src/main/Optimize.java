@@ -10,22 +10,13 @@ import store.event.StoreCloseEvent;
 import store.event.StoreStartEvent;
 import store.state.StoreState;
 
-public class Optimize {
+public class Optimize implements OptimizeTesting {
 
 	public static void main(String[] args) {
 		new Optimize().metod3(1234);
 	}
 	
 	private static int example = 0;
-	
-	double ARRIVAL_SPEED = 1.0d; // Speed of which costumers arrive at
-	int MAX_CUSTOMERS = 5; // Maximum number of costumers allowed in store at once
-	int TIME_STORE_CLOSE = 10; // At what time store closes
-	double MIN_PICKING_TIME = 0.5d; // Minimum time a costumer can pick items in
-	double MAX_PICKING_TIME = 1d; // Maximum time a costumer can pick items in
-	double MIN_CHECKOUT_TIME = 2d; // Minimum time a costumer can checkout in
-	double MAX_CHECKOUT_TIME = 3d; // Time a costumer can checkout in
-	double SIM_STOP_TIME = 999d; // At what time simulator will stop
 
 	public int metod1(long timeSeed, int maxRegisters) {
 
