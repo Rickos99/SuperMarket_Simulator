@@ -13,9 +13,15 @@
 package store.state;
 
 public class Customer {
-
+	/**
+	 * This class describes an customer
+	 */
 	private int id;
-	
+	/**
+	 * Constructor for the class Customer.
+	 * Creates an customer with an id.
+	 * @param id
+	 */
 	public Customer(int id) {
 		this.id = id;
 	}
