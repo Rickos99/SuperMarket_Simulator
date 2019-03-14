@@ -39,7 +39,7 @@ public class Optimize {
 	}
 
 	public int metod2(long seed) {
-		int MAX_REGISTERS = 0;
+		int MAX_REGISTERS = 1;
 		while (metod1(seed, MAX_REGISTERS) > 0) {
 			MAX_REGISTERS++;
 		}
