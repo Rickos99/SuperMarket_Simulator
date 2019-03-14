@@ -147,7 +147,7 @@ public class StoreView extends SimView {
 				//TODO: Måste till buss men fixa procent!! :D
 				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals((state.getElapsedTime()/state.getTIME_STORE_CLOSE())));
 		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
-				"<TOTAL_KÖTID_FÖR_KUNDER");
+				cutDecimals(state.getQueueTime()));
 		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", "<KÖTID_AVG>");
 		return result;
 	}
