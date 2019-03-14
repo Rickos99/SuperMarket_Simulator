@@ -47,7 +47,7 @@ public class Optimize {
 	public int metod2(long seed) {
 		int MAX_REGISTERS = MAX_CUSTOMERS;
 		int bestRun = MAX_REGISTERS;
-		while (MAX_REGISTERS >= 0) {
+		while (MAX_REGISTERS > 0) {
 			int missedCustomers = metod1(seed, MAX_REGISTERS);
 			if(missedCustomers == 0 || missedCustomers < bestRun) {
 				bestRun = MAX_REGISTERS;
