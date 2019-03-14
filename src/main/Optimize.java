@@ -1,8 +1,6 @@
 package main;
 
-import java.text.DecimalFormat;
-import java.text.MessageFormat;
-
+import java.util.Random;
 import simulator.EventQueue;
 import simulator.Simulator;
 import simulator.StopEvent;
@@ -81,15 +79,15 @@ public class Optimize {
 		return state;
 	}
 
-	private StoreState metod2(StoreState state) {
+	public int metod2(StoreState state) {
 		while (state.getCustomersDeniedEntry() > 0) {
 			MAX_REGISTERS++;
 			metod1(state);
 		}
-		return state;
+		return MAX_REGISTERS;
 	}
 
-	private void metod3(int seed) {
+	public void metod3(long seed) {
 		Random random = new Random(seed);
 		double dN;
 

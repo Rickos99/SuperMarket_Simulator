@@ -15,9 +15,13 @@
 package store.state;
 
 public class CreateCustomer {
-
+	/**
+	 * This class creates new customers
+	 */
 	private int id;
-
+	/**
+	 * Constructs the first customer id
+	 */
 	public CreateCustomer() {
 		id = 0;
 	}
