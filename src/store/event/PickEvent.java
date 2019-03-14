@@ -32,6 +32,7 @@ public class PickEvent extends Event {
 			s.closeOneRegister();
 			eventQueue.addEvent(new CheckOutEvent(s, s.getElapsedTime() + s.getTimeNextCustomerCheckout(), customer));
 		} else {
+			
 			s.addToCheckoutQueue(customer);
 		}
 	}

@@ -49,11 +49,6 @@ public class EventQueue {
 		}
 		// Sorts the current array via it's getExTime method.
 		eventQueue = sortEvent(eventQueue);
-		String s = "";
-		for (Event x : eventQueue) {
-			s += "[" + x + "]";
-		}
-		System.out.println(s);
 		return eventQueue.get(0);
 	}
 
