@@ -42,7 +42,6 @@ public class Optimize {
 		int MAX_REGISTERS = 0;
 		while (metod1(seed, MAX_REGISTERS) > 0) {
 			MAX_REGISTERS++;
-			metod1(seed, MAX_REGISTERS);
 		}
 		return MAX_REGISTERS;
 	}
