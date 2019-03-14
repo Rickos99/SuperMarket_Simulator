@@ -152,7 +152,7 @@ public class StoreView extends SimView {
 		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
 				cutDecimals(state.getQueueTime()));
 		
-		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", "<KÖTID_AVG>");
+		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", cutDecimals(state.getQueueTime()/state.getCustomersInQueueTotal()));
 		return result;
 	}
 
