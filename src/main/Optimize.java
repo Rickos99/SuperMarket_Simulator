@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+
 import simulator.EventQueue;
 import simulator.Simulator;
 import simulator.StopEvent;
@@ -39,7 +41,7 @@ public class Optimize {
 		return state;
 	}
 
-	public void metod3(int seed) {
+	public void metod3(long seed) {
 		Random random = new Random(seed);
 		double dN;
 
