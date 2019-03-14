@@ -41,6 +41,11 @@ public abstract class Event {
 		return eventDescription;
 	}
 	
+	/**
+	 *  Get event user description 
+	 * 
+	 * @return event user description
+	 */
 	public String getEventUserDescription() {
 		return eventUserDescription;
 	}
@@ -53,6 +58,7 @@ public abstract class Event {
 	public void addEventToQueue(Event event) {
 		this.eventQueue.addEvent(event);
 	}
+	
 	
 	public String toString() {
 		return eventDescription + eventUserDescription;

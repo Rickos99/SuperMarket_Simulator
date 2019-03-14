@@ -19,20 +19,12 @@ import simulator.SimState;
 import simulator.SimView;
 import store.state.StoreState;
 
-/**
- * @author Rickard Bemm
- * @author Philip Eriksson
- * @author Nour Aldein Bahtite
- * @author Andr� Christofferson
- *
- */
 public class StoreView extends SimView {
 
 	private boolean parametersGenerated = false;
 	private boolean progressHeaderGenerated = false;
 	private String newLine = "\r\n";
 	private String result = "";
-	private String FilePath = "";
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -45,20 +37,9 @@ public class StoreView extends SimView {
 			result += generateProgress(state);
 		} else {
 			result += generateResult(state);
-			if(FilePath.equals("")) {
-				printConsole();
-			} else {
-				printFile(FilePath, true);
-			}
+			printConsole();
+			printFile("C:/temp/Spermarket_DEDS.log", true);
 		}
-	}
-	
-	public StoreView() {
-		
-	}
-	
-	public StoreView(String filePath) {
-		this.FilePath = filePath;
 	}
 
 	/**
@@ -73,10 +54,8 @@ public class StoreView extends SimView {
 	 * Print simulation parameters, progress and result to a new file. Default
 	 * encoding is {@code UTF-8}.
 	 * 
-	 * @param filePath
-	 *            Path to file
-	 * @param overwrite
-	 *            Should a already existing file be overwritten.
+	 * @param filePath  Path to file
+	 * @param overwrite Should a already existing file be overwritten.
 	 */
 	@Override
 	public void printFile(String filePath, boolean overwrite) {
@@ -128,7 +107,7 @@ public class StoreView extends SimView {
 					":-(", "köat", "köT", "köar", "[Kassakö..]" });
 		}
 		String customerId = state.getCustomerWhoPerformedEvent();
-		if (state.getEventDescription() == "Stop" || state.getEventDescription() == "Open" ) {
+		if (state.getEventDescription() == "Stop" || state.getEventDescription() == "Open") {
 			String formatForStop = "%7s %-10s" + newLine;
 			result += String.format(formatForStop, cutDecimals(state.getElapsedTime()), state.getEventDescription());
 		} else {
@@ -152,27 +131,27 @@ public class StoreView extends SimView {
 		String result = generateHeader("Resultat");
 		result += MessageFormat.format("1) Av {0} kunder handlade {1} medan {2} missades \n",
 				state.getCustomersVisited(), state.getCustomersPayed(), state.getCustomersDeniedEntry());
-		
+
 		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n", state.getMAX_REGISTERS(),
 				cutDecimals(state.getCheckOutFreeTime()));
-				
-				
+
 		result += MessageFormat.format(
 				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1}% av tiden från öppning tills sista kunden betalat). \n",
-				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()/state.getSpecElapsedTime()*100));
+				cutDecimals(state.getCheckOutFreeTime() / state.getMAX_REGISTERS()),
+				cutDecimals(state.getCheckOutFreeTime() / state.getMAX_REGISTERS() / state.getSpecElapsedTime() * 100));
 
-		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
-				cutDecimals(state.getQueueTime()));
-		
-		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n", cutDecimals(state.getQueueTime()/state.getCustomersInQueueTotal()));
+		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n",
+				state.getCustomersInQueueTotal(), cutDecimals(state.getQueueTime()));
+
+		result += MessageFormat.format("\tGenomsnittlig kötid: {0} te. \n",
+				cutDecimals(state.getQueueTime() / state.getCustomersInQueueTotal()));
 		return result;
 	}
 
 	/**
 	 * Method generates description of the current event.
 	 * 
-	 * @param headerText
-	 *            describes the current event executed.
+	 * @param headerText describes the current event executed.
 	 * @return header description of the event
 	 */
 	private String generateHeader(String headerText) {

@@ -9,3 +9,7 @@ double MIN_PICKING_TIME_X = 0.6d;
 double MAX_PICKING_TIME_X = 0.9d; 	
 double MIN_CHECKOUT_TIME_X = 0.35d; 	
 double MAX_CHECKOUT_TIME_X = 0.6d;
+
+
+
+/////////////////////////OPTIMIZE 
