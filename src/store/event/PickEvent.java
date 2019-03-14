@@ -15,7 +15,12 @@ import store.state.StoreState;
 public class PickEvent extends Event {
 
 	private Customer customer;
-
+	/**
+	 * Constructs a new Pickevent
+	 * @param state
+	 * @param time
+	 * @param customer
+	 */
 	public PickEvent(StoreState state, double time, Customer customer) {
 		super(state);
 		super.eventDescription = "Pick";
@@ -23,7 +28,9 @@ public class PickEvent extends Event {
 		super.executeTime = time;
 		this.customer = customer;
 	}
-
+	/**
+	 * This method executes a pick event for a customer
+	 */
 	@Override
 	public void runEvent() {
 		StoreState s = (StoreState) state;

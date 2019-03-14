@@ -15,7 +15,7 @@ import store.state.StoreState;
 public class CheckOutEvent extends Event {
 
 	/**
-	 * Constructor if there are available registers and the queue is empty.
+	 * Constructor for a Checkout event
 	 * 
 	 * @param state    current store state
 	 * @param time     event execute time
@@ -27,7 +27,9 @@ public class CheckOutEvent extends Event {
 		super.eventUserDescription = customer.toString();
 		super.executeTime = time;
 	}
-
+	/**
+	 * Executes a checkout event
+	 */
 	@Override
 	public void runEvent() {
 		StoreState s = (StoreState) state;

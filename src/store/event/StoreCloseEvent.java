@@ -25,7 +25,9 @@ public class StoreCloseEvent extends Event {
 		super.eventUserDescription = "-";
 		super.executeTime = time;
 	}
-
+	/**
+	 * This event closes the store
+	 */
 	public void runEvent() {
 		StoreState s = (StoreState) state;
 		s.updateState(this);
