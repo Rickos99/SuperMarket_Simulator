@@ -121,7 +121,10 @@ public class StoreView extends SimView {
 							"$", ":-(", "köat", "köT", "köar", "[Kassakö..]" });
 		}
 		String customerId = state.getCustomerWhoPerformedEvent();
-
+		if (state.getEventDescription() == "Stop"){
+			String formatForStop = "%7s %-10s";
+			result += String.format(formatForStop, cutDecimals(state.getElapsedTime()),state.getEventDescription());
+		}else{
 		result += String.format(format,
 				new Object[] { cutDecimals(state.getElapsedTime()),
 						state.getEventDescription(), customerId == null ? "-" : customerId,
@@ -129,6 +132,7 @@ public class StoreView extends SimView {
 						cutDecimals(state.getCheckoutFreeTime()), state.getCustomersInStore(),
 						state.getCustomersPayed(), state.getCustomersDeniedEntry(), state.getCustomersInQueueTotal(),
 						cutDecimals(state.getQueueTime()), state.getCustomersInQueue(), state.getCheckoutQueue().toString() });
+		}
 		return result;
 	}
 
