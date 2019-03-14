@@ -52,10 +52,19 @@ public class EventQueue {
 		return eventQueue.get(0);
 	}
 
+	/**
+	 * 
+	 * @return the size of event queue array.
+	 */
 	public int getQueueSize() {
 		return eventQueue.size();
 	}
 
+	/**
+	 * TODO 
+	 * @param list
+	 * @return 
+	 */
 	private static ArrayList<Event> sortEvent(ArrayList<Event> list) {
 		if (list.size() == 1) {
 			return list;
@@ -83,6 +92,7 @@ public class EventQueue {
 
 	}
 
+	
 	private static ArrayList<Event> merge(ArrayList<Event> left, ArrayList<Event> right) {
 
 		ArrayList<Event> resultingList = new ArrayList<Event>();
