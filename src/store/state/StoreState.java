@@ -33,7 +33,7 @@ public class StoreState extends simulator.SimState {
 	// Checkout statistics
 	private int registersOpen;
 	private double queueTime;
-	private double checkoutFreeTime;
+	private double checkOutFreeTime;
 
 	// Event descriptions
 	private String eventDescription;
@@ -370,17 +370,10 @@ public class StoreState extends simulator.SimState {
 	 */
 
 	public double getCheckoutFreeTime() {
-		return checkoutFreeTime;
+		return checkOutFreeTime;
 	}
 
-	/**
-	 * Update the time when the checkout is down.
-	 *
-	 * @param deadRegisterTime
-	 */
-	public void uppdateRegistersDownTime(double deadRegisterTime) {
-		checkoutFreeTime += deadRegisterTime;
-	}
+	
 
 	/**
 	 * Update the time that spent in queue
@@ -419,8 +412,8 @@ public class StoreState extends simulator.SimState {
 		// TIME
 
 		// Updates registers wasted time
-
-		checkoutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
+		
+		checkOutFreeTime += registersOpen * (event.getExTime() - elapsedTime);
 
 		// Updates time that people have been standing in the queue
 		System.out.println(getCustomersInQueue());
