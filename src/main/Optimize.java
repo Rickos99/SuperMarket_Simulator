@@ -1,7 +1,5 @@
 package main;
 
-import java.text.DecimalFormat;
-import java.text.MessageFormat;
 import java.util.Random;
 import simulator.EventQueue;
 import simulator.Simulator;
