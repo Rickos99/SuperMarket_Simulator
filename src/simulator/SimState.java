@@ -20,24 +20,42 @@ public abstract class SimState extends Observable {
 		this.eventQueue = eventQueue;
 	}
 	
+	/**
+	 *  Run the simulator and set the simulatorIsRunning variabel to true. 
+	 */
 	public final void startSimulator() {
 		simulatorIsRunning = true;
 	}
 	
+	/**
+	 * Stop the simulator and set the simulatorIsRunning variabel to false. 
+	 */
 	public final void stopSimulator() {
 		simulatorIsRunning = false;
 		setChanged();
 		notifyObservers();
 	}
 	
+	/**
+	 * 
+	 * @return simulatorIsRunning when this method is called 
+	 */
 	public final boolean simulatorIsRunning() {
 		return simulatorIsRunning;
 	}
 
+	/**
+	 * 
+	 * @return the elaspsed time for the simulator from the start to the end.
+	 */
 	public double getElapsedTime() {
 		return elapsedTime;
 	}
 	
+	/**
+	 * 
+	 * @return event queue there all events are saved.
+	 */
 	public final EventQueue getEventQueue() {
 		return eventQueue;
 	}
