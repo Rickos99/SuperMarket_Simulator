@@ -26,11 +26,10 @@ public class FIFO {
 	}
 
 	public String toString() {
-		String result = "";
+		String result = "[";
 		if (fifoQueue.isEmpty()) {
-			result += "[]";
+			result += "]";
 		}else{
-			result += "[";
 			for (Customer customer : fifoQueue) {
 				result += customer + ",";
 			}
