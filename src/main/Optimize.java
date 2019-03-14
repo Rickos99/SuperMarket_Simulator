@@ -14,7 +14,7 @@ public class Optimize {
 
 	private static int example = 0;
 
-	public StoreState metod1(long timeSeed, int maxRegisters) {
+	public int metod1(long timeSeed, int maxRegisters) {
 
 		long TIME_SEED = timeSeed; // Seed to generate random number
 		int MAX_CUSTOMERS = 5; // Maximum number of costumers allowed in store at once
@@ -35,12 +35,12 @@ public class Optimize {
 		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
 		eventQueue.addEvent(new StopEvent(state, SIM_STOP_TIME));
 		new Simulator(state, eventQueue).run();
-		return state;
+		return state.getCustomersDeniedEntry();
 	}
 
 	public int metod2(long seed) {
 		int MAX_REGISTERS = 0;
-		while (state.getCustomersDeniedEntry() > 0) {
+		while (metod1(seed, MAX_REGISTERS) > 0) {
 			MAX_REGISTERS++;
 			metod1(seed, MAX_REGISTERS);
 		}
