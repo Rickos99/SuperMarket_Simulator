@@ -147,9 +147,8 @@ public class StoreView extends SimView {
 				
 		result += MessageFormat.format(
 				"\t Genomsnittlig ledig kassatid: {0} te (dvs {1}% av tiden från öppning tills sista kunden betalat). \n",
-				
-				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals((state.getElapsedTime()/state.getTIME_STORE_CLOSE())));
-		System.out.println(state.getSpecElapsedTime());
+				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()/state.getSpecElapsedTime()*100));
+
 		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
 				cutDecimals(state.getQueueTime()));
 		
