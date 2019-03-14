@@ -15,7 +15,11 @@ import store.state.StoreState;
 public class CustomerArrivedEvent extends Event {
 	
 	private Customer customer;
-	
+	/**
+	 * Constructs a new Customer to arrive
+	 * @param state
+	 * @param time
+	 */
 	public CustomerArrivedEvent(StoreState state, double time) {
 		super(state);
 		super.eventDescription = "Arrived";
@@ -26,15 +30,8 @@ public class CustomerArrivedEvent extends Event {
 	}
 
 	/**
-	 * state.storeTime.timeNextCustomer() blir storetime objektet som vi
-	 * skapar i storestate. state.customersInTotal blir antalet kunder i
-	 * affären.
-	 * 
-	 * state.getStoreOpen checks if the store is opened or closed. Only need
-	 * to chekc if the store is oppened here since if the store is opened
-	 * other events can still occour.
-	 * 
-	 * TODO: add customer id to every single event.
+	 * This method execute a new customer arriving to the store
+	 * and letting the person in if the store is open and not full.
 	 */
 	@Override
 	public void runEvent() {
