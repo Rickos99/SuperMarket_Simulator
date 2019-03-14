@@ -22,7 +22,6 @@ public class Optimize implements OptimizeTesting {
 
 		long TIME_SEED = timeSeed; // Seed to generate random number
 		int MAX_REGISTERS = maxRegisters; // Maximum number of registers available in store
-		
 
 		EventQueue eventQueue = new EventQueue();
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS, TIME_STORE_CLOSE, ARRIVAL_SPEED,
@@ -34,25 +33,14 @@ public class Optimize implements OptimizeTesting {
 		new Simulator(state, eventQueue).run();
 		return state.getCustomersDeniedEntry();
 	}
-	public int metod22(long seed) {
+	
+	public int metod2(long seed) {
 		int missedCustomers = metod1(seed, MAX_CUSTOMERS);
 		int max_Registers = 1;
 		while (metod1(seed, max_Registers) > missedCustomers) {
 			max_Registers ++;
 		}
 		return max_Registers;
-	}
-	public int metod2(long seed) {
-		int MAX_REGISTERS = MAX_CUSTOMERS;
-		int bestRun = MAX_REGISTERS;
-		while (MAX_REGISTERS > 0) {
-			int missedCustomers = metod1(seed, MAX_REGISTERS);
-			if(missedCustomers == 0 || missedCustomers < bestRun) {
-				bestRun = MAX_REGISTERS;
-			}
-			MAX_REGISTERS--;
-		}
-		return bestRun;
 	}
 
 	public void metod3(long seed) {
