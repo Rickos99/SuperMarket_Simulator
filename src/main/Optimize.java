@@ -12,11 +12,15 @@ import store.state.StoreState;
 
 public class Optimize {
 
+	public static void main(String[] args) {
+		new Optimize().metod3(1234);
+	}
+	
 	private static int example = 0;
 	
-	int TIME_STORE_CLOSE = 10; // At what time store closes
 	double ARRIVAL_SPEED = 1.0d; // Speed of which costumers arrive at
 	int MAX_CUSTOMERS = 5; // Maximum number of costumers allowed in store at once
+	int TIME_STORE_CLOSE = 10; // At what time store closes
 	double MIN_PICKING_TIME = 0.5d; // Minimum time a costumer can pick items in
 	double MAX_PICKING_TIME = 1d; // Maximum time a costumer can pick items in
 	double MIN_CHECKOUT_TIME = 2d; // Minimum time a costumer can checkout in
@@ -41,11 +45,16 @@ public class Optimize {
 	}
 
 	public int metod2(long seed) {
-		int MAX_REGISTERS = 1;
-		while (metod1(seed, MAX_REGISTERS) > 0) {
-			MAX_REGISTERS++;
+		int MAX_REGISTERS = MAX_CUSTOMERS;
+		int bestRun = MAX_REGISTERS;
+		while (MAX_REGISTERS >= 0) {
+			int missedCustomers = metod1(seed, MAX_REGISTERS);
+			if(missedCustomers == 0 || missedCustomers < bestRun) {
+				bestRun = MAX_REGISTERS;
+			}
+			MAX_REGISTERS--;
 		}
-		return MAX_REGISTERS;
+		return bestRun;
 	}
 
 	public void metod3(long seed) {
