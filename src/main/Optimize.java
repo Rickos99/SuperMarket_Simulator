@@ -50,12 +50,12 @@ public class Optimize {
 	public void metod3(long seed) {
 		Random random = new Random(seed);
 		int maxLeastRegisters = 0;
-		int leastRegistersIteration;
-		int i;
+		int leastRegistersIteration = 0;
+		int i = 0;
 
-		while (maxLeastRegisters - leastRegistersIteration > 1 && i <= 100) {
-			leastRegistersIteration = metod2();
-			if (maxLeastRegisters == 0 || leastRegistersIteration < maxLeastRegisters) {
+		while (i <= 100) {
+			leastRegistersIteration = metod2(random.nextLong());
+			if(maxLeastRegisters == 0 || leastRegistersIteration < maxLeastRegisters) {
 				maxLeastRegisters = leastRegistersIteration;
 			}
 			if (maxLeastRegisters == leastRegistersIteration) {
