@@ -11,6 +11,7 @@ import store.event.StoreStartEvent;
 import store.state.StoreState;
 
 public class Optimize {
+	private static int exampel = 0;
 	long TIME_SEED = 1234; // Seed to generate random number
 	int MAX_CUSTOMERS = 5; // Maximum number of costumers allowed in store at once
 	int MAX_REGISTERS = 2; // Maximum number of registers available in store
@@ -20,31 +21,48 @@ public class Optimize {
 	double MAX_PICKING_TIME = 1d; // Maximum time a costumer can pick items in
 	double MIN_CHECKOUT_TIME = 2d; // Minimum time a costumer can checkout in
 	double MAX_CHECKOUT_TIME = 3d; // Time a costumer can checkout in
-
+	double TIME_SIM_STOP = 999;
+	
 	EventQueue eventQueue = new EventQueue();
 	StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS,
 			TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
-			MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue);
+			MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue, TIME_SIM_STOP);
 	
-	private void printResults(StoreState state) {
-		String newLine = "\r\n";
-		String result = "Results"+newLine+"=====\n";
+	private String resultBody(StoreState state) {
+		String result = "Exampel "+(exampel++) + "\n";
+		result += MessageFormat.format("Max som ryms, M...........: {0} \n", state.getMAX_CUSTOMERS());
+		result += MessageFormat.format("Ankomshastighet, lambda...: {0} \n", state.getARRIVAL_SPEED());
+		result += MessageFormat.format("Plocktider, [P_min, P_max]: [{0}..{1}] \n", state.getMIN_PICKING_TIME(),
+				state.getMAX_PICKING_TIME());
+		result += MessageFormat.format("Betaltider, [K_min, K_max]: [{0}..{1}] \n", state.getMIN_CHECKOUT_TIME(),
+				state.getMAX_CHECKOUT_TIME());
+		result += MessageFormat.format("Frö, F....................: {0} \n", state.getTIME_SEED());
+		return result;
 		
-		result += MessageFormat.format("1) Av {0} kunder handlade {1} medan {2} missades \n",
-				state.getCustomersVisited(), state.getCustomersPayed(), state.getCustomersDeniedEntry());
+	}
+	private String resultsEnd(StoreState state) {
+		String result = "";
+		result += MessageFormat.format("Stängning sker tiden {0} och stophändelsen sker tiden {1} \n",
+				state.getTIME_STORE_CLOSE(), state.getTIME_SIM_STOP());
+		result += MessageFormat.format("Minsta antal kassor som ger minimalt antal missade ({0}): {1} \n ",
+				state.getCustomersDeniedEntry(), state.getMAX_REGISTERS());
+		if(state.getCustomersDeniedEntry() != 0) {
+			result += MessageFormat.format("(OBS! Missar som minst {0} kunder.)", "<ANTAL MISSADE>");
+		}
+		return result;
 		
-		result += MessageFormat.format("2) Total tid {0} kassor varit lediga: {1} te. \n", state.getMAX_REGISTERS(),
-				cutDecimals(state.getCheckOutFreeTime()));
-				
-				
-		result += MessageFormat.format(
-				"	 Genomsnittlig ledig kassatid: {0} te (dvs {1}% av tiden från öppning tills sista kunden betalat). \n",
-				cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()), cutDecimals(state.getCheckOutFreeTime()/state.getMAX_REGISTERS()/state.getSpecElapsedTime()*100));
-
-		result += MessageFormat.format("3) Total tid {0} kunder tvingats köa: {1} te. \n", state.getCustomersInQueueTotal(),
-				cutDecimals(state.getQueueTime()));
+	}
+	
+	private void printResultsMetod2(StoreState state) {
+		String result = resultBody(state) + resultsEnd(state);
+		System.out.println(result);
 		
-		result += MessageFormat.format("	Genomsnittlig kötid: {0} te. \n", cutDecimals(state.getQueueTime()/state.getCustomersInQueueTotal()));
+		
+	}
+	private void printResultsMetod3(StoreState state){
+		String result = resultBody(state);
+		result += MessageFormat.format("Lambda = {0} \n", state.getARRIVAL_SPEED());
+		result += resultsEnd(state);
 		System.out.println(result);
 	}
 	

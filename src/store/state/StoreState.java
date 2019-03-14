@@ -22,6 +22,7 @@ public class StoreState extends simulator.SimState {
 	private final double MAX_PICKING_TIME;
 	private final double MIN_CHECKOUT_TIME;
 	private final double MAX_CHECKOUT_TIME;
+	private final double TIME_SIM_STOP;
 
 	// Customer statistics
 	private int customersPayed;
@@ -70,14 +71,16 @@ public class StoreState extends simulator.SimState {
 	 */
 	public StoreState(long TIME_SEED, int MAX_CUSTOMERS, int MAX_REGISTERS, double TIME_STORE_CLOSE,
 			double ARRIVAL_SPEED, double MIN_PICKING_TIME, double MAX_PICKING_TIME, double MIN_CHECKOUT_TIME,
-			double MAX_CHECKOUT_TIME, EventQueue eventQueue) {
+			double MAX_CHECKOUT_TIME, EventQueue eventQueue, double TIME_SIM_STOP) {
 		super(eventQueue);
 
 		this.storeTime = new StoreTime(ARRIVAL_SPEED, TIME_SEED, MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME,
 				MAX_CHECKOUT_TIME);
 		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
-
+		
+		
+		this.TIME_SIM_STOP = TIME_SIM_STOP;
 		this.customersInQueueTotal = 0;
 		this.registersOpen = MAX_REGISTERS;
 		this.TIME_SEED = TIME_SEED;
@@ -132,6 +135,9 @@ public class StoreState extends simulator.SimState {
 		} else {
 			// TODO: throw new CloseRegisterFailedException()
 		}
+	}
+	public double getTIME_SIM_STOP() {
+		return TIME_SIM_STOP;
 	}
 
 	/**

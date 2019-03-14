@@ -26,18 +26,19 @@ public class RunSim {
 		double MAX_PICKING_TIME = 1d; 	// Maximum time a costumer can pick items in
 		double MIN_CHECKOUT_TIME = 2d; 	// Minimum time a costumer can checkout in
 		double MAX_CHECKOUT_TIME = 3d; 	// Time a costumer can checkout in
+		double TIME_SIM_STOP = 999;
 
 		// Create instances of various objects
 		StoreView view = new StoreView("C:/temp/Spermarket_DEDS.log"); // Print result to file only!
 		EventQueue eventQueue = new EventQueue();
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS,
 				TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
-				MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue);
+				MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue, TIME_SIM_STOP);
 
 		// Create and add events
 		eventQueue.addEvent(new StoreStartEvent(state));
 		eventQueue.addEvent(new StoreCloseEvent(state, TIME_STORE_CLOSE));
-		eventQueue.addEvent(new StopEvent(state, 999));
+		eventQueue.addEvent(new StopEvent(state, TIME_SIM_STOP));
 		
 		// Add observer
 		state.addObserver(view);
@@ -58,17 +59,18 @@ public class RunSim {
 		double MAX_PICKING_TIME_X = 0.9d; 	// Maximum time a costumer can pick items in
 		double MIN_CHECKOUT_TIME_X = 0.35d; // Minimum time a costumer can checkout in
 		double MAX_CHECKOUT_TIME_X = 0.6d;	// Time a costumer can checkout in
-
+		double TIME_SIM_STOP_X = 999;
+		
 		StoreView viewX = new StoreView();
 		EventQueue eventQueueX = new EventQueue();
 		StoreState stateX = new StoreState(TIME_SEED_X, MAX_CUSTOMERS_X, MAX_REGISTERS_X,
 				TIME_STORE_CLOSE_X, ARRIVAL_SPEED_X, MIN_PICKING_TIME_X,
 				MAX_PICKING_TIME_X, MIN_CHECKOUT_TIME_X, MAX_CHECKOUT_TIME_X,
-				eventQueueX);
+				eventQueueX,TIME_SIM_STOP_X);
 
 		eventQueueX.addEvent(new StoreStartEvent(stateX));
 		eventQueueX.addEvent(new StoreCloseEvent(stateX, TIME_STORE_CLOSE_X));
-		eventQueueX.addEvent(new StopEvent(stateX, 999));
+		eventQueueX.addEvent(new StopEvent(stateX, TIME_SIM_STOP_X));
 
 		stateX.addObserver(viewX);
 
