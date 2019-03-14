@@ -127,7 +127,7 @@ public class StoreView extends SimView {
 						state.getEventDescription(), customerId == null ? "-" : customerId,
 						state.storeIsOpen() ? "Ö" : "S", state.getRegistersOpen(),
 						cutDecimals(state.getCheckoutFreeTime()), state.getCustomersInStore(),
-						state.getCustomersPayed(), state.getCustomersDeniedEntry(), "-",
+						state.getCustomersPayed(), state.getCustomersDeniedEntry(), state.getCustomersInQueue(),
 						cutDecimals(state.getQueueTime()), state.getCustomersInQueue(), state.getCheckoutQueue().toString() });
 		return result;
 	}

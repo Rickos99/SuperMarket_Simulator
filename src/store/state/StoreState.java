@@ -68,7 +68,6 @@ public class StoreState extends simulator.SimState {
 		this.checkOutQueue = new FIFO();
 		this.customerSpawn = new CreateCustomer();
 		
-		
 		this.registersOpen = MAX_REGISTERS;
 		this.TIME_SEED = TIME_SEED;
 		this.MAX_CUSTOMERS = MAX_CUSTOMERS;
@@ -242,6 +241,7 @@ public class StoreState extends simulator.SimState {
 	public void addToCheckoutQueue(Customer c) {
 		checkOutQueue.add(c);
 	}
+
 	
 	public Customer getFirstFromCheckoutQueue() {
 		return checkOutQueue.getFirst();
@@ -405,6 +405,8 @@ public class StoreState extends simulator.SimState {
 		return customerWhoPerformedEvent;
 	}
 
+	
+
 	@Override
 	public void updateState(Event event) {
 		// TIME
@@ -415,8 +417,9 @@ public class StoreState extends simulator.SimState {
 		}
 
 		// Updates time that people have been standing in the queue
+		System.out.println(getCustomersInQueue());
 		queueTime += getCustomersInQueue() * (event.getExTime() - elapsedTime);
-
+		System.out.println(getCustomersInQueue());
 		// Sets time to be the time that the event was executed.
 		elapsedTime = event.getExTime();
 
