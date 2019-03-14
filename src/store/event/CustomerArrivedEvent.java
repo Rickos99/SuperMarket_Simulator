@@ -42,7 +42,7 @@ public class CustomerArrivedEvent extends Event {
 		
 		if (s.storeIsOpen()) {
 			s.increaseCustomerVisitedByOne();
-			if(s.getCustomersInStore() > s.getMAX_CUSTOMERS()) {
+			if(s.getCustomersInStore() >= s.getMAX_CUSTOMERS()) {
 				s.increaseCustomerDeniedByOne();
 			} else {
 				s.increaseCustomersInStoreByOne();
