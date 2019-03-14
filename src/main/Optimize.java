@@ -13,22 +13,18 @@ import store.state.StoreState;
 public class Optimize implements OptimizeTesting {
 
 	public static void main(String[] args) {
-		EventQueue eventQueue = new EventQueue();
-		int maxRegisters = 5;
-		StoreState state = new StoreState(TIME_SEED,MAX_CUSTOMERS,maxRegisters,TIME_STORE_CLOSE,
-										  ARRIVAL_SPEED,MIN_PICKING_TIME,MAX_PICKING_TIME,MIN_CHECKOUT_TIME,
-										  MAX_CHECKOUT_TIME,eventQueue,SIM_STOP_TIME);
-		new Optimize().metod3(state,1234);
+
+		new Optimize().metod3(1234);
 	}
 	
 	private static int example = 0;
 
-	public StoreState metod1(StoreState state,long timeSeed, int maxRegisters) {
+	public StoreState metod1(long timeSeed, int maxRegisters) {
 
 		EventQueue eventQueue = new EventQueue();
-		state = new StoreState(timeSeed, state.getMAX_CUSTOMERS(), maxRegisters, state.getTIME_STORE_CLOSE(), state.getARRIVAL_SPEED(),
-				state.getMIN_PICKING_TIME(), state.getMAX_PICKING_TIME(), state.getMIN_CHECKOUT_TIME(),state.getMAX_CHECKOUT_TIME(),
-				eventQueue, state.getTIME_SIM_STOP());
+		StoreState state = new StoreState(TIME_SEED,MAX_CUSTOMERS,maxRegisters,TIME_STORE_CLOSE,
+				  ARRIVAL_SPEED,MIN_PICKING_TIME,MAX_PICKING_TIME,MIN_CHECKOUT_TIME,
+				  MAX_CHECKOUT_TIME,eventQueue,SIM_STOP_TIME);
 		
 		eventQueue.addEvent(new StoreStartEvent(state));
 		eventQueue.addEvent(new StoreCloseEvent(state, state.getTIME_STORE_CLOSE()));
@@ -37,27 +33,27 @@ public class Optimize implements OptimizeTesting {
 		return state;
 	}
 	
-	public StoreState metod2(StoreState state,long timeSeed) {
-		int missedCustomers = metod1(state, timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
+	public int metod2(long timeSeed) {
+		int missedCustomers = metod1(timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
 		int max_Registers = 1;
-		while (metod1(state,timeSeed, max_Registers).getCustomersDeniedEntry() > missedCustomers) {
+		while (metod1(timeSeed, max_Registers).getCustomersDeniedEntry() > missedCustomers) {
 			max_Registers ++;
 		}
-		return state;
+		return max_Registers;
 	}
 
-	public void metod3(StoreState state,long seed) {
+	public void metod3(long seed) {
 		Random random = new Random(seed);
 		int maxLeastRegisters = 0;
 		int leastRegistersIteration = 0;
 
 		for(int i = 0; i < 100; i++) {
-			leastRegistersIteration = metod2(state, random.nextLong()).getCustomersDeniedEntry();
+			leastRegistersIteration = metod2(random.nextLong());
 			if(leastRegistersIteration > maxLeastRegisters) {
 				maxLeastRegisters = leastRegistersIteration;
 			}
 		}
-		printResultsMetod3(state);
+		System.out.println(maxLeastRegisters);
 	}
 
 	/// FOR RESULTS VIEW
