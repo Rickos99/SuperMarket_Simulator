@@ -22,7 +22,6 @@ public class StoreView extends SimView {
 
 	private boolean parametersGenerated = false;
 	private boolean progressHeaderGenerated = false;
-	private String newLine = "\r\n";
 	private String FilePath = "";
 	private String result = "";
 
@@ -71,7 +70,7 @@ public class StoreView extends SimView {
 	@Override
 	public void printFile(String filePath, boolean overwrite) {
 		File file = new File(filePath);
-		if (file.isDirectory() || (!overwrite && file.exists())) {
+		if (file.isDirectory()) {
 			return;
 		}
 
@@ -79,8 +78,9 @@ public class StoreView extends SimView {
 			PrintWriter writer = new PrintWriter(file);
 			writer.println(result);
 			writer.close();
+			System.out.println("File saved to: \n" + filePath);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("An error occured while writing result to file at: \n" + filePath);
 		}
 
 	}
@@ -113,8 +113,8 @@ public class StoreView extends SimView {
 	 * @return simulation event description
 	 */
 	private String generateProgress(StoreState state) {
-		String format = "%7s %-10s %4s %2s %4s | %5s %3s %3s %4s %5s | %5s %5s %s"
-				+ newLine;
+		String format = "%7s %-10s %4s %2s %4s %5s %3s %3s %4s %5s %5s %5s %s \n";
+		
 		String result = "";
 		if (!progressHeaderGenerated) {
 			progressHeaderGenerated = true;
@@ -123,13 +123,14 @@ public class StoreView extends SimView {
 					new Object[] { "Tid", "Händelse", "Kund", "?", "led", "ledT", "I",
 							"$", ":-(", "köat", "köT", "köar", "[Kassakö..]" });
 		}
-		String customerId = state.getCustomerWhoPerformedEvent();
+		
 		if (state.getEventDescription() == "Stop"
 				|| state.getEventDescription() == "Open") {
-			String formatForStop = "%7s %-10s" + newLine;
+			String formatForStop = "%7s %-10s\n";
 			result += String.format(formatForStop, cutDecimals(state.getElapsedTime()),
 					state.getEventDescription());
 		} else {
+			String customerId = state.getCustomerWhoPerformedEvent();
 			result += String.format(format, new Object[] {
 					cutDecimals(state.getElapsedTime()), state.getEventDescription(),
 					customerId == null ? "-" : customerId,
@@ -178,11 +179,11 @@ public class StoreView extends SimView {
 	 * @return header description of the event
 	 */
 	private String generateHeader(String headerText) {
-		String headerString = newLine + headerText + newLine;
+		String headerString = "\n" + headerText + "\n";
 		for (int i = 0; i < headerText.length(); i++) {
 			headerString += "=";
 		}
-		return headerString + newLine;
+		return headerString + "\n";
 	}
 
 	private String cutDecimals(double d) {
