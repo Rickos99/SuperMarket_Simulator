@@ -27,7 +27,7 @@ public class Simulator {
 	public void run(){
 		state.runSim();
 
-		while (state.simulatorIsRunning) {
+		while (state.simulatorIsRunning && !state.emergencyStop) {
 			queue.getEvent().runEvent();
 			queue.removeEvent();
 		}

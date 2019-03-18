@@ -14,7 +14,9 @@ import java.util.Observable;
 public abstract class SimState extends Observable {
 	protected double elapsedTime;
 	protected boolean simulatorIsRunning;
+	protected boolean emergencyStop = false;
 	protected EventQueue eventQueue;
+	
 
 	public SimState(EventQueue eventQueue) {
 		this.eventQueue = eventQueue;
@@ -26,6 +28,14 @@ public abstract class SimState extends Observable {
 	public final void startSimulator() {
 		simulatorIsRunning = true;
 	}
+	/**
+	 * Emergency halt in the simulator
+	 * 
+	 */
+	public final void emergencyStop(){
+		emergencyStop = true;
+	}
+	
 	
 	/**
 	 * Stop the simulator and set the simulatorIsRunning variabel to false. 
