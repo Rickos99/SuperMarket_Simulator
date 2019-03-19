@@ -29,7 +29,7 @@ public class RunSim {
 		double TIME_SIM_STOP = 999;
 
 		// Create instances of various objects
-		StoreView view = new StoreView("C:/temp/test.txt"); // Print result to file only!
+		StoreView view = new StoreView("C:/temp/Spermarket_DEDS.log"); // Print result to file only!
 		EventQueue eventQueue = new EventQueue();
 		StoreState state = new StoreState(TIME_SEED, MAX_CUSTOMERS, MAX_REGISTERS,
 				TIME_STORE_CLOSE, ARRIVAL_SPEED, MIN_PICKING_TIME, MAX_PICKING_TIME,
