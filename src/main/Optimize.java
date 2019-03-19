@@ -11,7 +11,7 @@ import store.event.StoreStartEvent;
 import store.state.StoreState;
 
 public class Optimize implements OptimizeTesting {
-
+	int missedCustomers;
 	public static void main(String[] args) {
 
 		new Optimize().metod3(1234);
@@ -34,7 +34,7 @@ public class Optimize implements OptimizeTesting {
 	}
 	
 	public int metod2(long timeSeed) {
-		int missedCustomers = metod1(timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
+		missedCustomers = metod1(timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
 		int max_Registers = 1;
 		while (metod1(timeSeed, max_Registers).getCustomersDeniedEntry() > missedCustomers) {
 			max_Registers ++;
@@ -52,6 +52,7 @@ public class Optimize implements OptimizeTesting {
 			leastRegistersIteration = metod2(timeSeed);
 			if(leastRegistersIteration > maxLeastRegisters) {
 				maxLeastRegisters = leastRegistersIteration;
+				i=0;
 			}
 		}
 		
