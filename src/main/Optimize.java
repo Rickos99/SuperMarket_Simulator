@@ -11,37 +11,33 @@ import store.event.StoreStartEvent;
 import store.state.StoreState;
 
 public class Optimize implements OptimizeTesting {
-
+	int missedCustomers;
 	public static void main(String[] args) {
-		double time = System.currentTimeMillis();
-//		new Optimize().metod3(TIME_SEED);
-//		System.out.println("Simulering för rec tog = "+(System.currentTimeMillis()-time));
-		time = System.currentTimeMillis();
-		new Optimize().recMetod3();
-//		System.out.println("Simulering för rec tog = "+(System.currentTimeMillis()-time));
-//		System.out.println(new Optimize().metod1(TIME_SEED, 6).getCustomersDeniedEntry());
-	}
 
+		new Optimize().metod3(1234);
+	}
+	
 	private static int example = 0;
 
 	public StoreState metod1(long timeSeed, int maxRegisters) {
 
 		EventQueue eventQueue = new EventQueue();
-		StoreState state = new StoreState(timeSeed, MAX_CUSTOMERS, maxRegisters, TIME_STORE_CLOSE, ARRIVAL_SPEED,
-				MIN_PICKING_TIME, MAX_PICKING_TIME, MIN_CHECKOUT_TIME, MAX_CHECKOUT_TIME, eventQueue, SIM_STOP_TIME);
-
+		StoreState state = new StoreState(TIME_SEED,MAX_CUSTOMERS,maxRegisters,TIME_STORE_CLOSE,
+				  ARRIVAL_SPEED,MIN_PICKING_TIME,MAX_PICKING_TIME,MIN_CHECKOUT_TIME,
+				  MAX_CHECKOUT_TIME,eventQueue,SIM_STOP_TIME);
+		
 		eventQueue.addEvent(new StoreStartEvent(state));
 		eventQueue.addEvent(new StoreCloseEvent(state, state.getTIME_STORE_CLOSE()));
 		eventQueue.addEvent(new StopEvent(state, state.getTIME_SIM_STOP()));
 		new Simulator(state, eventQueue).run();
 		return state;
 	}
-
+	
 	public int metod2(long timeSeed) {
-		int missedCustomers = metod1(timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
+		missedCustomers = metod1(timeSeed, MAX_CUSTOMERS).getCustomersDeniedEntry();
 		int max_Registers = 1;
 		while (metod1(timeSeed, max_Registers).getCustomersDeniedEntry() > missedCustomers) {
-			max_Registers++;
+			max_Registers ++;
 		}
 		return max_Registers;
 	}
@@ -51,76 +47,18 @@ public class Optimize implements OptimizeTesting {
 		int maxLeastRegisters = 0;
 		int leastRegistersIteration = 0;
 		long timeSeed = 0;
-		for (int i = 0; i < 100; i++) {
+		for(int i = 0; i < 100; i++) {
 			timeSeed = random.nextLong();
 			leastRegistersIteration = metod2(timeSeed);
-			if (leastRegistersIteration > maxLeastRegisters) {
+			if(leastRegistersIteration > maxLeastRegisters) {
 				maxLeastRegisters = leastRegistersIteration;
+				i=0;
 			}
 		}
-
-		StoreState s = metod1(TIME_SEED, maxLeastRegisters);
+		
+		StoreState s = metod1(timeSeed, maxLeastRegisters);
 		System.out.println(resultBody(s));
 		System.out.println(resultsEnd(s));
-	}
-	private boolean flagOne = true;
-	private boolean flagTwo = true;
-	private boolean flagThree = true;
-
-	
-	public int recMetod2(long timeSeed, int registers) {
-		int customersDenied = metod1(timeSeed, registers).getCustomersDeniedEntry();
-		if(customersDenied == metod1(timeSeed, registers + 1).getCustomersDeniedEntry()){
-			return registers;
-		}else if(flagOne &&
-				metod1(timeSeed, (MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= 0 &&
-				metod1(timeSeed, (MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/2)).getCustomersDeniedEntry()){
-			flagOne = false;
-			return recMetod2(timeSeed, (MAX_CUSTOMERS/2));
-		}else if(flagTwo && 
-				metod1(timeSeed, (MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= 0 &&
-				metod1(timeSeed, (MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/4)).getCustomersDeniedEntry()){
-			flagOne = false;
-			flagTwo = false;
-			return recMetod2(timeSeed, (MAX_CUSTOMERS/4));
-		}else if(flagThree && 
-				metod1(timeSeed, (MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= 0 && 
-				metod1(timeSeed, (MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/8)).getCustomersDeniedEntry()){
-			flagOne = false;
-			flagTwo = false;
-			flagThree = false;
-			return recMetod2(timeSeed, (MAX_CUSTOMERS/8));
-		}
-		flagOne = false;
-		flagTwo = false;
-		flagThree = false;
-		return recMetod2(timeSeed, registers + 1);
-
-	}
-
-	private void recMetod3() {
-
-		Random desiredSeed = new Random(TIME_SEED);
-		int currentRun = 1;
-		int desiredStreak = 100;
-		int beginingRegisters = 1;
-		int optimalRegisters = recMetod2(desiredSeed.nextLong(), beginingRegisters);
-		while (currentRun < desiredStreak) {
-			long currentSeed = desiredSeed.nextLong();
-			int tempOptimalRegisters = recMetod2(currentSeed, beginingRegisters);
-			// Check to see that the customersDenied are not the same with
-			// different registers.
-			if(tempOptimalRegisters <= optimalRegisters || 
-				metod1(TIME_SEED, tempOptimalRegisters).getCustomersDeniedEntry() == metod1(TIME_SEED, optimalRegisters).getCustomersDeniedEntry()){
-				currentRun++;
-			}else{
-				optimalRegisters = tempOptimalRegisters;
-				currentRun = 1;
-			}
-
-		}
-		StoreState finalResult = metod1(TIME_SEED, optimalRegisters);
-		printResultsMetod3(finalResult);
 	}
 
 	/// FOR RESULTS VIEW
@@ -145,7 +83,7 @@ public class Optimize implements OptimizeTesting {
 		result += MessageFormat.format("Minsta antal kassor som ger minimalt antal missade ({0}): {1} \n ",
 				state.getCustomersDeniedEntry(), state.getMAX_REGISTERS());
 		if (state.getCustomersDeniedEntry() != 0) {
-			result += MessageFormat.format("(OBS! Missar som minst {0} kunder.)", state.getCustomersDeniedEntry());
+			result += MessageFormat.format("(OBS! Missar som minst {0} kunder.)", missedCustomers);
 		}
 		return result;
 
@@ -156,14 +94,14 @@ public class Optimize implements OptimizeTesting {
 		System.out.println(result);
 
 	}
-
-	private void printResultsMetod3(StoreState state) {
+	
+	private void printResultsMetod3(StoreState state){
 		String result = resultBody(state);
 		result += MessageFormat.format("Lambda = {0} \n", state.getARRIVAL_SPEED());
 		result += resultsEnd(state);
 		System.out.println(result);
 	}
-
+	
 	private String cutDecimals(double d) {
 		return new DecimalFormat("#.##").format(d);
 	}
