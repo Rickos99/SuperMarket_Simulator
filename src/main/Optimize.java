@@ -73,21 +73,23 @@ public class Optimize implements OptimizeTesting {
 		if(customersDenied == metod1(timeSeed, registers + 1).getCustomersDeniedEntry()){
 			return registers;
 		}else if(flagOne &&
-				metod1(timeSeed, registers+(MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= 0 &&
-				metod1(timeSeed, registers+(MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-registers+(MAX_CUSTOMERS/2)).getCustomersDeniedEntry()){
+				metod1(timeSeed, (MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= 0 &&
+				metod1(timeSeed, (MAX_CUSTOMERS/2)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/2)).getCustomersDeniedEntry()){
 			flagOne = false;
-			return recMetod2(timeSeed, registers+(MAX_CUSTOMERS/2));
-		}else if(flagTwo && metod1(timeSeed, registers+(MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= 0 &&
-				metod1(timeSeed, registers+(MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-registers+(MAX_CUSTOMERS/4)).getCustomersDeniedEntry()){
+			return recMetod2(timeSeed, (MAX_CUSTOMERS/2));
+		}else if(flagTwo && 
+				metod1(timeSeed, (MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= 0 &&
+				metod1(timeSeed, (MAX_CUSTOMERS/4)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/4)).getCustomersDeniedEntry()){
 			flagOne = false;
 			flagTwo = false;
-			return recMetod2(timeSeed, registers+(MAX_CUSTOMERS/4));
-		}else if(flagThree && metod1(timeSeed, registers+(MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= 0 && 
-				metod1(timeSeed, registers+(MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-registers+(MAX_CUSTOMERS/8)).getCustomersDeniedEntry()){
+			return recMetod2(timeSeed, (MAX_CUSTOMERS/4));
+		}else if(flagThree && 
+				metod1(timeSeed, (MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= 0 && 
+				metod1(timeSeed, (MAX_CUSTOMERS/8)).getCustomersDeniedEntry()!= metod1(timeSeed, 1-(MAX_CUSTOMERS/8)).getCustomersDeniedEntry()){
 			flagOne = false;
 			flagTwo = false;
 			flagThree = false;
-			return recMetod2(timeSeed, registers+(MAX_CUSTOMERS/8));
+			return recMetod2(timeSeed, (MAX_CUSTOMERS/8));
 		}
 		flagOne = false;
 		flagTwo = false;
